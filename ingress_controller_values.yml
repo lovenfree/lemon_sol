@@ -1,0 +1,46 @@
+## nginx configuration
+## Ref: https://github.com/kubernetes/ingress/blob/master/controllers/nginx/configuration.md
+##
+controller:
+  name: controller
+###  image:
+###    repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
+###    tag: "0.10.2"
+
+  ## Election ID to use for status update
+  ##
+  electionID: ingress-internal-controller-leader
+
+  ## Name of the ingress class to route through this controller
+  ##
+  ingressClass: uas-nginx-internal
+
+  ## Allows customization of the external service
+  ## the ingress will be bound to via DNS
+  publishService:
+    enabled: true
+
+  kind: Deployment
+
+  replicaCount: 1
+  config: 
+    proxy-body-size: 100m
+
+  # The update strategy to apply to the Deployment or DaemonSet
+  ##
+
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+      service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+
+    externalTrafficPolicy: "Local"
+
+## Enable RBAC as per https://github.com/kubernetes/ingress/tree/master/examples/rbac/nginx and https://github.com/kubernetes/ingress/issues/266
+rbac:
+  create: true
+  serviceAccountName: default
+
+targetPorts:
+  http: 80

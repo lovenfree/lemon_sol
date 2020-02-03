@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "6143e595-1e3b-4a0d-9be8-b4fd09a31392",
+		"name": "v-portal-intf_health_check",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "health check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd127320-28aa-467c-ad89-922f808f834a",
+						"exec": [
+							"pm.test(\"Run the health check\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/health",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

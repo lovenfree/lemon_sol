@@ -1,0 +1,230 @@
+{
+    "source": "mockoon:1.7.0",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 9,
+                "name": "integrateapproval",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 1080,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "v1/register",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n        \"visitRequestID\":\"aab12acedfadfsdafsdf\",\n        \"visitGroupCompanyID\":\"1000\",\n        \"visitWorkplaceID\":\"1000\",\n        \"visitWorkplace\":\"LG화학 대산 공장\",\n        \"successYesOrNo\":\"Y\",\n        \"statusCode\":\"200\",\n        \"statusMessage\":\"정상처리되었습니다\"\n}",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "https": true,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 9,
+                "name": "VisitBE",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 1081,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "v1/approved",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n    \"visitRequestID\":\"aab12acedfadfsdafsdf\",\n    \"visitGroupCompanyID\":\"1000\",\n    \"visitWorkplaceID\":\"1000\",\n    \"visitWorkplace\":\"LG화학 대산 공장\",\n    \"successYesOrNo\":\"Y\",\n    \"statusCode\":\"200\",\n    \"statusMessage\":\"정상처리되었습니다\"\n}",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "https": true,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 9,
+                "name": "APIM",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 1082,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "v1/valid",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n    \"isValid\": \n     {{#switch (body 'apiKey')}}\n       {{#case \"abcd1234\"}}\"Y\"{{/case}}\n       {{#default}}\"N\"{{/default }}\n     {{/switch}}\n}",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "https": true,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 9,
+                "name": "IDP",
+                "endpointPrefix": "",
+                "latency": 0,
+                "port": 1083,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "idpws/idp/gm/apc/VistApcNavi/CreateVistApc",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n    \"ifVistId\": \"{{body 'ifVistId'}}\",\n    \"vistId\": 123,\n    \"vstrID\": 321,\n    \"vistStCd\": \"C0064\"\n}",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "rsltCd",
+                                        "value": "OK"
+                                    },
+                                    {
+                                        "key": "rsltMsg",
+                                        "value": "Success"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "idpws/idp/ip/user/UserNavi/RetrieveUser",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n    \"userId\": 12345,\n    \"userNm\": \"홍길동\",\n    \"comId\": 1006,\n    \"comNm\": \"LG생활건강\",\n    \"siteId\": 1000,\n    \"deptId\": 2121,\n    \"deptNm\": \"부서명\",\n    \"userEmpno\": \"ENO001\",\n    \"userBirth\": \"20200101\",\n    \"userUseYn\": \"Y\",\n    \"userSt\": \"C0176\",\n    \"userTypeCd\": \"C0226\",\n    \"posnNm\": \"책임\",\n    \"copcomNm\": \"\",\n    \"tmanEmpno\": \"ENO002\",\n    \"userEngFstNm\": \"Hong\",\n    \"userEngNm\": \"Gil Dong\",\n    \"userMobno\": \"01012345678\",\n    \"userEmail\": \"hongildong@lg.com\",\n    \"comTelno\": \"0212345678\",\n    \"wkplcInfo\": \"서울\",\n    \"jikchekCd\": \"C01\",\n    \"boaniId\": \"A456\",\n    \"userPotoLoct\": \"/tmp/pic\",\n    \"ifCopcomIdSt\": \"AAA\"\n}",
+                                "latency": 0,
+                                "statusCode": "200",
+                                "label": "",
+                                "headers": [
+                                    {
+                                        "key": "rsltCd",
+                                        "value": "OK"
+                                    },
+                                    {
+                                        "key": "rsltMsg",
+                                        "value": "SUCCESS"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "https": true,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        }
+    ]
+}

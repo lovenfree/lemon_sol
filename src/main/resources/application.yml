@@ -1,0 +1,83 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+server:
+  port: 9090
+  
+# We're including this here to allow for running JUnit module tests in the IDE. 
+# Ideally we could configure JUnit to use src/test/resources/application.yml the way ./gradlew integrationTest does, but this fix works for now.
+local:
+  server:
+    port: 9090
+    address: http://localhost
+
+payer-service-client:
+  feign:
+    hystrix:
+      enabled: false
+---
+spring:
+  profiles: default
+
+logging:
+  level:
+    com.lgcns.vportal: debug
+feign:
+  httpclient:
+    disableSslValidation: true
+  client:
+    config:
+      default:
+        connectTimeout: 10_000
+        readTimeout: 10_000
+        loggerLevel: FULL
+  retryer:
+    period: 1000
+    maxPeriod: 1000
+    maxAttempts: 0
+
+vportal:
+  visit:
+    host: https://127.0.0.1
+    port: 1081
+    uri:
+      approved: /v1/approved
+
+apim:
+  host: https://127.0.0.1
+  port: 1082
+  uri:
+    check: /v1/valid
+
+idp:
+  sifsystemid: abcd123456
+
+---
+spring:
+  profiles: dev
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 2000
+        loggerLevel: FULL    
+
+---
+spring:
+  profiles: testing
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 2000
+        loggerLevel: FULL    
+    
+  

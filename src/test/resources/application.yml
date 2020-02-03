@@ -1,0 +1,42 @@
+spring:
+
+  http: 
+    encoding: 
+      charset: UTF-8
+      enabled: true
+      force: true
+  
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+
+local:
+  server:
+    port: 9090
+    address: http://localhost
+
+---
+spring:
+  profiles: default
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 2000
+        loggerLevel: FULL
+
+---
+spring:
+  profiles: testing
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 2000
+        loggerLevel: FULL  

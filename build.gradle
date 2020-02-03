@@ -1,0 +1,110 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'org.asciidoctor.convert' version '1.5.8'
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+	id 'com.google.cloud.tools.jib' version '1.6.1'
+}
+
+group = 'com.lgcns.buildcenter.vportal'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    unitTestImplementation.extendsFrom implementation
+    unitTestRuntimeOnly.extendsFrom runtimeOnly
+    moduleTestImplementation.extendsFrom implementation
+    moduleTestRuntimeOnly.extendsFrom runtimeOnly
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+	set('springCloudVersion', "Greenwich.SR2")
+}
+
+sourceSets {
+	unitTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/test/unit')
+            include 'com/lgcns/buildcenter/vportal/unit/**'
+        }
+        resources.srcDir file('src/test/resources')
+    }
+    
+    moduleTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/test/module')
+            include 'com/lgcns/buildcenter/vportal/module/**'
+        }
+        resources.srcDir file('src/test/resources')
+    }
+}
+
+// If you want to use library , just add on dependencies bracket and refresh gradle
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.apache.commons:commons-lang3:3.6'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.9'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	implementation 'com.google.code.gson:gson:2.8.5'
+	compile 'org.springframework.cloud:spring-cloud-starter-openfeign:2.1.3.RELEASE'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+   	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+    // https://mvnrepository.com/artifact/com.netflix.feign/feign-jackson
+    compile group: 'com.netflix.feign', name: 'feign-jackson', version: '8.1.0'
+    // https://mvnrepository.com/artifact/com.netflix.feign/feign-gson
+    compile group: 'com.netflix.feign', name: 'feign-gson', version: '8.18.0'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	outputs.dir snippetsDir
+}
+
+task unitTest(type: Test) {
+    testClassesDirs = sourceSets.unitTest.output.classesDirs
+    classpath = sourceSets.unitTest.runtimeClasspath
+    outputs.upToDateWhen { false}
+} 
+
+task moduleTest(type: Test) {
+    testClassesDirs = sourceSets.moduleTest.output.classesDirs
+    classpath = sourceSets.moduleTest.runtimeClasspath
+    outputs.upToDateWhen { false}
+}
+
+check.dependsOn unitTest
+check.dependsOn moduleTest
+
+asciidoctor {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+jib {
+  to {
+    image = "_ECRURI_"
+    credHelper = 'ecr-login'
+  }
+}

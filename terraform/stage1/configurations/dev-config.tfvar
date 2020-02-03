@@ -1,0 +1,17 @@
+environment     = "dev"
+aws_region      = "ap-northeast-2"
+assume_role_arn = "arn:aws:iam::754860697973:role/IAM-ECS-TASK-JENKINS"
+
+########## Terraform State file configuration
+s3_bucket         = "terraform-state-754860697973-ap-northeast-2"
+s3_folder_project = "v-portal-intf-spring"
+s3_bucket_region  = "ap-northeast-2"
+s3_tfstate_file   = "stage1-common.tfstate"
+
+prefix_name            = "V-P-I-COMMON"
+vpc_id                 = "vpc-0edf11a237236e2bb"
+container_port         = "9090"
+whitelist_ips = [
+  "165.243.5.20/32", # U-Cloud NAT IP #1
+  "165.243.5.159/32" # U-Cloud NAT IP #2
+]

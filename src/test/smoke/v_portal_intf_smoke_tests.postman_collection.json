@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "c610677d-d05c-48e1-b1d6-e934327c6690",
+		"name": "v-portal-intf_smoke_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ies_returnsCreatedCCDataWithStatus201WhenApiCalled",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "30dd4c04-7ccf-49d7-a07a-d07210935486",
+						"exec": [
+							"pm.test(\"IES returns CreatedCCData With Status 201 When Api Called\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"batchId\", jsonData[0].batchId);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"21584642\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"150551\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069AHJ890020\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"19500\",\n        \"amtAmount\": \"17727\",\n        \"vatAmount\": \"1773\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"17728\",\n        \"vatMdAmount\": \"1772\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"요거프레소\",\n        \"mercSaupNo\": \"2201007168\",\n        \"mercAddr\": \"서울 강남구 도곡동 467-12군인공제회관 1층\",\n        \"mercRepr\": \"이유선\",\n        \"mercTel\": \"0221902160\",\n        \"mercZip\": \"06292\",\n        \"mccName\": \"일반대중음식\",\n        \"mccCode\": \"331\",\n        \"mccStat\": \"00\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190402\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \"101634\",\n        \"gongjeNoChk\": \" \",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110116\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"17331134\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"073342\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069AXJ310004\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"12000\",\n        \"amtAmount\": \"10909\",\n        \"vatAmount\": \"1091\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"12000\",\n        \"vatMdAmount\": \"0\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"25시김밥\",\n        \"mercSaupNo\": \"2210733107\",\n        \"mercAddr\": \"강원 춘천시 퇴계동945번지 퇴계금호상가 1층 3호\",\n        \"mercRepr\": \"원은희\",\n        \"mercTel\": \"0332642477\",\n        \"mercZip\": \"24424\",\n        \"mccName\": \"한식\",\n        \"mccCode\": \"311\",\n        \"mccStat\": \"00\",\n        \"vatStat\": \"2\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190404\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \" 10273\",\n        \"gongjeNoChk\": \"Y\",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110116\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"20659927\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"133734\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069E4K360006\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"42000\",\n        \"amtAmount\": \"38182\",\n        \"vatAmount\": \"3818\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"38182\",\n        \"vatMdAmount\": \"3818\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"샤불냉\",\n        \"mercSaupNo\": \"2211215613\",\n        \"mercAddr\": \"강원 춘천시 퇴계농공로 14(석사동)\",\n        \"mercRepr\": \"신지현\",\n        \"mercTel\": \"0332613592\",\n        \"mercZip\": \"24414\",\n        \"mccName\": \"한식\",\n        \"mccCode\": \"311\",\n        \"mccStat\": \"00\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190403\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \" 10283\",\n        \"gongjeNoChk\": \" \",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110116\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"18956572\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"112435\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069HRC580001\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"220000\",\n        \"amtAmount\": \"200000\",\n        \"vatAmount\": \"20000\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"200000\",\n        \"vatMdAmount\": \"20000\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"수성산업\",\n        \"mercSaupNo\": \"7561000742\",\n        \"mercAddr\": \"경기도 파주시 광탄면 명봉산로 339-51층\",\n        \"mercRepr\": \"송성원\",\n        \"mercTel\": \"0315426092\",\n        \"mercZip\": \"10955\",\n        \"mccName\": \"각종수리점\",\n        \"mccCode\": \"754\",\n        \"mccStat\": \"00\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190402\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \" 10301\",\n        \"gongjeNoChk\": \" \",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110116\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"21876892\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"153405\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069BFU291160\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"28500\",\n        \"amtAmount\": \"28500\",\n        \"vatAmount\": \"0\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"28500\",\n        \"vatMdAmount\": \"0\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"우정사업본부(우체국)\",\n        \"mercSaupNo\": \"1018302925\",\n        \"mercAddr\": \"세종특별자치시 도움5로19 (어진동)\",\n        \"mercRepr\": \"강성주\",\n        \"mercTel\": \"0220404021\",\n        \"mercZip\": \"30114\",\n        \"mccName\": \"기타3\",\n        \"mccCode\": \"291\",\n        \"mccStat\": \"00\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190404\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \"101612\",\n        \"gongjeNoChk\": \" \",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110117\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"21876980\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"153406\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069BFW761007\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"2000\",\n        \"amtAmount\": \"2000\",\n        \"vatAmount\": \"0\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"1819\",\n        \"vatMdAmount\": \"181\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"주식회사명진\",\n        \"mercSaupNo\": \"5038615952\",\n        \"mercAddr\": \"경상북도 고령군 다산면 벌지로 188957\",\n        \"mercRepr\": \"신점수\",\n        \"mercTel\": \"0549560038\",\n        \"mercZip\": \"40112\",\n        \"mccName\": \"기타제조업\",\n        \"mccCode\": \"836\",\n        \"mccStat\": \"00\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190403\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \"101629\",\n        \"gongjeNoChk\": \" \",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110117\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"22743413\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"165245\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069K4P970037\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"270900\",\n        \"amtAmount\": \"270900\",\n        \"vatAmount\": \"0\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"246273\",\n        \"vatMdAmount\": \"24627\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"한국정보통신(주)\",\n        \"mercSaupNo\": \"1168119948\",\n        \"mercAddr\": \"서울 중구 남대문로4가45번지 상공회의소회관건물 7층\",\n        \"mercRepr\": \"권순배\",\n        \"mercTel\": \"0216001234\",\n        \"mercZip\": \"04513\",\n        \"mccName\": \"결제대행(PG)\",\n        \"mccCode\": \"262\",\n        \"mccStat\": \"06\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190404\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \"101624\",\n        \"gongjeNoChk\": \"Y\",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110117\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"1068123498\",\n        \"supplyName\": \"롯데지알에스 주식회사\",\n        \"supplyMccName\": \"기타3\",\n        \"supplyMcc\": \"291\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"22775983\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"165625\",\n        \"aquiDate\": \"20190323\",\n        \"georaeColl\": \"201903230069K4P970038\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"270900\",\n        \"amtAmount\": \"270900\",\n        \"vatAmount\": \"0\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"246273\",\n        \"vatMdAmount\": \"24627\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"한국정보통신(주)\",\n        \"mercSaupNo\": \"1168119948\",\n        \"mercAddr\": \"서울 중구 남대문로4가45번지 상공회의소회관건물 7층\",\n        \"mercRepr\": \"권순배\",\n        \"mercTel\": \"0216001234\",\n        \"mercZip\": \"04513\",\n        \"mccName\": \"결제대행(PG)\",\n        \"mccCode\": \"262\",\n        \"mccStat\": \"06\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190404\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \"101624\",\n        \"gongjeNoChk\": \"Y\",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110117\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"1068123498\",\n        \"supplyName\": \"롯데지알에스 주식회사\",\n        \"supplyMccName\": \"기타3\",\n        \"supplyMcc\": \"291\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    },\n    {\n        \"ownerRegNo\": \"1168119477\",\n        \"cardCode\": \"997\",\n        \"cardName\": \"신한카드\",\n        \"cardNum\": \"4409151100137462\",\n        \"userName\": \"조경종\",\n        \"authNum\": \"17903241\",\n        \"authDate\": \"20190322\",\n        \"authTime\": \"091932\",\n        \"aquiDate\": \"20190325\",\n        \"georaeColl\": \"201903250069MAA071041\",\n        \"georaeStat\": \"1\",\n        \"georaeCand\": \"        \",\n        \"requestAmount\": \"466800\",\n        \"amtAmount\": \"466800\",\n        \"vatAmount\": \"0\",\n        \"serAmount\": \"0\",\n        \"freAmount\": \"0\",\n        \"amtMdAmount\": \"466800\",\n        \"vatMdAmount\": \"0\",\n        \"georaeGukga\": \"KRW\",\n        \"forAmount\": \"0.0000\",\n        \"usdAmount\": \"0.0000\",\n        \"aquiRate\": \"0.0000\",\n        \"mercName\": \"(주)아시아나항공-항공권판매\",\n        \"mercSaupNo\": \"1048117480\",\n        \"mercAddr\": \"서울 강서구 오쇠동47아시아나빌딩\",\n        \"mercRepr\": \"김수천\",\n        \"mercTel\": \"0226691932\",\n        \"mercZip\": \"07505\",\n        \"mccName\": \"항공사\",\n        \"mccCode\": \"122\",\n        \"mccStat\": \"02\",\n        \"vatStat\": \"1\",\n        \"canDate\": \" \",\n        \"askSite\": \"N\",\n        \"siteDate\": \"20190403\",\n        \"askDate\": \"20190405\",\n        \"askTime\": \"102457\",\n        \"gongjeNoChk\": \"Y\",\n        \"createdate\": \"20190405\",\n        \"createtime\": \"110118\",\n        \"sendYn\": \"C\",\n        \"conversionFee\": \"0.0000\",\n        \"settDate\": \"20190417\",\n        \"orgColl\": \"\",\n        \"aquiDiscountAmt\": \"0\",\n        \"apGeoraeGukga\": \"KRW\",\n        \"apForAmount\": \"0.0000\",\n        \"aqForAmount\": \"0.0000\",\n        \"foreUse\": \"1\",\n        \"supplySocNo\": \"\",\n        \"supplyName\": \"\",\n        \"supplyMccName\": \"\",\n        \"supplyMcc\": \"\",\n        \"mccNameHn\": \"\",\n        \"mccCodeHn\": \"\",\n        \"mccNameBc\": \"\",\n        \"mccCodeBc\": \"\"\n    }\n]\t\t",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{iesDomain}}/v1/ies",
+					"host": [
+						"{{iesDomain}}"
+					],
+					"path": [
+						"v1",
+						"ies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uas_returnsCardUseDataWithStatus200WhenCardDataIsValid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5298db55-6c59-4792-af72-859c33e58ad0",
+						"exec": [
+							"pm.test(\"UAS returns CardUseData With Status 201 When CardData Is Valid\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/v1/corpcarduse",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"v1",
+						"corpcarduse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uas_returnsSubmitExpenseListWithStatus200WhenImployeeIdIsIncludedInPath",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45ab3140-d62c-4c74-87d3-895e9f846572",
+						"exec": [
+							"pm.test(\"UAS returns SubmitExpenseList With Status 200 When ImployeeId Is Included In Path\", function () {",
+							"     pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"taskId\", jsonData[0].taskId);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/v1//corpcardexpenses/{{currentOwnerEmployeeId}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"v1",
+						"",
+						"corpcardexpenses",
+						"{{currentOwnerEmployeeId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uas_returnsSubmitExpenseDetailWithStatus200WhenTaskIdIsIncludedInPath",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2115a513-8764-45b2-b094-d84ab6777038",
+						"exec": [
+							"pm.test(\"UAS returns SubmitExpenseDetail With Status 200 When TaskId Is Included In Path\", function () {",
+							"     pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/v1/corpcardexpense/{{taskId}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"v1",
+						"corpcardexpense",
+						"{{taskId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uas_returnsSuccessMessageWithStatus201WhenTaskIdIsIncludedInPath",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3758448-89aa-49b2-a32a-2cb5ce4faf67",
+						"exec": [
+							"pm.test(\"UAS returns Success Message With Status 201 When TaskId Is Included In Path\", function () {",
+							"     pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"taskId\": {{taskId}},\n    \"useDate\": \"2019-04-03T07:00:00.000+0000\",\n    \"status\": \"New\",\n    \"merchantName\": \"구카페9cafe역삼2호점\",\n    \"amount\": 14200.0,\n    \"billCode\": null,\n    \"category\": null,\n    \"taxType\": \"Included\",\n    \"originalOwnerId\": 100002,\n    \"currentOwnerId\": 100002,\n    \"currentManagerId\": 123,\n    \"cardNumberLastFour\": 4321,\n    \"cardName\": \"cardname\",\n    \"cardHolderName\": \"Zero Moustafa\",\n    \"useLocation\": \"Budapest\",\n    \"useCurrency\": \"USD\",\n    \"koreanAmount\": null,\n    \"usePurpose\": \"l'air de panache\",\n    \"categoryId\": 12345\n}"
+				},
+				"url": {
+					"raw": "{{domain}}/v1/corpcardexpense/{{taskId}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"v1",
+						"corpcardexpense",
+						"{{taskId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IES_returnsSuccessMessageWithStatus200WhenBatchIdIsIncludedInPath",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7596a853-6d21-4391-a350-b3f23be589c4",
+						"exec": [
+							"pm.test(\"IES returns Success Message With Status 200 When BatchId Is Included In Path\", function () {",
+							"     pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{iesDomain}}/v1/ies/{{batchId}}",
+					"host": [
+						"{{iesDomain}}"
+					],
+					"path": [
+						"v1",
+						"ies",
+						"{{batchId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
