@@ -2,9 +2,8 @@ package com.lgcns.vportal.idp.createVistApc.service;
 
 import com.lgcns.vportal.common.Feign.interceptor.InterceptorEnum;
 import com.lgcns.vportal.common.Feign.service.RequestFeignService;
-import com.lgcns.vportal.idp.createVistApc.model.RequestCreateVistApcVO;
-import com.lgcns.vportal.idp.createVistApc.model.RequestFromBEVO;
-import com.lgcns.vportal.idp.createVistApc.model.ResponseCreateVistApcVO;
+import com.lgcns.vportal.common.model.ResponseBEVO;
+import com.lgcns.vportal.idp.createVistApc.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,15 +11,19 @@ import org.springframework.stereotype.Component;
 public class RequestCreateVistApcService {
 
   @Autowired
-  private RequestFeignService<ResponseCreateVistApcVO> service;
+  private RequestFeignService<ResponseRootVO> service;
 
-  public ResponseCreateVistApcVO callCreateVistApc(String location, RequestFromBEVO req, String sifSystemId) throws Exception {
+  public ResponseBEVO callCreateVistApc(String location, RequestFromBEVO req, String sifSystemId) throws Exception {
     service.setLocation(location);
     service.setInterceptor(InterceptorEnum.IDP.getInterceptor(sifSystemId));
-    RequestCreateVistApcVO reservationData = req.getData();
+    ReservationVO reservationData = req.getData();
 
-    ResponseCreateVistApcVO result = service.callService(reservationData, ResponseCreateVistApcVO.class);
-
+    ResponseRootVO resultRoot = service.callService(reservationData, ResponseRootVO.class);
+    ResponseHeaderVO headerVo = resultRoot.getHeader();
+    ResponseBEVO result = new ResponseBEVO();
+    result.setSuccessOrNot(headerVo.getRsltCd().equals("00") ? "Y" : "N");
+    result.setStatusCode(headerVo.getRsltCd());
+    result.setStatusMessage(headerVo.getRsltMsg());
     return result;
   }
 }

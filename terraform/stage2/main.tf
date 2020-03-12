@@ -12,7 +12,6 @@ module "ECS-INTF-SPRING" {
   tools_zone_domain_name = var.tools_zone_domain_name
   vpc_id                 = var.vpc_id
   ecr_uri                = var.ecr_uri
-  my_ips                 = var.whitelist_ips
   ecs_load_balancer_external_name = var.ecs_load_balancer_external_name
   ecs_alb_listener_arn   = var.ecs_alb_listener_arn
   ecs_sg_internal_id     = var.ecs_sg_internal_id

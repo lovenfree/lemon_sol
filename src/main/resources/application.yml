@@ -4,7 +4,8 @@ spring:
       charset: UTF-8
       enabled: true
       force: true
-
+  profiles:
+    active: default
 server:
   port: 9090
   
@@ -19,6 +20,10 @@ payer-service-client:
   feign:
     hystrix:
       enabled: false
+
+https:
+  protocols: TLSv1
+
 ---
 spring:
   profiles: default
@@ -33,7 +38,45 @@ feign:
     config:
       default:
         connectTimeout: 10_000
-        readTimeout: 10_000
+        readTimeout: 30_000
+        loggerLevel: FULL
+  retryer:
+    period: 1000
+    maxPeriod: 1000
+    maxAttempts: 0
+
+vportal:
+  visit:
+    host: https://intf-mock.vportaldev.koreabuild.com/mockserver/visit
+    port:
+    uri:
+      approved: /v1/intf/approve
+
+apim:
+  host: https://intf-mock.vportaldev.koreabuild.com/mockserver/apim
+  port:
+  uri:
+    check: /v1/valid
+
+idp:
+  sifsystemid: defaultsif12345
+
+env: deafult
+---
+spring:
+  profiles: feature
+
+logging:
+  level:
+    com.lgcns.vportal: debug
+feign:
+  httpclient:
+    disableSslValidation: true
+  client:
+    config:
+      default:
+        connectTimeout: 10_000
+        readTimeout: 30_000
         loggerLevel: FULL
   retryer:
     period: 1000
@@ -54,30 +97,159 @@ apim:
     check: /v1/valid
 
 idp:
-  sifsystemid: abcd123456
+  sifsystemid: featuresif12345
 
+env: feature
 ---
 spring:
   profiles: dev
 
+logging:
+  level:
+    com.lgcns.vportal: debug
+
 feign:
+  httpclient:
+    disableSslValidation: true
   client:
     config:
       default:
-        connectTimeout: 5000
-        readTimeout: 2000
-        loggerLevel: FULL    
+        connectTimeout: 10_000
+        readTimeout: 30_000
+        loggerLevel: FULL
+  retryer:
+    period: 1000
+    maxPeriod: 1000
+    maxAttempts: 0
 
+vportal:
+  visit:
+    host: https://visit.vportaldev.koreabuild.com
+    port:
+    uri:
+      approved: /v1/intf/approve
+
+apim:
+  host: https://127.0.0.1
+  port: 1082
+  uri:
+    check: /v1/valid
+
+idp:
+  sifsystemid: 0dk403jsdf9302i304dkf0d
+
+env: dev
+---
+spring:
+  profiles: stage
+
+logging:
+  level:
+    com.lgcns.vportal: debug
+feign:
+  httpclient:
+    disableSslValidation: true
+  client:
+    config:
+      default:
+        connectTimeout: 10_000
+        readTimeout: 30_000
+        loggerLevel: FULL
+  retryer:
+    period: 1000
+    maxPeriod: 1000
+    maxAttempts: 0
+
+vportal:
+  visit:
+    host: https://visit.vportalstg.koreabuild.com
+    port:
+    uri:
+      approved: /v1/intf/approve
+
+apim:
+  host: https://127.0.0.1
+  port: 1082
+  uri:
+    check: /v1/valid
+
+idp:
+  sifsystemid: 0dk403jsdf9302i304dkf0d
+
+env: stage
+---
+spring:
+  profiles: prod
+
+logging:
+  level:
+    com.lgcns.vportal: debug
+feign:
+  httpclient:
+    disableSslValidation: true
+  client:
+    config:
+      default:
+        connectTimeout: 10_000
+        readTimeout: 30_000
+        loggerLevel: FULL
+  retryer:
+    period: 1000
+    maxPeriod: 1000
+    maxAttempts: 0
+
+vportal:
+  visit:
+    host: https://visit.vportalprd.koreabuild.com
+    port:
+    uri:
+      approved: /v1/intf/approve
+
+apim:
+  host: https://127.0.0.1
+  port: 1082
+  uri:
+    check: /v1/valid
+
+idp:
+  sifsystemid: 0dk403jsdf9302i304dkf0d
+
+env: prod
 ---
 spring:
   profiles: testing
 
+logging:
+  level:
+    com.lgcns.vportal: debug
 feign:
+  httpclient:
+    disableSslValidation: true
   client:
     config:
       default:
-        connectTimeout: 5000
-        readTimeout: 2000
-        loggerLevel: FULL    
-    
+        connectTimeout: 10_000
+        readTimeout: 30_000
+        loggerLevel: FULL
+  retryer:
+    period: 1000
+    maxPeriod: 1000
+    maxAttempts: 0
+
+vportal:
+  visit:
+    host: https://127.0.0.1
+    port: 1081
+    uri:
+      approved: /v1/intf/approve
+
+apim:
+  host: https://127.0.0.1
+  port: 1082
+  uri:
+    check: /v1/valid
+
+idp:
+  sifsystemid: testsif12345
   
+env: testing

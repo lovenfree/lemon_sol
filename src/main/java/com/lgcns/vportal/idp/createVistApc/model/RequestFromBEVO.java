@@ -7,5 +7,5 @@ import java.util.Date;
 @Data
 public class RequestFromBEVO {
   private String location;
-  private RequestCreateVistApcVO data;
+  private ReservationVO data;
 }

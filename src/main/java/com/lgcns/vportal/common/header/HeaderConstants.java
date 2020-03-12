@@ -10,8 +10,9 @@ public class HeaderConstants {
   public static final String ACCEPT_CHARSET_KEY = HttpHeaders.ACCEPT_CHARSET;
   public static final String ACCEPT_CHARSET_VAL = "UTF-8";
   public static final String CONTENTS_TYPE_KEY = HttpHeaders.CONTENT_TYPE;
-  public static final String CONTENTS_TYPE_VAL = MediaType.APPLICATION_JSON_UTF8_VALUE;
+  public static final String CONTENTS_TYPE_VAL = "application/json";
   public static final String AUTHORIZATION_KEY = HttpHeaders.AUTHORIZATION;
   public static final String CORRELATION_ID_KEY = "X-Correlation-Id";
   public static final String SIF_SYSTEM_ID_KEY = "sifSystemId";
+  public static final String X_FORWARDED_FOR = "X-Forwarded-For";
 }

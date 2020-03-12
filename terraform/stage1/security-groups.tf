@@ -1,3 +1,11 @@
+data "aws_subnet" "cidrs" {
+  for_each = data.aws_subnet_ids.private_subnets.ids
+  id       = each.value
+}
+
+# data "aws_security_group" "lambdaSG" {
+#   id = var.lambdaSGID
+# }
 
 resource "aws_security_group" "ECS_SG_EXTERNAL" {
   name        = "SG-ALB-EXT-${var.prefix_name}"
@@ -5,13 +13,39 @@ resource "aws_security_group" "ECS_SG_EXTERNAL" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port = 80
-    to_port   = 80
+    from_port = 443
+    to_port   = 443
     protocol  = "TCP"
-
+    cidr_blocks = [for s in data.aws_subnet.cidrs : s.cidr_block]
+  }
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "TCP"
     cidr_blocks = var.whitelist_ips
   }
 
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "TCP"
+    cidr_blocks = ["10.1.106.118/32","10.1.106.122/32"]
+  }
+  
+ ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "TCP"
+    security_groups = var.lambdaSGID
+  }
+
+  #  ingress {
+  #   from_port = 80
+  #   to_port   = 80
+  #   protocol  = "TCP"
+  #   security_groups = [data.aws_security_group.lambdaSG.id]
+  # }
+  
   ingress {
     from_port   = 9100
     to_port     = 9100
@@ -55,4 +89,5 @@ resource "aws_security_group" "ECS_SG_INTERNAL" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 

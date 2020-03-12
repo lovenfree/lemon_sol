@@ -1,5 +1,7 @@
 package com.lgcns.vportal.common.Feign.service;
 
+import com.google.gson.Gson;
+import com.lgcns.vportal.Util.GsonUtils;
 import com.lgcns.vportal.common.Feign.Exception.FeignCustomException;
 import com.lgcns.vportal.common.Feign.Exception.FeignErrorDecoder;
 import com.lgcns.vportal.common.Feign.common.FeignCustomConfiguration;
@@ -54,10 +56,10 @@ public class RequestFeignService<ResVO> {
   }
 
   private Feign.Builder getInstance(){
-    if(this.b == null){
+//    if(this.b == null){
       this.b = Feign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder()).errorDecoder(new FeignErrorDecoder()).retryer(new FeignRetryer(period, maxPeriod, maxAttempts).retryer())
       .options(new Request.Options(connectTimeout, readTimeout)).client(feignCustomConfiguration.feignClient());
-    }
+//    }
     if(this.interceptor != null){
       this.b.requestInterceptor(this.interceptor);
     }
@@ -76,12 +78,17 @@ public class RequestFeignService<ResVO> {
     ResVO res = null;
     try {
       this.service = getService(this.location);
-
+      log.debug("Request Data: " + req.toString());
+      Gson gson = new Gson();
+      String reqStr = gson.toJson(req);
+      log.debug("Request Data Str: " + reqStr);
       Response result = service.callService(req);
       log.debug("Result status: " + result.status());
       log.debug("Result headers: " + result.headers().toString());
       log.debug("Result body: " + result.body().toString());
+
       res = (ResVO) new GsonDecoder().decode(result, classType);
+      log.debug("Result res: " + res.toString());
     } catch (Exception e) {
       throw new FeignCustomException(500, e.getMessage());
     }

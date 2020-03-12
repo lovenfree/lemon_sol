@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 public class ResponseReservationVO {
-  private String visitRequestID;
-  private String visitGroupCompanyID;
-  private String visitWorkplaceID;
+  private String visitRequestId;
+  private String visitGroupCompanyId;
+  private String visitWorkplaceId;
   private String visitWorkplace;
   private String approvalStatus;
   private String approvalMessage;

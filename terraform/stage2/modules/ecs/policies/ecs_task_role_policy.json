@@ -18,7 +18,9 @@
         },
         {
             "Action": [
-                "logs:CreateLog*",
+                "logs:CreateLogDelivery",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
                 "logs:PutLogEvents",
                 "logs:DescribeLogStreams"
             ],

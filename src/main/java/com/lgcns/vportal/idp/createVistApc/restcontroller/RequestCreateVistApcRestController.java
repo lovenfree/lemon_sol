@@ -35,7 +35,7 @@ public class RequestCreateVistApcRestController {
     String location = req.getLocation();
     log.debug("location: " + location);
 
-    ResponseCreateVistApcVO result = null;
+    ResponseBEVO result = null;
     HttpHeaders headers = HeaderUtil.getHeaders();
     try {
       log.debug("Service Call Start");
@@ -52,7 +52,7 @@ public class RequestCreateVistApcRestController {
       return new CreateResponse().createInternalError(headers);
     }
 
-    return new CreateResponse<ResponseCreateVistApcVO>().createSuccessToBE(result, headers);
+    return new CreateResponse<ResponseBEVO>().createSuccessToBE(result, headers);
 
   }
 }

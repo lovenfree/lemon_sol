@@ -15,5 +15,6 @@ public class BaseInterceptor implements RequestInterceptor {
     template.header(HeaderConstants.ACCEPT_KEY, HeaderConstants.ACCEPT_VAL);
     template.header(HeaderConstants.ACCEPT_CHARSET_KEY, HeaderConstants.ACCEPT_CHARSET_VAL);
     template.header(HeaderConstants.CONTENTS_TYPE_KEY, HeaderConstants.CONTENTS_TYPE_VAL);
+    System.out.println("BaseInterceptor Header:" + template.headers());
   }
 }

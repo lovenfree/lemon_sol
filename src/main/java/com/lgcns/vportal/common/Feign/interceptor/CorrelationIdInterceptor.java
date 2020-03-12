@@ -21,5 +21,6 @@ public class CorrelationIdInterceptor implements RequestInterceptor {
     template.header(HeaderConstants.ACCEPT_CHARSET_KEY, HeaderConstants.ACCEPT_CHARSET_VAL);
     template.header(HeaderConstants.CONTENTS_TYPE_KEY, HeaderConstants.CONTENTS_TYPE_VAL);
     template.header(HeaderConstants.CORRELATION_ID_KEY, HeaderUtil.getCorrelationID(path));
+    System.out.println("CorrelationIdInterceptor Header:" + template.headers());
   }
 }

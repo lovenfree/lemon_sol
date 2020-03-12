@@ -31,3 +31,24 @@ variable "prefix_name" {
 variable "container_port" {
   type = string
 }
+variable "hosted_zone_domain_name" {
+  type = string
+}
+variable "lambdaSGID" {
+  type = list
+}
+
+variable "s3_account_id" {
+  type = string
+}
+variable "logging_bucket_prefix" {
+  type = string
+}
+
+variable "elb_account_id" {
+  type = string
+}
+
+variable "setting_alb_deletion_protection" {
+  type = string
+}

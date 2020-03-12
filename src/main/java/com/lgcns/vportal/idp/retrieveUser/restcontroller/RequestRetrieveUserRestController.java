@@ -6,7 +6,7 @@ import com.lgcns.vportal.common.model.SystemKeyVO;
 import com.lgcns.vportal.common.response.CreateResponse;
 import com.lgcns.vportal.idp.retrieveUser.model.RequestFromBEVO;
 import com.lgcns.vportal.common.model.ResponseBEVO;
-import com.lgcns.vportal.idp.retrieveUser.model.ResponseRetrieveUserVO;
+import com.lgcns.vportal.idp.retrieveUser.model.ResponseRetrieveUserDetailVO;
 import com.lgcns.vportal.idp.retrieveUser.service.RequestRetrieveUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class RequestRetrieveUserRestController {
     String location = req.getLocation();
     log.debug("location: " + location);
 
-    ResponseRetrieveUserVO result = null;
+    ResponseBEVO<ResponseRetrieveUserDetailVO> result = null;
     HttpHeaders headers = HeaderUtil.getHeaders();
     try {
       log.debug("Service Call Start");
@@ -52,7 +52,7 @@ public class RequestRetrieveUserRestController {
       return new CreateResponse().createInternalError(headers);
     }
 
-    return new CreateResponse<ResponseRetrieveUserVO>().createSuccessToBE(result, headers);
+    return new CreateResponse<ResponseBEVO<ResponseRetrieveUserDetailVO>>().createSuccessToBE(result, headers);
 
   }
 }

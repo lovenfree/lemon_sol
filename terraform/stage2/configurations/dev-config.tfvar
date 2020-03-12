@@ -22,7 +22,3 @@ container_port         = "9090"
 volume_container_path = "/usr/local/BizActorHome/Repository"
 tools_zone_domain_name = "vportaldev.koreabuild.com."
 is_fargate             = true
-whitelist_ips = [
-  "165.243.5.20/32", # U-Cloud NAT IP #1
-  "165.243.5.159/32" # U-Cloud NAT IP #2
-]

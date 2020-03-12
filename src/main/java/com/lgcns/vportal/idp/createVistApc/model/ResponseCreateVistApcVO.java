@@ -6,8 +6,7 @@ import java.util.Date;
 
 @Data
 public class ResponseCreateVistApcVO {
-  private String ifVistId;
-  private Number vistId;
-  private Number vstrID;
-  private String vistStCd;
+  private String successYesOrNo;
+  private String statusCode;
+  private String statusMessage;
 }

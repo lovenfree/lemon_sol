@@ -1,6 +1,5 @@
 package com.lgcns.vportal.common.model;
 
-import com.lgcns.vportal.idp.retrieveUser.model.ResponseRetrieveUserVO;
 import lombok.Data;
 
 @Data

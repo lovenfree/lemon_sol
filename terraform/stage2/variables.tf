@@ -18,9 +18,6 @@ variable "prefix_name" {}
 variable "ecs_load_balancer_external_name" {}
 variable "ecs_alb_listener_arn" {}
 variable "ecs_sg_internal_id" {}
-variable "whitelist_ips" {
-  type = list
-}
 variable "is_fargate" {
   type = bool
 }

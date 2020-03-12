@@ -17,6 +17,3 @@ variable "ecs_sg_internal_id" {}
 variable "is_fargate" {
   type = bool
 }
-variable "my_ips" {
-  type = list
-}

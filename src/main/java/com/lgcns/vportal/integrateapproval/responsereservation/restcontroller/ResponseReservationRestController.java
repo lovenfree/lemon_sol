@@ -49,18 +49,20 @@ public class ResponseReservationRestController {
 
   @CrossOrigin(origins = "*")
   @RequestMapping(path = "/responseReservation", method = RequestMethod.POST)
-  public ResponseEntity<ResponseVO> ResponseReservation(@RequestHeader(value="X-VPORTAL-APIKEY") String apiKey,  @RequestBody ResponseReservationVO req) {
+  public ResponseEntity<ResponseVO> ResponseReservation(@RequestHeader(value="X-VPORTAL-APIKEY", required = false) String apiKey,  @RequestBody ResponseReservationVO req) {
     log.info("ResponseReservation Controller");
 
     log.debug("apiKey: " + apiKey);
 
-    String apimLocation = apimHost + (apimPort == "" || apimPort == null ? "" : ":" + apimPort) + apimCheckUri;
+    String apimLocation = apimHost + ((apimPort.equals("") || apimPort == null) ? "" : ":" + apimPort) + apimCheckUri;
 
-    String location = visitHost + (visitPort == "" || visitPort == null ? "" : ":" + visitPort) + visitApprovedUri;
+    String location = visitHost + ((visitPort.equals("") || visitPort == null) ? "" : ":" + visitPort) + visitApprovedUri;
 
     log.debug("apimLocation: " + apimLocation);
     log.debug("location: " + location);
 
+    HttpHeaders headers = HeaderUtil.getHeaders();
+    /*
     // APIM Check API Key
     APIKeyRequestVO apiReq = new APIKeyRequestVO();
     apiReq.setApiKey(apiKey);
@@ -78,6 +80,10 @@ public class ResponseReservationRestController {
       log.error(e.getMessage());
     }
     if(checkResult == null || !checkResult.getIsValid().equals("Y")){
+      return new CreateResponse().createApiKeyError(headers);
+    }
+    */
+    if(apiKey == null || apiKey.equals("") || !apiKey.equals("V7vportalKJHD110")){
       return new CreateResponse().createApiKeyError(headers);
     }
 

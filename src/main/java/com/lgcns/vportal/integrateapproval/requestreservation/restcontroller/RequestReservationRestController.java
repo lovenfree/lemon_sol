@@ -2,6 +2,7 @@ package com.lgcns.vportal.integrateapproval.requestreservation.restcontroller;
 
 import com.lgcns.vportal.common.Feign.Exception.FeignCustomException;
 import com.lgcns.vportal.common.header.HeaderUtil;
+import com.lgcns.vportal.common.model.ResponseBEVO;
 import com.lgcns.vportal.common.response.CreateResponse;
 import com.lgcns.vportal.integrateapproval.requestreservation.model.RequestReservationVO;
 import com.lgcns.vportal.integrateapproval.requestreservation.model.ResponseVO;
@@ -30,12 +31,13 @@ public class RequestReservationRestController {
     String location = req.getLocation();
     log.debug("location: " + location);
 
-    ResponseVO result = null;
+    ResponseBEVO<ResponseVO> result = null;
     HttpHeaders headers = HeaderUtil.getHeaders();
     try {
       log.debug("Service Call Start");
       result = requestReservationService.callRequestReservation(location, req);
       log.debug("Service Call End");
+      log.debug(result.toString());
     } catch (FeignCustomException f) {
       log.error("Service Call Error  " + f.getMessage());
       return new CreateResponse().createInternalError(headers);
@@ -43,7 +45,7 @@ public class RequestReservationRestController {
       log.error(e.getMessage());
     }
 
-    return new CreateResponse<ResponseVO>().createSuccess(result, headers);
+    return new CreateResponse<ResponseBEVO<ResponseVO>>().createSuccessToBE(result, headers);
 
   }
 }

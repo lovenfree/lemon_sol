@@ -6,9 +6,9 @@ import java.io.Serializable;
 
 @Data
 public class VisitVO implements Serializable {
-  private String visitRequestID;
-  private String visitGroupCompanyID;
-  private String visitWorkplaceID;
+  private String visitRequestId;
+  private String visitGroupCompanyId;
+  private String visitWorkplaceId;
   private String visitWorkplace;
   private String successYesOrNo;
   private String statusCode;

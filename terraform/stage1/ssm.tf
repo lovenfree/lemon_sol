@@ -21,3 +21,11 @@ resource "aws_ssm_parameter" "ECS_ALB_LISTENER_ARN" {
   type  = "SecureString"
   value = aws_lb_listener.ecs_alb_listener.arn
 }
+
+# #Fowler
+# resource "aws_ssm_parameter" "ECS_ALB_PRI_LISTENER_ARN" {
+#   name  = "/V-P-I/ECS_ALB_PRI_LISTENER_ARN"
+#   type  = "SecureString"
+#   value = aws_lb_listener.ecs_alb_pri_listener.arn
+# }
+# #Fowler

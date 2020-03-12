@@ -25,7 +25,7 @@
         "dnsSearchDomains": null,
         "extraHosts": null,
         "dockerSecurityOptions": null,
-        "dockerLabels": null,
+        "dockerLabels": {"TaskDefinitionRandomRevisionKey": "_RANDOM_"},
         "ulimits": null,
         "logConfiguration": {
             "logDriver": "awslogs",

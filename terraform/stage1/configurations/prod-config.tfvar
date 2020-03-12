@@ -7,10 +7,23 @@ s3_bucket         = "terraform-state-362820019109-ap-northeast-2"
 s3_folder_project = "v-portal-intf-spring"
 s3_bucket_region  = "ap-northeast-2"
 s3_tfstate_file   = "stage1-common.tfstate"
+hosted_zone_domain_name = "*.vportalprd.koreabuild.com"
+lambdaSGID = [_LAMBDASGID_]
 
 prefix_name            = "V-P-I-COMMON"
-vpc_id                 = "vpc-0edf11a237236e2bb"
+vpc_id                 = "vpc-0ad1c605eca53705b"
+container_port         = "9090"
 whitelist_ips = [
-  "165.243.5.20/32", # U-Cloud NAT IP #1
-  "165.243.5.159/32" # U-Cloud NAT IP #2
+  "165.244.250.210/32", # LGE Security Portal PRD env.
+  "165.244.250.147/32", # LGE Security Portal PRD env.
+  "165.244.250.148/32" # LGE Security Portal PRD env.
 ]
+
+########## ALB Logging configuration
+s3_account_id = "362820019109"
+logging_bucket_prefix = "v-p-i-accesslog"
+
+#"ap-northeast-2"
+elb_account_id = "600734575887" 
+
+setting_alb_deletion_protection = _DELETIONPROTECTION_
