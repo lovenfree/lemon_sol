@@ -5,7 +5,7 @@ plugins {
 	id 'java'
 	id 'eclipse'
 	id 'idea'
-	id 'com.google.cloud.tools.jib' version '1.6.1'
+	id 'com.google.cloud.tools.jib' version '2.1.0'
 }
 
 group = 'com.lgcns.buildcenter.vportal'
@@ -102,9 +102,9 @@ asciidoctor {
 	dependsOn test
 }
 
-jib {
-  to {
-    image = "_ECRURI_"
-    credHelper = 'ecr-login'
-  }
-}
+// jib {
+//   to {
+//     image = "151564769076.dkr.ecr.ap-northeast-2.amazonaws.com/ecr_springboot"
+//     credHelper = 'ecr-login'
+//   }
+// }

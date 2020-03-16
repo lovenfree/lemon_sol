@@ -4,11 +4,11 @@ variable "region" {}
 variable "prefix_name" {}
 variable "container_port" {}
 variable "volume_container_path" {}
-variable "ecs_hostname" {}
+# variable "ecs_hostname" {}
 variable "ecs_ec2_instance_ami" {}
 variable "key_pair_name" {}
 variable "ebs_volume_size" {}
-variable "tools_zone_domain_name" {}
+# variable "tools_zone_domain_name" {}
 variable "vpc_id" {}
 variable "ecr_uri" {}
 variable "ecs_load_balancer_external_name" {}

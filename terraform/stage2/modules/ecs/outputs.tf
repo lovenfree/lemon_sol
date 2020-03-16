@@ -1,5 +1,5 @@
 output "ecs_url" {
-  value       = "https://${var.ecs_hostname}"
+  value       = data.aws_alb.ECS_LOAD_BALANCER_EXTERNAL.dns_name
   description = "This is the URL to access Server"
 }
 

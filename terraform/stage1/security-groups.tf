@@ -10,48 +10,26 @@ data "aws_subnet" "cidrs" {
 resource "aws_security_group" "ECS_SG_EXTERNAL" {
   name        = "SG-ALB-EXT-${var.prefix_name}"
   description = "Allow Access to ECS Cluster"
-  vpc_id      = var.vpc_id
+  vpc_id      = local.vpc_id
 
   ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "TCP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "TCP"
     cidr_blocks = [for s in data.aws_subnet.cidrs : s.cidr_block]
   }
   ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "TCP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "TCP"
     cidr_blocks = var.whitelist_ips
   }
 
   ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "TCP"
-    cidr_blocks = ["10.1.106.118/32","10.1.106.122/32"]
-  }
-  
- ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "TCP"
-    security_groups = var.lambdaSGID
-  }
-
-  #  ingress {
-  #   from_port = 80
-  #   to_port   = 80
-  #   protocol  = "TCP"
-  #   security_groups = [data.aws_security_group.lambdaSG.id]
-  # }
-  
-  ingress {
-    from_port   = 9100
-    to_port     = 9100
-    protocol    = "TCP"
-    description = "for communication of prometheus node exporter"
-    cidr_blocks = [data.aws_vpc.selected.cidr_block]
+    from_port       = 80
+    to_port         = 80
+    protocol        = "TCP"
+    security_groups = local.lambdaSg_endpoint
   }
 
   egress {
@@ -71,14 +49,6 @@ resource "aws_security_group" "ECS_SG_INTERNAL" {
     from_port   = var.container_port
     to_port     = var.container_port
     protocol    = "TCP"
-    cidr_blocks = [data.aws_vpc.selected.cidr_block]
-  }
-
-  ingress {
-    from_port   = 9100
-    to_port     = 9100
-    protocol    = "TCP"
-    description = "for communication of prometheus node exporter"
     cidr_blocks = [data.aws_vpc.selected.cidr_block]
   }
 

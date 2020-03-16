@@ -29,21 +29,27 @@ resource "aws_lb_listener_rule" "ecs_alb_listener_rule" {
     target_group_arn = aws_alb_target_group.ecs_target_group_external.arn
   }
 
+  # condition {
+  #   host_header {
+  #     values = [var.ecs_hostname]
+  #   }
+  # }
+
   condition {
-    host_header {
-      values = [var.ecs_hostname]
+    path_pattern {
+      values = ["/*"]
     }
   }
 }
 
-resource "aws_route53_record" "ecs_route53_record" {
-  zone_id = data.aws_route53_zone.selected.zone_id
-  name    = var.ecs_hostname
-  type    = "A"
+# resource "aws_route53_record" "ecs_route53_record" {
+#   zone_id = data.aws_route53_zone.selected.zone_id
+#   name    = var.ecs_hostname
+#   type    = "A"
 
-  alias {
-    name                   = data.aws_alb.ECS_LOAD_BALANCER_EXTERNAL.dns_name
-    zone_id                = data.aws_alb.ECS_LOAD_BALANCER_EXTERNAL.zone_id
-    evaluate_target_health = false
-  }
-}
+#   alias {
+#     name                   = data.aws_alb.ECS_LOAD_BALANCER_EXTERNAL.dns_name
+#     zone_id                = data.aws_alb.ECS_LOAD_BALANCER_EXTERNAL.zone_id
+#     evaluate_target_health = false
+#   }
+# }

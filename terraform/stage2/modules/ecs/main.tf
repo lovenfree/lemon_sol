@@ -19,13 +19,13 @@ data "aws_subnet_ids" "private_subnets" {
 }
 
 data "aws_alb" "ECS_LOAD_BALANCER_EXTERNAL" {
-  name  = var.ecs_load_balancer_external_name
+  name = var.ecs_load_balancer_external_name
 }
 
-data "aws_route53_zone" "selected" {
-  name         = var.tools_zone_domain_name
-  private_zone = false
-}
+# data "aws_route53_zone" "selected" {
+#   name         = var.tools_zone_domain_name
+#   private_zone = false
+# }
 
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = local.cluster_name

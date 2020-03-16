@@ -1,29 +1,24 @@
-environment     = "dev"
-aws_region      = "ap-northeast-2"
-assume_role_arn = "arn:aws:iam::754860697973:role/IAM-ECS-TASK-JENKINS"
+environment = "dev"
+aws_region  = "ap-northeast-2"
 
 ########## Terraform State file configuration
-s3_bucket         = "terraform-state-754860697973-ap-northeast-2"
-s3_folder_project = "v-portal-intf-spring"
+s3_bucket         = "terraform-state-vportaldev-ap-northeast-2"
+s3_folder_project = "VPORTALDEV-SPRING"
 s3_bucket_region  = "ap-northeast-2"
 s3_tfstate_file   = "stage1-common.tfstate"
-hosted_zone_domain_name = "*.vportaldev.koreabuild.com"
-lambdaSGID = ["_LAMBDASGID_"]
+# hosted_zone_domain_name = "*.vportaldev.buildtestenv.com"
 
-prefix_name            = "V-P-I-COMMON"
-vpc_id                 = "vpc-0edf11a237236e2bb"
-container_port         = "9090"
+prefix_name    = "V-P-I-COMMON"
+container_port = "9090"
 whitelist_ips = [
-  "10.81.131.64/26", #SE,QE for develop in private
-  "10.81.131.128/25", #SE,QE for develop in private
-  "165.243.166.190/32" # LGE Security Portal DEV env.
+  "165.243.5.20/32"
 ]
 
 ########## ALB Logging configuration
-s3_account_id = "754860697973"
+# s3_account_id         = "151564769076"
 logging_bucket_prefix = "v-p-i-accesslog"
 
 #"ap-northeast-2"
-elb_account_id = "600734575887" 
+elb_account_id = "600734575887"
 
-setting_alb_deletion_protection = _DELETIONPROTECTION_
+setting_alb_deletion_protection = false
