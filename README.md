@@ -80,7 +80,7 @@ ALB 관련 Resource들을 생성하는 단계로 브랜치별로 생성되어야
 cd terraform/stage1
 ./get-setenv.sh configurations/dev-config.tfvar
 terraform plan -var-file configurations/dev-config.tfvar
-terraform apply -var-file configurations/dev-config.tfvar
+terraform apply -var-file configurations/dev-config.tfvar -auto-approve
 ```
 
 ## create stage2(terraform)
@@ -91,7 +91,7 @@ ALB Listener Rule을 추가하고, ECS 관련 자원들을 생성하여 containe
 cd terraform/stage2
 ./get-setenv.sh configurations/dev-config.tfvar
 terraform plan -var-file configurations/dev-config.tfvar
-terraform apply -var-file configurations/dev-config.tfvar
+terraform apply -var-file configurations/dev-config.tfvar -auto-approve
 ```
 
 terraform apply가 성공적으로 끝나도 정상적으로 container가 기동되려면 5~10분 정도 시간이 더 소요된다.
