@@ -64,7 +64,7 @@ EOF
 
 
 resource "aws_alb" "ecs_load_balancer_external" {
-  name            = "ALB-EXT-PRI-${var.prefix_name}"
+  name            = "ALB-EXT-${var.prefix_name}"
   security_groups = [aws_security_group.ECS_SG_EXTERNAL.id]
   subnets         = data.aws_subnet_ids.public_subnets.ids
   # internal        = "true"
@@ -77,7 +77,7 @@ resource "aws_alb" "ecs_load_balancer_external" {
   }
 
   tags = {
-    Name = "ALB-EXT-PRI-${var.prefix_name}"
+    Name = "ALB-EXT-${var.prefix_name}"
   }
   depends_on = [aws_s3_bucket.access_log_bucket]
 }

@@ -102,3 +102,4 @@ terraform apply가 성공적으로 끝나도 정상적으로 container가 기동
 - [Terraform](https://www.terraform.io/intro/index.html)
 - [JIB](https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin#quickstart)
 - [AWS CLI](https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/cli-chap-using.html)
+- [BuildCenter Workbook - Back-End (Container) 개발 가이드](https://wire.lgcns.com/confluence/pages/viewpage.action?pageId=35801685)
