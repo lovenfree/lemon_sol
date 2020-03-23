@@ -59,18 +59,18 @@ AWS_REGION=ap-northeast-2 ./gradlew jib --info --image=${ECR_URI}
 ## create stage0(terraform)
 
 기본 인프라를 생성하는 단계로 아래와 같은 Resource들을 생성함
-(vpc, subnet, security group, RDS, ssm_parameter, s3)
+(vpc, subnet, security group, ssm_parameter)
 
 backend-spring/terraform/stage0 폴더내에서 아래의 명령을 실행
 
 ```bash
 cd terraform/stage0
-./get-setenv.sh configurations/VPORTALDEV.tfvar
-terraform plan -var-file configurations/VPORTALDEV.tfvar
-terraform apply -var-file configurations/VPORTALDEV.tfvar -auto-approve
+./get-setenv.sh configurations/VPORTALDEV.tfvars
+terraform plan -var-file configurations/VPORTALDEV.tfvars
+terraform apply -var-file configurations/VPORTALDEV.tfvars -auto-approve
 ```
 
-생성된 VPC 및 RDS 등의 정보들은 [ssm parameter store](https://console.aws.amazon.com/systems-manager/parameters?region=us-east-1)에 저장 된다.
+생성된 VPC 등의 정보들은 [ssm parameter store](https://console.aws.amazon.com/systems-manager/parameters?region=us-east-1)에 저장 된다.
 
 ## create stage1(terraform)
 
@@ -78,9 +78,9 @@ ALB 관련 Resource들을 생성하는 단계로 브랜치별로 생성되어야
 
 ```bash
 cd terraform/stage1
-./get-setenv.sh configurations/dev-config.tfvar
-terraform plan -var-file configurations/dev-config.tfvar
-terraform apply -var-file configurations/dev-config.tfvar -auto-approve
+./get-setenv.sh configurations/dev-config.tfvars
+terraform plan -var-file configurations/dev-config.tfvars
+terraform apply -var-file configurations/dev-config.tfvars -auto-approve
 ```
 
 ## create stage2(terraform)
@@ -89,9 +89,9 @@ ALB Listener Rule을 추가하고, ECS 관련 자원들을 생성하여 containe
 
 ```bash
 cd terraform/stage2
-./get-setenv.sh configurations/dev-config.tfvar
-terraform plan -var-file configurations/dev-config.tfvar
-terraform apply -var-file configurations/dev-config.tfvar -auto-approve
+./get-setenv.sh configurations/dev-config.tfvars
+terraform plan -var-file configurations/dev-config.tfvars
+terraform apply -var-file configurations/dev-config.tfvars -auto-approve
 ```
 
 terraform apply가 성공적으로 끝나도 정상적으로 container가 기동되려면 5~10분 정도 시간이 더 소요된다.
