@@ -1,0 +1,23 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: did-solution-backend
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  tls:
+  - hosts:
+    - devsolutionbackend.duckdns.org
+    secretName: tls-secret-devservicebackend
+  rules:
+    - host: devsolutionbackend.duckdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: did-solution-backend
+                port: 
+                  name: http
