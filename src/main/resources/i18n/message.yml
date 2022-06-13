@@ -1,0 +1,3 @@
+exception:
+  account:
+    duplicateAccount: "이미 존재하는 관리자 입니다."
