@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - devsolutionbackend.duckdns.org
-    secretName: tls-secret-devservicebackend
+    - devsolutionbackend.lemonaidsinglexdev.com
+    secretName: tls-secret-devsolutionbackend
   rules:
-    - host: devsolutionbackend.duckdns.org
+    - host: devsolutionbackend.lemonaidsinglexdev.com
       http:
         paths:
           - path: /
