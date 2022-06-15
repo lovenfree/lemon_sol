@@ -5,12 +5,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DID_DATABASE_URL:jdbc:postgresql://127.0.0.1:5432/solution}
     username: ${DID_DATABASE_USER:postgres}
-    password: ${DID_DATABASE_PASS:mysecretpassword}
+    password: ${DID_DATABASE_PASS:mysecretpasword}
   jpa:
     hibernate:
       ddl-auto: ${DID_DATABASE_DDL_AUTO:create}
@@ -19,7 +18,7 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     properties:
       hibernate:
-        show_sql: ${DID_DATABASE_SHOW_SQL:true}
+        show_sql: true
         format_sql: true
         user_sql_comments: true
     open-in-view: false

@@ -82,9 +82,6 @@ dependencies {
 //	implementation 'org.flywaydb:flyway-core'
 	runtimeOnly 'org.postgresql:postgresql'
 
-//	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-//	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-
 	implementation 'io.springfox:springfox-boot-starter:3.0.0' //.. swagger
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
