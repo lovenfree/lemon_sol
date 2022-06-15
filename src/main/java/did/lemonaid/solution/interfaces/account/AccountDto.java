@@ -18,33 +18,25 @@ public class AccountDto {
     @Setter
     @ToString
     public static class AccountInfo {
-        @JsonProperty("account_id")
         @NotNull(message = "필수 파라미터 누락")
         @ApiModelProperty(value = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-
-        @JsonProperty("account_name")
         @ApiModelProperty(value = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @JsonProperty("cellular_phone")
         @ApiModelProperty(value = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @JsonProperty("email")
         @ApiModelProperty(value = "이메일", example = "lemonaid@lgcns.com")
         String email;
 
-        @JsonProperty("account_status")
         @ApiModelProperty(value = "계정상태", example = "", required = true)
         Account.AccountStatus accountStatus;
 
-        @JsonProperty("auth_ip")
         @ApiModelProperty(value = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
 
-        @JsonProperty("last_login_time")
         @ApiModelProperty(value = "마지막 로그인 시간")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime lastLoginDateTime;
@@ -54,36 +46,30 @@ public class AccountDto {
     @Setter
     public class AccountListResults {
         @ApiModelProperty(value="계정 목록")
-        @JsonProperty("accounts")
         List<AccountDto> accounts;
     }
 
     @Getter
     @Setter
     public class RegisterRequest {
-        @JsonProperty("account_id")
         @NotNull(message = "필수 파라미터 누락")
         @ApiModelProperty(value = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-        @JsonProperty(value = "account_password", access = JsonProperty.Access.WRITE_ONLY)
+        @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @NotNull(message = "필수 파라미터 누락")
         @ApiModelProperty(value="관리자 계정 비밀번호", example="****", required = true)
         String accountPw;
 
-        @JsonProperty("account_name")
         @ApiModelProperty(value = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @JsonProperty("cellular_phone")
         @ApiModelProperty(value = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @JsonProperty("email")
         @ApiModelProperty(value = "email", example = "lemonaid@lgcns.com")
         String email;
 
-        @JsonProperty("auth_ip")
         @ApiModelProperty(value = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
     }
@@ -102,20 +88,16 @@ public class AccountDto {
     @Setter
     @ToString
     public static class RegisterResponse {
-        @JsonProperty("account_id")
         @NotNull(message = "필수 파라미터 누락")
         @ApiModelProperty(value = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-        @JsonProperty("account_name")
         @ApiModelProperty(value = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @JsonProperty("cellular_phone")
         @ApiModelProperty(value = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @JsonProperty("email")
         @ApiModelProperty(value = "이메일", example = "lemonaid@lgcns.com")
         String email;
 
@@ -123,7 +105,6 @@ public class AccountDto {
 //        @ApiModelProperty(value = "유선전화번호", example = "0200000000")
 //        String phoneNumber;
 
-        @JsonProperty("auth_ip")
         @ApiModelProperty(value = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
     }

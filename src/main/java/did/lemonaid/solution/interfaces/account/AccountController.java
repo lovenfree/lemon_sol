@@ -1,6 +1,7 @@
 package did.lemonaid.solution.interfaces.account;
 
 import did.lemonaid.solution.domain.account.AccountService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@Tag(name = "Account", description = "Account API")
+@Api(tags = {"Account"})
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 @Slf4j
