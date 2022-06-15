@@ -141,5 +141,9 @@ jib {
 	}
 	to {
 		image = "${dockerRegistry}/did-solution-backend:latest"
+		auth {
+			username = "admin"
+			password = "mulgX59q1WhT9tvxP5BJwKKSFUeeQ7"
+		}
 	}
 }
