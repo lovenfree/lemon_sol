@@ -1,6 +1,5 @@
 package did.lemonaid.solution.interfaces.tenant;
 
-import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Api(tags = {"Trust Registry"})
+@Tag(name="Trust Registry")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")

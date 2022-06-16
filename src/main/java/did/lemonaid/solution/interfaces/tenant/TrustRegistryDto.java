@@ -1,7 +1,7 @@
 package did.lemonaid.solution.interfaces.tenant;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,11 +25,11 @@ public class TrustRegistryDto {
     public static class Tenant {
         @JsonProperty("tenant_id")
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "Tenant Id", example = "ISSaskdjnek", required = true)
+        @Schema(name = "Tenant Id", example = "ISSaskdjnek", required = true)
         private final String tenantId;
         @JsonProperty("tenant_type")
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "Tenant Type", example = "ISSUER", required = true)
+        @Schema(name = "Tenant Type", example = "ISSUER", required = true)
         private final TenantType tenantType;
     }
 
@@ -55,11 +55,11 @@ public class TrustRegistryDto {
     public static class Certificate {
         @JsonProperty("tenant_id")
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "Tenant Id", example = "ISSaskdjnek", required = true)
+        @Schema(name = "Tenant Id", example = "ISSaskdjnek", required = true)
         private final String tenantId;
         @JsonProperty("tenant_type")
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "Tenant Type", example = "ISSUER", required = true)
+        @Schema(name = "Tenant Type", example = "ISSUER", required = true)
         private final TenantType tenantType;
     }
 

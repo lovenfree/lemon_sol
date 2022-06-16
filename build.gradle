@@ -68,6 +68,7 @@ dependencies {
 	implementation 'com.google.guava:guava:31.1-jre'
 	implementation 'com.google.code.gson:gson:2.8.5'
 
+	implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
 	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
 	implementation "org.springframework.boot:spring-boot-starter-websocket:${springBootVersion}"
 	implementation "org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}"
@@ -82,7 +83,13 @@ dependencies {
 //	implementation 'org.flywaydb:flyway-core'
 	runtimeOnly 'org.postgresql:postgresql'
 
-	implementation 'io.springfox:springfox-boot-starter:3.0.0' //.. swagger
+	// implementation 'io.springfox:springfox-boot-starter:3.0.0' //.. swagger
+	// springfox 는 spring-boot 2.6 의 actuator 와 출돌함.
+	// 이를 회피하기 위해 springfox 대신 sprongdoc 으로 마이그레이션 하였음.
+	// 마이그레이션 가이드. https://springdoc.org/#migrating-from-springfox
+	 implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+	 implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 

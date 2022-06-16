@@ -3,7 +3,7 @@ package did.lemonaid.solution.interfaces.account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import did.lemonaid.solution.domain.account.Account;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,25 +19,25 @@ public class AccountDto {
     @ToString
     public static class AccountInfo {
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "관리자 계정 아이디", example = "admin", required = true)
+        @Schema(name = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-        @ApiModelProperty(value = "관리자 이름", example = "김라엘", required = true)
+        @Schema(name = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @ApiModelProperty(value = "휴대전화번호", example = "01000000000")
+        @Schema(name = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @ApiModelProperty(value = "이메일", example = "lemonaid@lgcns.com")
+        @Schema(name = "이메일", example = "lemonaid@lgcns.com")
         String email;
 
-        @ApiModelProperty(value = "계정상태", example = "", required = true)
+        @Schema(name = "계정상태", example = "", required = true)
         Account.AccountStatus accountStatus;
 
-        @ApiModelProperty(value = "권한IP", example = "0.0.0.0", required = true)
+        @Schema(name = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
 
-        @ApiModelProperty(value = "마지막 로그인 시간")
+        @Schema(name = "마지막 로그인 시간")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime lastLoginDateTime;
     }
@@ -45,7 +45,7 @@ public class AccountDto {
     @Getter
     @Setter
     public class AccountListResults {
-        @ApiModelProperty(value="계정 목록")
+        @Schema(name = "계정 목록")
         List<AccountDto> accounts;
     }
 
@@ -53,24 +53,24 @@ public class AccountDto {
     @Setter
     public class RegisterRequest {
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "관리자 계정 아이디", example = "admin", required = true)
+        @Schema(name = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value="관리자 계정 비밀번호", example="****", required = true)
+        @Schema(name = "관리자 계정 비밀번호", example="****", required = true)
         String accountPw;
 
-        @ApiModelProperty(value = "관리자 이름", example = "김라엘", required = true)
+        @Schema(name = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @ApiModelProperty(value = "휴대전화번호", example = "01000000000")
+        @Schema(name = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @ApiModelProperty(value = "email", example = "lemonaid@lgcns.com")
+        @Schema(name = "email", example = "lemonaid@lgcns.com")
         String email;
 
-        @ApiModelProperty(value = "권한IP", example = "0.0.0.0", required = true)
+        @Schema(name = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
     }
 
@@ -89,23 +89,23 @@ public class AccountDto {
     @ToString
     public static class RegisterResponse {
         @NotNull(message = "필수 파라미터 누락")
-        @ApiModelProperty(value = "관리자 계정 아이디", example = "admin", required = true)
+        @Schema(name = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-        @ApiModelProperty(value = "관리자 이름", example = "김라엘", required = true)
+        @Schema(name = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @ApiModelProperty(value = "휴대전화번호", example = "01000000000")
+        @Schema(name = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @ApiModelProperty(value = "이메일", example = "lemonaid@lgcns.com")
+        @Schema(name = "이메일", example = "lemonaid@lgcns.com")
         String email;
 
 //        @JsonProperty("phone_number")
-//        @ApiModelProperty(value = "유선전화번호", example = "0200000000")
+//        @Schema(name = "유선전화번호", example = "0200000000")
 //        String phoneNumber;
 
-        @ApiModelProperty(value = "권한IP", example = "0.0.0.0", required = true)
+        @Schema(name = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
     }
 
@@ -116,16 +116,16 @@ public class AccountDto {
 //    public class AccountInfoResult {
 //        @JsonProperty("account_id")
 //        @NotNull(message = "필수 파라미터 누락")
-//        @ApiModelProperty(value="관리자 계정 아이디", example="admin", required = true)
+//        @Schema(name="관리자 계정 아이디", example="admin", required = true)
 //        String accountId;
 //
 ////    @JsonProperty(value = "account_password", access = JsonProperty.Access.WRITE_ONLY)
 ////    @NotNull(message = "필수 파라미터 누락")
-////    @ApiModelProperty(value="관리자 계정 비밀번호", example="****", required = true)
+////    @Schema(name="관리자 계정 비밀번호", example="****", required = true)
 ////    String accountPw;
 //
 //        @JsonProperty("account_name")
-//        @ApiModelProperty(value="이름", example="김라엘",  required = true)
+//        @Schema(name="이름", example="김라엘",  required = true)
 //        @NotNull(message = "필수 파라미터 누락")
 //        String accountName;
 //

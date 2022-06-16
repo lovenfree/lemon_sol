@@ -7,12 +7,12 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${DID_DATABASE_URL:jdbc:postgresql://127.0.0.1:5432/solution}
-    username: ${DID_DATABASE_USER:postgres}
-    password: ${DID_DATABASE_PASS:mysecretpasword}
+    url: ${DID_DATABASE_URL:jdbc:postgresql://34.64.237.85:5432/solution}
+    username: ${DID_DATABASE_USER:solution}
+    password: ${DID_DATABASE_PASS:0sRyPSoK7p7i6Ygk1dewaPkRoy3K5Z/+}
   jpa:
     hibernate:
-      ddl-auto: ${DID_DATABASE_DDL_AUTO:create}
+      ddl-auto: ${DID_DATABASE_DDL_AUTO:update}
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
@@ -34,6 +34,10 @@ server:
 logging:
   level:
     did: ${DID_LOG_LEVEL:debug}
+management:
+  endpoint:
+    health:
+      show-details: always
 cors:
   patterns: ${DID_CORS_PATTERNS:"*"}
 aries:
