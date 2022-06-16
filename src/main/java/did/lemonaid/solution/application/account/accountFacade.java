@@ -14,7 +14,7 @@ public class accountFacade {
     private final AccountService accountService;
 
     public AccountInfo createAccount(AccountCommand command){
-        var accountInfo = accountService.createAccount(command);
+        var accountInfo = accountService.registerAccount(command);
         return accountInfo;
     }
 

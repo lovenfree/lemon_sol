@@ -14,7 +14,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountReader accountReader;
 
     @Transactional
-    public AccountInfo createAccount(AccountCommand command){
+    public AccountInfo registerAccount(AccountCommand command){
         var iniAccount = command.toEntity();
         Account account = accountStore.store(iniAccount);
         return new AccountInfo(account);

@@ -1,8 +1,10 @@
 package did.lemonaid.solution.interfaces.account;
 
 import did.lemonaid.solution.domain.account.AccountService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@Tag(name="Account")
+@Tag(name="Account", description = "Account API")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 @Slf4j
@@ -27,7 +29,7 @@ public class AccountController {
     @PostMapping("/accounts")
     public ResponseEntity<AccountDto.RegisterResponse> createAccount(@RequestBody @Valid AccountDto.RegisterRequest request) {
         var command =  mapper.of(request);
-        var accountInfo = accountService.createAccount(command);
+        var accountInfo = accountService.registerAccount(command);
         return ResponseEntity.ok(mapper.of(accountInfo));
     }
 

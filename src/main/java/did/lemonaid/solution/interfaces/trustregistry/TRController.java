@@ -1,5 +1,6 @@
-package did.lemonaid.solution.interfaces.tenant;
+package did.lemonaid.solution.interfaces.trustregistry;
 
+import did.lemonaid.solution.application.tenant.TenantFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -10,26 +11,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @Slf4j
-@Tag(name="Trust Registry")
 @RestController
+@Tag(name="Trust Registry", description = "Trust Registry API")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 public class TRController {
+    private final TenantFacade tenantFacade;
+//    private final CertifiacateFacade certifiacateFacade;
+    private final TrustRegistryDtoMapper mapper;
 
 
     @GetMapping("/tenants")
     @Operation(summary = "Tenant List")
-    public ResponseEntity<TrustRegistryDto.Tenant> retrieveTenant() {
-        return null;
+    public ResponseEntity<TrustRegistryDto.Tenants> retrieveTenants() {
+        var tenants = tenantFacade.retrieveTenants();
+        var response = TrustRegistryDto.Tenants.builder().tenants(mapper.of(tenants)).build();
+        return ResponseEntity.ok(response);
     }
 
 
     @Operation(summary = "certificates List")
     @GetMapping("/tenants/{tenant-id}/certificates")
-    public ResponseEntity<TrustRegistryDto.Certificate> retrieveCertificates (@PathVariable("tenant-id") String tenantId) {
+    public ResponseEntity<TrustRegistryDto.Credentials> retrieveCertificates (@PathVariable("tenant-id") String tenantId) {
 
         return null;
     }
+
+
+
+
+
 
 }
