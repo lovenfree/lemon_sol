@@ -19,25 +19,25 @@ public class AccountDto {
     @ToString
     public static class AccountInfo {
         @NotNull(message = "필수 파라미터 누락")
-        @Schema(name = "관리자 계정 아이디", example = "admin", required = true)
+        @Schema(description = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-        @Schema(name = "관리자 이름", example = "김라엘", required = true)
+        @Schema(description = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @Schema(name = "휴대전화번호", example = "01000000000")
+        @Schema(description = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @Schema(name = "이메일", example = "lemonaid@lgcns.com")
+        @Schema(description = "이메일", example = "lemonaid@lgcns.com")
         String email;
 
-        @Schema(name = "계정상태", example = "", required = true)
+        @Schema(description = "계정상태", example = "", required = true)
         Account.AccountStatus accountStatus;
 
-        @Schema(name = "권한IP", example = "0.0.0.0", required = true)
+        @Schema(description = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
 
-        @Schema(name = "마지막 로그인 시간")
+        @Schema(description = "마지막 로그인 시간")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         LocalDateTime lastLoginDateTime;
     }
@@ -45,7 +45,7 @@ public class AccountDto {
     @Getter
     @Setter
     public class AccountListResults {
-        @Schema(name = "계정 목록")
+        @Schema(description = "계정 목록")
         List<AccountDto> accounts;
     }
 
@@ -53,24 +53,24 @@ public class AccountDto {
     @Setter
     public class RegisterRequest {
         @NotNull(message = "필수 파라미터 누락")
-        @Schema(name = "관리자 계정 아이디", example = "admin", required = true)
+        @Schema(description = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @NotNull(message = "필수 파라미터 누락")
-        @Schema(name = "관리자 계정 비밀번호", example="****", required = true)
+        @Schema(description = "관리자 계정 비밀번호", example="****", required = true)
         String accountPw;
 
-        @Schema(name = "관리자 이름", example = "김라엘", required = true)
+        @Schema(description = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @Schema(name = "휴대전화번호", example = "01000000000")
+        @Schema(description = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @Schema(name = "email", example = "lemonaid@lgcns.com")
+        @Schema(description = "email", example = "lemonaid@lgcns.com")
         String email;
 
-        @Schema(name = "권한IP", example = "0.0.0.0", required = true)
+        @Schema(description = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
     }
 
@@ -89,23 +89,23 @@ public class AccountDto {
     @ToString
     public static class RegisterResponse {
         @NotNull(message = "필수 파라미터 누락")
-        @Schema(name = "관리자 계정 아이디", example = "admin", required = true)
+        @Schema(description = "관리자 계정 아이디", example = "admin", required = true)
         String accountId;
 
-        @Schema(name = "관리자 이름", example = "김라엘", required = true)
+        @Schema(description = "관리자 이름", example = "김라엘", required = true)
         String accountName;
 
-        @Schema(name = "휴대전화번호", example = "01000000000")
+        @Schema(description = "휴대전화번호", example = "01000000000")
         String cellphoneNumber;
 
-        @Schema(name = "이메일", example = "lemonaid@lgcns.com")
+        @Schema(description = "이메일", example = "lemonaid@lgcns.com")
         String email;
 
 //        @JsonProperty("phone_number")
-//        @Schema(name = "유선전화번호", example = "0200000000")
+//        @Schema(description = "유선전화번호", example = "0200000000")
 //        String phoneNumber;
 
-        @Schema(name = "권한IP", example = "0.0.0.0", required = true)
+        @Schema(description = "권한IP", example = "0.0.0.0", required = true)
         String authIp;
     }
 
@@ -116,24 +116,24 @@ public class AccountDto {
 //    public class AccountInfoResult {
 //        @JsonProperty("account_id")
 //        @NotNull(message = "필수 파라미터 누락")
-//        @Schema(name="관리자 계정 아이디", example="admin", required = true)
+//        @Schema(description="관리자 계정 아이디", example="admin", required = true)
 //        String accountId;
 //
 ////    @JsonProperty(value = "account_password", access = JsonProperty.Access.WRITE_ONLY)
 ////    @NotNull(message = "필수 파라미터 누락")
-////    @Schema(name="관리자 계정 비밀번호", example="****", required = true)
+////    @Schema(description="관리자 계정 비밀번호", example="****", required = true)
 ////    String accountPw;
 //
-//        @JsonProperty("account_name")
-//        @Schema(name="이름", example="김라엘",  required = true)
+//        @JsonProperty("account_description")
+//        @Schema(description="이름", example="김라엘",  required = true)
 //        @NotNull(message = "필수 파라미터 누락")
-//        String accountName;
+//        String accountdescription;
 //
 //        @JsonProperty("rank")
 //        @ApiModelProperty(value="직급", example="프로")
 //        String rank;
 //
-//        @JsonProperty("team_name")
+//        @JsonProperty("team_description")
 //        @ApiModelProperty(value="조직명", example="블록체인기술팀")
 //        String teamNm;
 //
