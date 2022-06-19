@@ -16,7 +16,7 @@ public class SchemaAttribute {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "SCHEMA_ID")
-  private Schema schema;
+  private Schemas schema;
   //  SCHEMA_ID         BIGINT       NOT NULL
   @Column(name="ATTRIBUTE_CODE", nullable = false)
   private String attributeCode;
@@ -36,7 +36,7 @@ public class SchemaAttribute {
   }
 
   @Builder
-  public SchemaAttribute(Schema schema, String attributeCode, String attributeName, MimeType mimeType) {
+  public SchemaAttribute(Schemas schema, String attributeCode, String attributeName, MimeType mimeType) {
     this.schema = schema;
     this.attributeCode = attributeCode;
     this.attributeName = attributeName;

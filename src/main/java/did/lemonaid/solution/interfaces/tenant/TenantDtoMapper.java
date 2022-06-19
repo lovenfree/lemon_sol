@@ -1,9 +1,10 @@
 package did.lemonaid.solution.interfaces.tenant;
 
 import did.lemonaid.solution.domain.tenant.TenantCommand;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import did.lemonaid.solution.domain.tenant.TenantInfo;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(
   componentModel = "spring",
@@ -11,7 +12,19 @@ import org.mapstruct.ReportingPolicy;
   unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface TenantDtoMapper {
-  TenantCommand.RegisterTenantRequest of(TenantDto.RegisterTenantRequest request);
+  TenantCommand.RegisterTenant of(TenantDto.RegisterTenantRequest request);
 
-  TenantDto.RegisterResponse of(String tenantId);
+  TenantDto.TenantResponse of(String tenantId);
+
+  TenantDto.TenantInfo of(TenantInfo tenantInfo);
+
+  @Mappings({
+    @Mapping(source = "TenantInfo", target = "TenantDto.TenantInfo")
+  })
+  List<TenantDto.TenantInfo> of(List<TenantInfo> tenantInfos);
+
+  TenantCommand.UpdateTenant of(TenantDto.UpdateTenantRequest request);
+
+  TenantCommand.ActivateTenant
+  of(TenantDto.ActivateTenantRequest request);
 }

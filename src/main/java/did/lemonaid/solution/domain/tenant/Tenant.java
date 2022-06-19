@@ -76,12 +76,12 @@ public class Tenant extends BaseEntity {
 //  }
 //
   @Builder
-  public Tenant( TenantType tenantType, String tenantName, TenantStatus tenantStatus, String tenantHomeUrl, String tenantAddress, String tenantLogoPath, boolean trustTenant) {
+  public Tenant( TenantType tenantType, String tenantName, String tenantHomeUrl, String tenantAddress, String tenantLogoPath, boolean trustTenant) {
     this.tenantId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.tenantType = tenantType;
     this.tenantName = tenantName;
 
-    this.tenantStatus = tenantStatus;
+    this.tenantStatus = Tenant.TenantStatus.PAUSE;
     this.tenantHomeUrl = tenantHomeUrl;
     this.tenantAddress = tenantAddress;
     this.tenantLogoPath = tenantLogoPath;
@@ -90,14 +90,14 @@ public class Tenant extends BaseEntity {
 
 
 
-  public void activateTenant(TenantCommand.ActivateTenantRequest command){
+  public void activateTenant(TenantCommand.ActivateTenant command){
     this.tenantDID = command.getTenantDID();
     this.tenantInvitationUrl = command.getTenantInvitationUrl();
     changeTenantStatus(TenantStatus.ACTIVATE);
     changeTrustTenant();
   }
 
-  public void updateTenantInfo(TenantCommand.UpdateTenantRequest command){
+  public void updateTenantInfo(TenantCommand.UpdateTenant command){
     this.tenantType = command.getTenantType();
     this.tenantName = command.getTenantName();
     this.tenantDID = command.getTenantDID();

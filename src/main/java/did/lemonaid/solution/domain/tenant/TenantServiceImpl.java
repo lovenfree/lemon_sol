@@ -15,11 +15,11 @@ public class TenantServiceImpl implements TenantService{
 
   private final TenantReader tenantReader;
   private final TenantStore tenantStore;
-  private final TenantInfoMapper mapper;
+  private final TenantInfoMapper tenantInfoMapper;
 
   @Override
   @Transactional
-  public String registerTenant(TenantCommand.RegisterTenantRequest command) {
+  public String registerTenant(TenantCommand.RegisterTenant command) {
     var initTenant = command.toEntity();
     tenantStore.store(initTenant);
     return initTenant.getTenantId();
@@ -27,7 +27,7 @@ public class TenantServiceImpl implements TenantService{
 
   @Override
   @Transactional
-  public String updateTenantInfo(String tenantId, TenantCommand.UpdateTenantRequest command) {
+  public String updateTenantInfo(String tenantId, TenantCommand.UpdateTenant command) {
     var tenant = tenantReader.getTenant(tenantId);
     tenant.updateTenantInfo(command);
     tenantStore.store(tenant);
@@ -36,7 +36,7 @@ public class TenantServiceImpl implements TenantService{
 
   @Override
   @Transactional
-  public String activateTenant(String tenantId,TenantCommand.ActivateTenantRequest command) {
+  public String activateTenant(String tenantId, TenantCommand.ActivateTenant command) {
     var tenant = tenantReader.getTenant(tenantId);
     tenant.activateTenant(command);
     tenantStore.store(tenant);
@@ -55,6 +55,12 @@ public class TenantServiceImpl implements TenantService{
   @Override
   public List<TenantInfo> retrieveTenants() {
     var tenants = tenantReader.retrieveTenants();
-    return mapper.of(tenants);
+    return tenantInfoMapper.of(tenants);
+  }
+
+  @Override
+  public TenantInfo retrieveTenant(String tenantId) {
+    var tenant = tenantReader.getTenant(tenantId);
+    return tenantInfoMapper.of(tenant);
   }
 }

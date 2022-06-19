@@ -4,6 +4,7 @@ import did.lemonaid.solution.domain.tenant.Tenant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
@@ -11,37 +12,37 @@ import java.util.List;
 public class TenantDto {
 
   @Getter
-  @Builder
+  @Setter
   @ToString
   public static class RegisterTenantRequest {
-    private final Tenant.TenantType tenantType;
-    private final String tenantName;
-    private final String tenantHomeUrl;
-    private final String tenantAddress;
-    private final String tenantLogoPath;
+    private Tenant.TenantType tenantType;
+    private String tenantName;
+    private String tenantHomeUrl;
+    private String tenantAddress;
+    private String tenantLogoPath;
   }
 
   @Getter
-  @Builder
+  @Setter
   @ToString
   public static class UpdateTenantRequest {
-    private final Tenant.TenantType tenantType;
-    private final String tenantName;
-    private final String tenantDID;
-    private final String tenantInvitationUrl;
-    private final Tenant.TenantStatus tenantStatus;
-    private final String tenantHomeUrl;
-    private final String tenantAddress;
-    private final String tenantLogoPath;
+    private Tenant.TenantType tenantType;
+    private String tenantName;
+    private String tenantDID;
+    private String tenantInvitationUrl;
+    private Tenant.TenantStatus tenantStatus;
+    private String tenantHomeUrl;
+    private String tenantAddress;
+    private String tenantLogoPath;
   }
 
 
   @Getter
-  @Builder
+  @Setter
   @ToString
   public static class ActivateTenantRequest {
-    private final String tenantDID;
-    private final String tenantInvitationUrl;
+    private String tenantDID;
+    private String tenantInvitationUrl;
   }
 
 
@@ -73,32 +74,26 @@ public class TenantDto {
     private final String tenantInvitationUrl;
 
     @Schema(description = "Tenant Status", example = "Activate", required = true)
-    private Tenant.TenantStatus tenantStatus;
+    private final Tenant.TenantStatus tenantStatus;
 
-    @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg", required = true)
-    private String tenantLogoPath;
+    @Schema(description = "Tenant Home URL", example = "http://lemonaid.com")
+    private final String tenantHomeUrl;
+
+    @Schema(description = "Tenant Address", example = "서울시 강서구 마곡")
+    private final String tenantAddress;
+
+    @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg")
+    private final String tenantLogoPath;
 
   }
 
   @Getter
   @Builder
   @ToString
-  public static class RegisterResponse {
-    private final String tokenId;
+  public static class TenantResponse {
+    private final String tenantId;
   }
 
-  @Getter
-  @Builder
-  @ToString
-  public static class ActivateResponse {
-    private final String tokenId;
-  }
 
-  @Getter
-  @Builder
-  @ToString
-  public static class UpdateResponse {
-    private final String tokenId;
-  }
 
 }

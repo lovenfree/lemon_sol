@@ -18,15 +18,13 @@ public class Credential extends BaseEntity {
   @Column(name = "ID")
   private Long id;
 
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "TENANT_ID")
   private Tenant tenant;
 
-
-  @OneToOne()
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "SCHEMA_ID")
-  private Schema schema;
+  private Schemas schema;
 
   @Column(name = "CREDENTIAL_ID", nullable = false)
   private String credentialId;
@@ -39,12 +37,12 @@ public class Credential extends BaseEntity {
   @Column(name = "CREDENTIAL_TYPE", nullable = false)
   @Enumerated(EnumType.STRING)
   private CredentialType credentialType;
-  @Column(name = "REVOCATION_REGISTRY_SIZE", nullable = false)
-  private int revocationRegistrySize;
+//  @Column(name = "REVOCATION_REGISTRY_SIZE", nullable = false)
+//  private int revocationRegistrySize;
   @Column(name = "DESCRIPTION")
   private String description;
   @Column(name = "USER_AUTH_PAGE_URL", nullable = false)
-  private String userAuthPageUrl;
+  private String authLinkUrl;
   @Column(name = "EXP_DT_SET_YN", nullable = false)
   private boolean expiryDateYN;
   @Column(name = "VALIDITY_DAYS")
@@ -70,15 +68,15 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(String credentialId, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, int revocationRegistrySize, String description, String userAuthPageUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String tempItemMapping) {
+  public Credential(String credentialId, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String tempItemMapping) {
     this.credentialId = credentialId;
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
     this.trustCredentialYN = trustCredentialYN;
     this.credentialType = credentialType;
-    this.revocationRegistrySize = revocationRegistrySize;
+//    this.revocationRegistrySize = revocationRegistrySize;
     this.description = description;
-    this.userAuthPageUrl = userAuthPageUrl;
+    this.authLinkUrl = authLinkUrl;
     this.expiryDateYN = expiryDateYN;
     this.validityDays = validityDays;
     this.backgroundImg = backgroundImg;

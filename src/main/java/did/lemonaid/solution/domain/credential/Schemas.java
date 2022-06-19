@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Table(name="SCHEMA")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Schema {
+public class Schemas {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ID")
@@ -40,7 +40,7 @@ public class Schema {
 //  }
 
   @Builder
-  public Schema(String schemaId, String credentialDefinitionId, String schemaName){
+  public Schemas(String schemaId, String credentialDefinitionId, String schemaName){
     this.schemaId = schemaId;
     this.credentialDefinitionId = credentialDefinitionId;
     this.schemaName = schemaName;

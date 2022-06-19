@@ -15,4 +15,6 @@ public interface TenantInfoMapper {
     @Mapping(source = "Tenant", target = "TenantInfo")
   })
   List<TenantInfo> of(List<Tenant> tenantInfoList);
+
+  TenantInfo of(Tenant tenant);
 }
