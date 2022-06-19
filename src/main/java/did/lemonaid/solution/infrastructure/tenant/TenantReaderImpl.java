@@ -1,5 +1,6 @@
 package did.lemonaid.solution.infrastructure.tenant;
 
+import did.lemonaid.solution.common.exception.EntityNotFoundException;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantReader;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TenantReaderImpl implements TenantReader {
   private final TenantRepository tenantRepository;
+
+  @Override
+  public Tenant getTenant(String tenantId) {
+
+      return tenantRepository.findByTenantId(tenantId)
+        .orElseThrow(EntityNotFoundException::new);
+
+  }
+
   @Override
   public List<Tenant> retrieveTenants() {
     return tenantRepository.findAll();

@@ -1,5 +1,6 @@
 package did.lemonaid.solution.domain.tenant;
 
+import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.domain.BaseEntity;
 import lombok.*;
 
@@ -8,9 +9,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name="TENANT")
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+//@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tenant extends BaseEntity {
+  private static final String PREFIX_TENANT = "tnt_";
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ID")
@@ -62,13 +65,64 @@ public class Tenant extends BaseEntity {
     private final String description;
   }
 
+//  @Builder
+//  public Tenant(String tenantId, TenantType tenantType,String tenantName, TenantStatus tenantStatus) {
+//    //validation
+//
+//    this.tenantId = tenantId;
+//    this.tenantType = tenantType;
+//    this.tenantName = tenantName;
+//    this.tenantStatus = tenantStatus;
+//  }
+//
   @Builder
-  public Tenant(String tenantId, TenantType tenantType,String tenantName, TenantStatus status) {
-    //validation
-
-    this.tenantId = tenantId;
+  public Tenant( TenantType tenantType, String tenantName, TenantStatus tenantStatus, String tenantHomeUrl, String tenantAddress, String tenantLogoPath, boolean trustTenant) {
+    this.tenantId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.tenantType = tenantType;
     this.tenantName = tenantName;
+
+    this.tenantStatus = tenantStatus;
+    this.tenantHomeUrl = tenantHomeUrl;
+    this.tenantAddress = tenantAddress;
+    this.tenantLogoPath = tenantLogoPath;
+    this.trustTenant = trustTenant;
+  }
+
+
+
+  public void activateTenant(TenantCommand.ActivateTenantRequest command){
+    this.tenantDID = command.getTenantDID();
+    this.tenantInvitationUrl = command.getTenantInvitationUrl();
+    changeTenantStatus(TenantStatus.ACTIVATE);
+    changeTrustTenant();
+  }
+
+  public void updateTenantInfo(TenantCommand.UpdateTenantRequest command){
+    this.tenantType = command.getTenantType();
+    this.tenantName = command.getTenantName();
+    this.tenantDID = command.getTenantDID();
+    this.tenantInvitationUrl = command.getTenantInvitationUrl();
+    this.tenantStatus = command.getTenantStatus();
+    this.tenantHomeUrl = command.getTenantHomeUrl();
+    this.tenantAddress = command.getTenantAddress();
+    this.tenantLogoPath = command.getTenantLogoPath();
+  }
+
+
+
+  public void changeTenantStatus(TenantStatus status){
     this.tenantStatus = status;
   }
+
+  public void changeTrustTenant(){
+    this.trustTenant = true;
+  }
+
+  public void changeUnTrustTenant(){
+    this.trustTenant = false;
+  }
+
+
+
+
 }

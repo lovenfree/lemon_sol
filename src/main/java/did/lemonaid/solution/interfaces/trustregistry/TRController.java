@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name="Trust Registry", description = "Trust Registry API")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/trust-registry")
 public class TRController {
     private final TenantFacade tenantFacade;
 //    private final CertifiacateFacade certifiacateFacade;
@@ -33,7 +33,7 @@ public class TRController {
 
 
     @Operation(summary = "certificates List")
-    @GetMapping("/tenants/{tenant-id}/certificates")
+    @GetMapping("/tenants/{tenant-id}/credentials")
     public ResponseEntity<TrustRegistryDto.Credentials> retrieveCertificates (@PathVariable("tenant-id") String tenantId) {
 
         return null;

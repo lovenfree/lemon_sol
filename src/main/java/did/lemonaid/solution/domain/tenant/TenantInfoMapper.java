@@ -1,5 +1,6 @@
 package did.lemonaid.solution.domain.tenant;
 
+import did.lemonaid.solution.domain.MapStructConfig;
 import org.mapstruct.*;
 
 import java.util.List;

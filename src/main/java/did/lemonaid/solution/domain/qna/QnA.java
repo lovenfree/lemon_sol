@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name="TENANT")
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QnA {
   @Id
@@ -18,7 +17,8 @@ public class QnA {
   @Column(name="ID")
   private Long id;
 
-  @Column(name="TEST", nullable = false)
-  private String test;
-
 }
+
+
+
+
