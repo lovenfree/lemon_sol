@@ -12,7 +12,7 @@ public class AccountCommand {
     String accountId;
     String accountPw;
     String accountName;
-    String cellphoneNumber;
+    String mobileNumber;
     String email;
     String authIp;
 
@@ -20,7 +20,7 @@ public class AccountCommand {
         return Account.builder()
                 .accountId(accountId)
                 .accountName(accountName)
-                .cellphoneNumber(cellphoneNumber)
+                .mobileNumber(mobileNumber)
                 .email(email)
                 .authIp(authIp)
                 .build();

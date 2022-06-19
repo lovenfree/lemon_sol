@@ -7,7 +7,7 @@ public class AccountInfo {
     private final Long id;
     private final String accountId;
     private final String accountName;
-    private final String cellphoneNumber;
+    private final String mobileNumber;
     private final String email;
     private final Account.AccountStatus accountStatus;
     private final String authIp;
@@ -17,7 +17,7 @@ public class AccountInfo {
         this.id = account.getId();
         this.accountId = account.getAccountId();
         this.accountName = account.getAccountName();
-        this.cellphoneNumber = account.getCellphoneNumber();
+        this.mobileNumber = account.getMobileNumber();
         this.email = account.getEmail();
         this.accountStatus = account.getAccountStatus();
         this.authIp = account.getAuthIp();

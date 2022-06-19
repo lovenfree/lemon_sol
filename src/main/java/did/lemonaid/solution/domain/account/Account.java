@@ -19,7 +19,7 @@ public class Account extends BaseEntity {
     @Column(name="ID")
     private Long id;
 
-    @Column(name="ACC_ID", nullable = false)
+    @Column(name="ACCOUNT_ID", nullable = false)
     private String accountId;
 
     @Column(name="PSWD_HASH_VAL")
@@ -32,16 +32,19 @@ public class Account extends BaseEntity {
     private String accountName;
 
     @Column(name="CPNO")
-    private String cellphoneNumber;
+    private String mobileNumber;
 
     @Column(name="EMAIL")
     private String email;
 
-    @Column(name="ACC_STCD", nullable = false)
+    @Column(name="ACCOUNT_STATUS", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus;
 
-    @Column(name="AUTH_IP")
+  @Column(name="ACCOUNT_TYPE", nullable = false)
+  @Enumerated(EnumType.STRING)
+  private AccountType accountType;
+  @Column(name="AUTH_IP")
     private String authIp;
 
     @Column(name="LAST_LOGIN_DTTM")
@@ -60,17 +63,24 @@ public class Account extends BaseEntity {
         private final String description;
     }
 
+  @Getter
+  @AllArgsConstructor
+  public enum AccountType{
+    ADMIN("주관리자"), GENERAL("부관리자");
+    private final String description;
+  }
 
 
     @Builder
-    public Account(String accountId, String accountPw, String accountName, String cellphoneNumber,
-                   String email, AccountStatus accountStatus, String authIp) {
+    public Account(String accountId, String accountPw, String accountName, String mobileNumber,
+                   String email, AccountStatus accountStatus, AccountType accountType, String authIp) {
         this.accountId = accountId;
         this.accountPwHash = accountPw;
         this.accountName = accountName;
-        this.cellphoneNumber = cellphoneNumber;
+        this.mobileNumber = mobileNumber;
         this.email = email;
         this.accountStatus = accountStatus;
+        this.accountType = accountType;
         this.authIp = authIp;
 
         // NOT NULL 초기화
@@ -84,7 +94,7 @@ public class Account extends BaseEntity {
     public void updateAccountInfo(Account account) {
 
         this.accountName = account.getAccountName();
-        this.cellphoneNumber = account.getCellphoneNumber();
+        this.mobileNumber = account.getMobileNumber();
         this.email = account.getEmail();
         this.accountStatus = account.getAccountStatus();
         this.authIp = account.getAuthIp();

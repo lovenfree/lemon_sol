@@ -26,7 +26,7 @@ public class AccountDto {
         String accountName;
 
         @Schema(description = "휴대전화번호", example = "01000000000")
-        String cellphoneNumber;
+        String mobileNumber;
 
         @Schema(description = "이메일", example = "lemonaid@lgcns.com")
         String email;
@@ -65,7 +65,7 @@ public class AccountDto {
         String accountName;
 
         @Schema(description = "휴대전화번호", example = "01000000000")
-        String cellphoneNumber;
+        String mobileNumber;
 
         @Schema(description = "email", example = "lemonaid@lgcns.com")
         String email;
@@ -96,7 +96,7 @@ public class AccountDto {
         String accountName;
 
         @Schema(description = "휴대전화번호", example = "01000000000")
-        String cellphoneNumber;
+        String mobileNumber;
 
         @Schema(description = "이메일", example = "lemonaid@lgcns.com")
         String email;
@@ -144,7 +144,7 @@ public class AccountDto {
 //
 //        @JsonProperty("cellular_phone")
 //        @ApiModelProperty(value="휴대전화번호", example="01000000000")
-//        String cellphoneNumber;
+//        String mobileNumber;
 //
 //        @JsonProperty("phone_number")
 //        @ApiModelProperty(value="유선전화번호", example="0200000000")
