@@ -1,10 +1,12 @@
 package did.lemonaid.solution.domain.tenant;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
+@Builder
 public class TenantInfo {
   private final String tenantId;
   private final Tenant.TenantType tenantType;

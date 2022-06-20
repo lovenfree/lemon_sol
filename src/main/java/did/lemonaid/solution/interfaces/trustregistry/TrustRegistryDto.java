@@ -96,8 +96,6 @@ public class TrustRegistryDto {
       @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0", required = true)
       private  String credentialDefinitionId;
 
-//      @Schema(description = "revocation size", example = "100")
-//      private int revocationRegistrySize;
       @Schema(description = "Description", example = "DID id credential")
       private  String description;
       @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
@@ -159,8 +157,6 @@ public class TrustRegistryDto {
     @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0", required = true)
     private final String credentialDefinitionId;
 
-    //      @Schema(description = "revocation size", example = "100")
-//      private int revocationRegistrySize;
     @Schema(description = "Description", example = "DID id credential")
     private final String description;
     @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
@@ -173,18 +169,33 @@ public class TrustRegistryDto {
     private final String backgroundImg;
     @Schema(description = "Logo Image", example = "logo.img")
     private final String logoImg;
-    @Schema(description = "???", example = "???", required = true)
+    @Schema(description = "credential template Info", example = "???", required = true)
     private final String tempItemMapping;
 
+    @Schema(description = "Schema", required = true)
+    private final SchemaDto schema;
 
+//    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
+//    private  final String schemaId;
+//    @Schema(description = "Schema Name", example = "사원증", required = true)
+//    private final String schemaName;
+//    @Schema(description = "Schema attribute List", required = true)
+//    private final List<SchemaAttributeDto> schemaAttributeList;
+
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class SchemaDto {
     @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
     private  final String schemaId;
     @Schema(description = "Schema Name", example = "사원증", required = true)
     private final String schemaName;
     @Schema(description = "Schema attribute List", required = true)
     private final List<SchemaAttributeDto> schemaAttributeList;
-
   }
+
 
   @Getter
   @Builder

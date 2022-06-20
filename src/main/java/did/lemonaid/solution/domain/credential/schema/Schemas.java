@@ -1,5 +1,6 @@
-package did.lemonaid.solution.domain.credential;
+package did.lemonaid.solution.domain.credential.schema;
 
+import did.lemonaid.solution.domain.credential.SchemaAttribute;
 import lombok.*;
 import org.assertj.core.util.Lists;
 

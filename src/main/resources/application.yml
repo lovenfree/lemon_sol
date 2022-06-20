@@ -34,7 +34,7 @@ server:
       force: true
 logging:
   level:
-    did: ${DID_LOG_LEVEL:debug}
+    did: ${DID_LOG_LEVEL:info}
 management:
   endpoint:
     health:

@@ -1,5 +1,6 @@
 package did.lemonaid.solution.domain.credential;
 
+import did.lemonaid.solution.domain.credential.schema.Schemas;
 import lombok.*;
 
 import javax.persistence.*;

@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
     @CreatedBy
     @Column(name = "FRST_RGSR_ID", nullable = false, updatable = false)
-    private String firstRegistorId;
+    private String firstRegistorId="test";
 
     @Column(name = "FRST_REG_PROG_ID", nullable = false, updatable = false)
     private String firstRegisterProgramId = Util.getMethodName();
@@ -34,7 +34,7 @@ public abstract class BaseEntity {
 
     @LastModifiedBy
     @Column(name = "LAST_EDTR_ID", nullable = false)
-    private String lastEditorId ;
+    private String lastEditorId ="test";
 
     @Column(name = "LAST_CHNG_PROG_ID", nullable = false)
     private String lastChangeProgramId = Util.getMethodName();

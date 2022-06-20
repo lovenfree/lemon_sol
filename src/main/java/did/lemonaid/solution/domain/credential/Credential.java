@@ -1,6 +1,7 @@
 package did.lemonaid.solution.domain.credential;
 
 import did.lemonaid.solution.domain.BaseEntity;
+import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import lombok.*;
 import org.hibernate.annotations.Type;
@@ -37,8 +38,7 @@ public class Credential extends BaseEntity {
   @Column(name = "CREDENTIAL_TYPE", nullable = false)
   @Enumerated(EnumType.STRING)
   private CredentialType credentialType;
-//  @Column(name = "REVOCATION_REGISTRY_SIZE", nullable = false)
-//  private int revocationRegistrySize;
+
   @Column(name = "DESCRIPTION")
   private String description;
   @Column(name = "USER_AUTH_PAGE_URL", nullable = false)
@@ -74,7 +74,6 @@ public class Credential extends BaseEntity {
     this.credentialDefinitionId = credentialDefinitionId;
     this.trustCredentialYN = trustCredentialYN;
     this.credentialType = credentialType;
-//    this.revocationRegistrySize = revocationRegistrySize;
     this.description = description;
     this.authLinkUrl = authLinkUrl;
     this.expiryDateYN = expiryDateYN;
