@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -17,19 +18,25 @@ public class CredentialServiceImpl implements CredentialService{
 //  private final CredentialStore credentialStore;
 
   @Override
+  public String registerCredential(CredentialCommand.RegisterCredential command) {
+
+
+
+    return null;
+  }
+
+  @Override
   public List<CredentialInfo> retrieveCredentials() {
     return null;
   }
 
   @Override
-  public CredentialInfo retrieveCredential(String credentialDefinitionId) {
+  @Transactional
+  public CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId) {
     var credential = credentialReader.getCredentialBy(credentialDefinitionId);
+
 //    var credential = credentialReader.getCredentialBy(credentialDefinitionId);
-    System.out.println(credential.getCredentialName());
-    System.out.println(credential.getCredentialType());
-    System.out.println(credential.getTenant().getTenantId());
-    System.out.println(credential.getSchema());
-    System.out.println(credential.getSchema().getSchemaId());
-    return null;
+
+    return     credentialInfoMapper.of(credential);
   }
 }

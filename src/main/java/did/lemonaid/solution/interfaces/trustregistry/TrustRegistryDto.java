@@ -1,7 +1,7 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
 import did.lemonaid.solution.domain.credential.Credential;
-import did.lemonaid.solution.domain.credential.SchemaAttribute;
+import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
 import java.util.List;
 
 public class TrustRegistryDto {
@@ -75,9 +74,9 @@ public class TrustRegistryDto {
         @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com", required = true)
         private final String authLinkUrl;
         @Schema(description = "Background Image", example = "background.jpg", required = true)
-        private final String backgroundImg;
+        private final byte[] backgroundImg;
         @Schema(description = "Logo Image", example = "logo.img", required = true)
-        private final String logoImg;
+        private final byte[] logoImg;
     }
 
     //credential 등록
@@ -111,15 +110,23 @@ public class TrustRegistryDto {
       @Schema(description = "???", example = "???", required = true)
       private String tempItemMapping;
 
+      private SchemaInfo schemaInfo;
 
-      @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
-      private  String schemaId;
-      @Schema(description = "Schema Name", example = "사원증", required = true)
-      private String schemaName;
-      @Schema(description = "Schema attribute List", required = true)
-      private List<RequestSchemaAttribute> schemaAttributeList;
 
   }
+
+  @Getter
+  @Setter
+  @ToString
+  public static class SchemaInfo {
+    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
+    private  String schemaId;
+    @Schema(description = "Schema Name", example = "사원증", required = true)
+    private String schemaName;
+    @Schema(description = "Schema attribute List", required = true)
+    private List<RequestSchemaAttribute> schemaAttributeList;
+  }
+
 
 
   @Getter

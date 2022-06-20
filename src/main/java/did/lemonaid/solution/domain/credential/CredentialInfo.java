@@ -1,7 +1,6 @@
 package did.lemonaid.solution.domain.credential;
 
-import did.lemonaid.solution.domain.credential.schema.Schemas;
-import lombok.Builder;
+import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -24,13 +23,13 @@ public class CredentialInfo {
     private final String authLinkUrl;
     private final boolean expiryDateYN;
     private final int validityDays;
-    private final String backgroundImg;
-    private final String logoImg;
-    private final String tempItemMapping;
+    private final byte[] backgroundImg;
+    private final byte[] logoImg;
+    private final String templateItemMapping;
     private final SchemaInfo schema;
 
 
-    public CredentialDetail(String tenantId, String credentialId, String credentialName, Credential.CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, String backgroundImg, String logoImg, String tempItemMapping, SchemaInfo schema) {
+    public CredentialDetail(String tenantId, String credentialId, String credentialName, Credential.CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String templateItemMapping, SchemaInfo schema) {
       this.tenantId = tenantId;
       this.credentialId = credentialId;
       this.credentialName = credentialName;
@@ -41,7 +40,7 @@ public class CredentialInfo {
       this.validityDays = validityDays;
       this.backgroundImg = backgroundImg;
       this.logoImg = logoImg;
-      this.tempItemMapping = tempItemMapping;
+      this.templateItemMapping = templateItemMapping;
       this.schema = schema;
     }
   }

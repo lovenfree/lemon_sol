@@ -16,4 +16,6 @@ public interface TrustRegistryDtoMapper {
     @Mapping(source = "TenantInfo", target = "TrustRegistryDto.TenantInfo")
   })
   List<TrustRegistryDto.TenantInfo> of(List<TenantInfo> tenantInfos);
+
+//  void of(TrustRegistryDto.RegisterCredentialRequest request);
 }

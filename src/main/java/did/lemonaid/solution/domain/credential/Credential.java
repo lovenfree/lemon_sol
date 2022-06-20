@@ -19,11 +19,11 @@ public class Credential extends BaseEntity {
   @Column(name = "ID")
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "TENANT_ID")
   private Tenant tenant;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "SCHEMA_ID")
   private Schemas schema;
 
@@ -55,8 +55,8 @@ public class Credential extends BaseEntity {
   @Column(name = "LOGO_IMG")
   @Type(type = "org.hibernate.type.BinaryType")
   private byte[] logoImg;
-  @Column(name = "TEMP_ITEM_MAPPING", nullable = false)
-  private String tempItemMapping;
+  @Column(name = "TEMPLATE_ITEM_MAPPING", nullable = false)
+  private String templateItemMapping;
 
   @Getter
   @AllArgsConstructor
@@ -68,7 +68,7 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String tempItemMapping) {
+  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String templateItemMapping) {
     this.credentialId = credentialId;
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
@@ -80,7 +80,7 @@ public class Credential extends BaseEntity {
     this.validityDays = validityDays;
     this.backgroundImg = backgroundImg;
     this.logoImg = logoImg;
-    this.tempItemMapping = tempItemMapping;
+    this.templateItemMapping = templateItemMapping;
     this.schema =schema;
     this.tenant =tenant;
   }

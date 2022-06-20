@@ -45,6 +45,8 @@ public class TRController {
     @Operation(summary = "register credential")
     @PostMapping ("/credentials")
     public ResponseEntity<TrustRegistryDto.CredentialResponse> registerCredential (@RequestBody @Valid TrustRegistryDto.RegisterCredentialRequest request) {
+      var tenantID = request.getTenantId();
+
 
       return ResponseEntity.ok(null);
     }

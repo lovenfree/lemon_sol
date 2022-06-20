@@ -8,7 +8,7 @@ import lombok.ToString;
 
 public class TenantCommand {
   @Getter
-  @ToString
+  @Builder
   @AllArgsConstructor
   public static class RegisterTenant {
 //    private final String tenantId;

@@ -1,7 +1,6 @@
-package did.lemonaid.solution.domain.credential;
+package did.lemonaid.solution.domain.credential.schema;
 
 import did.lemonaid.solution.domain.BaseEntity;
-import did.lemonaid.solution.domain.credential.schema.Schemas;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ public class SchemaAttribute extends BaseEntity {
   @Column(name="ID")
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "SCHEMA_ID")
   private Schemas schema;
   @Column(name="ATTRIBUTE_CODE", nullable = false)
