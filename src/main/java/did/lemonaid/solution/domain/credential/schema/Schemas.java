@@ -1,5 +1,7 @@
 package did.lemonaid.solution.domain.credential.schema;
 
+import did.lemonaid.solution.domain.BaseEntity;
+import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.SchemaAttribute;
 import lombok.*;
 import org.assertj.core.util.Lists;
@@ -11,7 +13,7 @@ import java.util.List;
 @Getter
 @Table(name="SCHEMA")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Schemas {
+public class Schemas extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ID")
@@ -28,6 +30,9 @@ public class Schemas {
 
   @OneToMany(mappedBy = "schema", cascade = CascadeType.ALL)
   private List<SchemaAttribute> schemaAttributeList = Lists.newArrayList();
+
+//  @OneToMany(mappedBy = "schema", cascade = CascadeType.ALL)
+//  private List<Credential> credentialList = Lists.newArrayList();
 
 //  @Column(name="SCHEMA_TYPE", nullable = false)
 //  private schemaType schemaType;

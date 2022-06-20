@@ -68,7 +68,7 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(String credentialId, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String tempItemMapping) {
+  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String tempItemMapping) {
     this.credentialId = credentialId;
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
@@ -81,5 +81,16 @@ public class Credential extends BaseEntity {
     this.backgroundImg = backgroundImg;
     this.logoImg = logoImg;
     this.tempItemMapping = tempItemMapping;
+    this.schema =schema;
+    this.tenant =tenant;
+  }
+
+  //연관관계 설정
+  public void setSchema(Schemas schema){
+    this.schema = schema;
+  }
+
+  public void setTenant(Tenant tenant){
+    this.tenant = tenant;
   }
 }

@@ -54,7 +54,7 @@ public class TRController {
     @Operation(summary = "credential details")
     @GetMapping("/credentials/{credential-definition-id}/")
     public ResponseEntity<TrustRegistryDto.CredentialDetail> retrieveCertificate (@PathVariable("credential-definition-id") String credentialDefinitionId) {
-
+      credentialFacade.retrieveCredential(credentialDefinitionId);
       return ResponseEntity.ok(null);
     }
 

@@ -1,5 +1,6 @@
 package did.lemonaid.solution.domain.credential;
 
+import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Table(name="SCHEMA_ATTRIBUTE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SchemaAttribute {
+public class SchemaAttribute extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ID")
@@ -18,7 +19,6 @@ public class SchemaAttribute {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "SCHEMA_ID")
   private Schemas schema;
-  //  SCHEMA_ID         BIGINT       NOT NULL
   @Column(name="ATTRIBUTE_CODE", nullable = false)
   private String attributeCode;
 

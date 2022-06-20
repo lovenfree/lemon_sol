@@ -20,8 +20,9 @@ public class CredentialReaderImpl implements CredentialReader {
       .orElseThrow(EntityNotFoundException::new);
   }
 
-  @Override
-  public Schemas getSchema(Credential credential) {
-    return null;
-  }
+//
+//  @Override
+//  public Schemas getSchema(Credential credential) {
+//    return null;
+//  }
 }

@@ -2,14 +2,17 @@ package did.lemonaid.solution.domain.tenant;
 
 import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.domain.BaseEntity;
+import did.lemonaid.solution.domain.credential.Credential;
 import lombok.*;
+import org.assertj.core.util.Lists;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Table(name="TENANT")
-//@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tenant extends BaseEntity {
   private static final String PREFIX_TENANT = "tnt_";
@@ -50,6 +53,9 @@ public class Tenant extends BaseEntity {
 
   @Column(name="TRUST_TENANT")
   private boolean trustTenant;
+
+  @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL)
+  private List<Credential> credentialList = Lists.newArrayList();
 
   @Getter
   @AllArgsConstructor
