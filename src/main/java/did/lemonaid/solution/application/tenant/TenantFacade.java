@@ -18,11 +18,16 @@ public class TenantFacade {
   private final TenantService tenantService;
   private final NotificationService notificationService;
 
-  public List<TenantInfo> retrieveTenants(){
+  public List<TenantInfo.TenantDetail> retrieveTenants(){
     return tenantService.retrieveTenants();
   }
-  public TenantInfo retrieveTenant(String tenantId){
+
+  public TenantInfo.TenantDetail retrieveTenant(String tenantId){
     return tenantService.retrieveTenant(tenantId);
+  }
+
+  public List<TenantInfo.CredentialDetail> retrieveCredentialList(String tenantId){
+    return tenantService.retrieveTenantCredentials(tenantId);
   }
 
 

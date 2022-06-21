@@ -1,6 +1,7 @@
 package did.lemonaid.solution.domain.tenant;
 
 import did.lemonaid.solution.domain.MapStructConfig;
+import did.lemonaid.solution.domain.credential.Credential;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -12,31 +13,32 @@ import java.util.List;
 )
 public interface TenantInfoMapper {
   @Mappings({
-    @Mapping(source = "Tenant", target = "TenantInfo")
+    @Mapping(source = "Tenant", target = "TenantInfo.TenantDetail")
   })
-  List<TenantInfo> of(List<Tenant> tenantInfoList);
+  List<TenantInfo.TenantDetail> of(List<Tenant> tenantInfoList);
 
 //  @Mappings({
-//    @Mapping(source = "Tenant", target = "TenantInfo")
+//    @Mapping(source = "Tenant", target = "TenantInfo.TenantDetail")
 //  })
-//  TenantInfo of(Tenant tenant);
+  TenantInfo.TenantDetail of(Tenant tenant);
 
-  default TenantInfo of(Tenant tenant) {
-    return TenantInfo.builder()
-      .tenantAddress(tenant.getTenantAddress())
-      .tenantDID(tenant.getTenantDID())
-      .tenantId(tenant.getTenantId())
-      .tenantHomeUrl(tenant.getTenantHomeUrl())
-      .tenantInvitationUrl(tenant.getTenantInvitationUrl())
-      .tenantLogo(tenant.getTenantLogo() != null ? String.valueOf(tenant.getTenantLogo()) : null)
-      .tenantName(tenant.getTenantName())
-      .tenantStatus(tenant.getTenantStatus())
-      .tenantType(tenant.getTenantType())
-      .trustTenant(tenant.isTrustTenant())
-      .build();
+  List<TenantInfo.CredentialDetail> credentialOf(List<Credential> credentials);
 
-  }
-  default String toString(Byte[] bytes) {
-    return bytes != null ? String.valueOf(bytes): null;
-  }
+//  default TenantInfo.TenantDetail of(Tenant tenant) {
+//    return TenantInfo.TenantDetail.builder()
+//      .tenantAddress(tenant.getTenantAddress())
+//      .tenantDID(tenant.getTenantDID())
+//      .tenantId(tenant.getTenantId())
+//      .tenantHomeUrl(tenant.getTenantHomeUrl())
+//      .tenantInvitationUrl(tenant.getTenantInvitationUrl())
+//      .tenantLogo(tenant.getTenantLogo() != null ? String.valueOf(tenant.getTenantLogo()) : null)
+//      .tenantName(tenant.getTenantName())
+//      .tenantStatus(tenant.getTenantStatus())
+//      .tenantType(tenant.getTenantType())
+//      .trustTenant(tenant.isTrustTenant())
+//      .credentialList(tenant.getCredentialList())
+//      .build();
+
+//  }
+
 }

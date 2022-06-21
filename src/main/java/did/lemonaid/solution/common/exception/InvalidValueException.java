@@ -1,8 +1,12 @@
 package did.lemonaid.solution.common.exception;
 
 public class InvalidValueException extends BusinessException{
+  public InvalidValueException() {
+    super(ErrorCode.INVALID_INPUT_VALUE);
+  }
 
-    public InvalidValueException(String value) {
+
+  public InvalidValueException(String value) {
         super(value, ErrorCode.INVALID_INPUT_VALUE);
     }
 
@@ -13,4 +17,6 @@ public class InvalidValueException extends BusinessException{
     public InvalidValueException(String message, ErrorCode errorCode, ErrorResponse.FieldError fieldError) {
         super(message, errorCode, fieldError );
     }
+
+
 }

@@ -8,7 +8,8 @@ public interface TenantService {
   String updateTenantInfo(String tenantId, TenantCommand.UpdateTenant command);
   String activateTenant(String tenantId, TenantCommand.ActivateTenant command);
 //  String deleteTenant(String tenantId);
-  List<TenantInfo> retrieveTenants();
+  List<TenantInfo.TenantDetail> retrieveTenants();
 
-  TenantInfo retrieveTenant(String tenantId);
+  TenantInfo.TenantDetail retrieveTenant(String tenantId);
+  List<TenantInfo.CredentialDetail> retrieveTenantCredentials(String tenantId);
 }

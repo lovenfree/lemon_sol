@@ -37,7 +37,7 @@ public class TrustRegistryDto {
         @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
         private final String tenantDID;
 
-        @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks.")
+        @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks...")
         private final String tenantInvitationUrl;
 
         @Schema(description = "Tenant Status", example = "Activate")
@@ -61,7 +61,7 @@ public class TrustRegistryDto {
     @Builder
     @ToString
     public static class CredentialInfo {
-        @Schema(description = "Credential Id", example = "lgcnsudskjd")
+        @Schema(description = "Credential Id", example = "TNT_tjalkjaslkddjxc")
         private final String credentialId;
         @Schema(description = "Credential Name", example = "LG EMP ID")
         private final String credentialName;

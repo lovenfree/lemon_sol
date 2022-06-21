@@ -16,12 +16,12 @@ public interface TenantDtoMapper {
 
   TenantDto.TenantResponse of(String tenantId);
 
-  TenantDto.TenantInfo of(TenantInfo tenantInfo);
+  TenantDto.TenantInfo of(TenantInfo.TenantDetail tenantInfo);
 
   @Mappings({
     @Mapping(source = "TenantInfo", target = "TenantDto.TenantInfo")
   })
-  List<TenantDto.TenantInfo> of(List<TenantInfo> tenantInfos);
+  List<TenantDto.TenantInfo> of(List<TenantInfo.TenantDetail> tenantInfos);
 
   TenantCommand.UpdateTenant of(TenantDto.UpdateTenantRequest request);
 

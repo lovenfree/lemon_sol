@@ -36,9 +36,9 @@ public class TRController {
     @Operation(summary = "credential List")
     @GetMapping("/tenants/{tenant-id}/credentials")
     public ResponseEntity<TrustRegistryDto.Credentials> retrieveCertificates (@PathVariable("tenant-id") String tenantId) {
-//      var tenantId = tenantFacade.g
-
-        return null;
+      var credentials = tenantFacade.retrieveCredentialList(tenantId);
+      var response = TrustRegistryDto.Credentials.builder().credentialInfos(mapper.credentialOf(credentials)).build();
+      return ResponseEntity.ok(response);
     }
 
 

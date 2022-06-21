@@ -53,14 +53,20 @@ public class TenantServiceImpl implements TenantService{
 
 
   @Override
-  public List<TenantInfo> retrieveTenants() {
+  public List<TenantInfo.TenantDetail> retrieveTenants() {
     var tenants = tenantReader.retrieveTenants();
     return tenantInfoMapper.of(tenants);
   }
 
   @Override
-  public TenantInfo retrieveTenant(String tenantId) {
+  public TenantInfo.TenantDetail retrieveTenant(String tenantId) {
     var tenant = tenantReader.getTenant(tenantId);
     return tenantInfoMapper.of(tenant);
+  }
+
+  @Override
+  public List<TenantInfo.CredentialDetail> retrieveTenantCredentials(String tenantId) {
+    var credentials = tenantReader.getTenant(tenantId).getCredentialList();
+    return tenantInfoMapper.credentialOf(credentials);
   }
 }
