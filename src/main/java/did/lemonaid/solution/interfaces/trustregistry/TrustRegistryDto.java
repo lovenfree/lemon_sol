@@ -197,7 +197,7 @@ public class TrustRegistryDto {
     @Schema(description = "Logo Image", example = "logo.img")
     private final String logoImg;
     @Schema(description = "credential template Info", example = "???", required = true)
-    private final String tempItemMapping;
+    private final String templateItemMapping;
 
     @Schema(description = "Schema", required = true)
     private final SchemaDto schema;

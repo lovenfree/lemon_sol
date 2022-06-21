@@ -39,6 +39,7 @@ public class CredentialServiceImpl implements CredentialService{
 
 //    var credential = credentialReader.getCredentialBy(credentialDefinitionId);
 
-    return     credentialInfoMapper.of(credential);
+    return null;
+//    return     credentialInfoMapper.of(credential);
   }
 }

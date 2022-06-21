@@ -19,7 +19,7 @@ public class CredentialInfo {
     private final String credentialName;
     private final Credential.CredentialType credentialType;
 
-    public static String credentialDefinitionId;
+    public final String credentialDefinitionId;
 
     private final String description;
     private final String authLinkUrl;
@@ -37,6 +37,7 @@ public class CredentialInfo {
 
       this.tenantId = credential.getTenant().getTenantId();
       this.credentialId = credential.getCredentialId();
+      this.credentialDefinitionId = credential.getCredentialDefinitionId();
       this.credentialName = credential.getCredentialName();
       this.credentialType = credential.getCredentialType();
       this.description = credential.getDescription();
