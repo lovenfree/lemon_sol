@@ -5,11 +5,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Slf4j
 public class CredentialServiceImpl implements CredentialService{
   private final CredentialInfoMapper credentialInfoMapper;
@@ -31,7 +34,6 @@ public class CredentialServiceImpl implements CredentialService{
   }
 
   @Override
-  @Transactional
   public CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId) {
     var credential = credentialReader.getCredentialBy(credentialDefinitionId);
 

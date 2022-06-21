@@ -15,7 +15,7 @@ public class SchemaAttribute extends BaseEntity {
   @Column(name="ID")
   private Long id;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "SCHEMA_ID")
   private Schemas schema;
   @Column(name="ATTRIBUTE_CODE", nullable = false)
