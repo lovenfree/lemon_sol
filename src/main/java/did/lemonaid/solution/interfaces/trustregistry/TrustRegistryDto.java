@@ -25,26 +25,26 @@ public class TrustRegistryDto {
     @ToString
     public static class TenantInfo {
 
-        @Schema(description = "Tenant Id", example = "tnt_askjeigjksldkfjh", required = true)
+        @Schema(description = "Tenant Id", example = "tnt_askjeigjksldkfjh")
         private final String tenantId;
 
-        @Schema(description = "Tenant Type", example = "ISSUER", required = true)
+        @Schema(description = "Tenant Type", example = "ISSUER")
         private final Tenant.TenantType tenantType;
 
-        @Schema(description = "Tenant Name", example = "LGCNS ISSUER", required = true)
+        @Schema(description = "Tenant Name", example = "LGCNS ISSUER")
         private final String tenantName;
 
-        @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah", required = true)
+        @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
         private final String tenantDID;
 
-        @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks.", required = true)
+        @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks.")
         private final String tenantInvitationUrl;
 
-        @Schema(description = "Tenant Status", example = "Activate", required = true)
+        @Schema(description = "Tenant Status", example = "Activate")
         private final Tenant.TenantStatus tenantStatus;
 
-        @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg")
-        private final String tenantLogoPath;
+        @Schema(description = "Tenant logo path(base64 image)", example = "")
+        private final String tenantLogo;
 
     }
 
@@ -61,22 +61,22 @@ public class TrustRegistryDto {
     @Builder
     @ToString
     public static class CredentialInfo {
-        @Schema(description = "Credential Id", example = "lgcnsudskjd", required = true)
+        @Schema(description = "Credential Id", example = "lgcnsudskjd")
         private final String credentialId;
-        @Schema(description = "Credential Name", example = "LG EMP ID", required = true)
+        @Schema(description = "Credential Name", example = "LG EMP ID")
         private final String credentialName;
-        @Schema(description = "Credential Type", example = "ID", required = true)
+        @Schema(description = "Credential Type", example = "ID")
         private final Credential.CredentialType credentialType;
-        @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0", required = true)
+        @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0")
         private final String credentialDefinitionId;
-        @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
+        @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0")
         private final String schemaId;
-        @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com", required = true)
+        @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com")
         private final String authLinkUrl;
-        @Schema(description = "Background Image", example = "background.jpg", required = true)
-        private final byte[] backgroundImg;
-        @Schema(description = "Logo Image", example = "logo.img", required = true)
-        private final byte[] logoImg;
+        @Schema(description = "Background Image", example = "background.jpg")
+        private final String backgroundImg;
+        @Schema(description = "Logo Image", example = "logo.img")
+        private final String logoImg;
     }
 
     //credential 등록
@@ -119,11 +119,11 @@ public class TrustRegistryDto {
   @Setter
   @ToString
   public static class SchemaInfo {
-    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
+    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0")
     private  String schemaId;
-    @Schema(description = "Schema Name", example = "사원증", required = true)
+    @Schema(description = "Schema Name", example = "사원증")
     private String schemaName;
-    @Schema(description = "Schema attribute List", required = true)
+    @Schema(description = "Schema attribute List")
     private List<RequestSchemaAttribute> schemaAttributeList;
   }
 
