@@ -28,7 +28,7 @@ public interface TenantInfoMapper {
       .tenantId(tenant.getTenantId())
       .tenantHomeUrl(tenant.getTenantHomeUrl())
       .tenantInvitationUrl(tenant.getTenantInvitationUrl())
-      .tenantLogo(String.valueOf(tenant.getTenantLogo()))
+      .tenantLogo(tenant.getTenantLogo() != null ? String.valueOf(tenant.getTenantLogo()) : null)
       .tenantName(tenant.getTenantName())
       .tenantStatus(tenant.getTenantStatus())
       .tenantType(tenant.getTenantType())
