@@ -32,6 +32,14 @@ public class TRController {
         return ResponseEntity.ok(response);
     }
 
+  @PostMapping("/tenants/{tenant-id}/activate")
+  @Operation(summary="Activate Tenant")
+  public ResponseEntity<TrustRegistryDto.TenantResponse> activateTenant(@Valid @PathVariable("tenant-id") String tenantId, @RequestBody @Valid TrustRegistryDto.ActivateTenantRequest request) {
+    var tenantCommand = mapper.activateOf(request);
+    var result = tenantFacade.activateTenant(tenantId, tenantCommand);
+    var response = mapper.of(result);
+    return ResponseEntity.ok(response);
+  }
 
     @Operation(summary = "credential List")
     @GetMapping("/tenants/{tenant-id}/credentials")

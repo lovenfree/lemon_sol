@@ -40,14 +40,7 @@ public class TenantController {
     return ResponseEntity.ok(response);
   }
 
-  @PostMapping("/{tenant-id}/activate")
-  @Operation(summary="Activate Tenant")
-  public ResponseEntity<TenantDto.TenantResponse> activateTenant(@Valid @PathVariable("tenant-id") String tenantId, @RequestBody @Valid TenantDto.ActivateTenantRequest request) {
-    var tenantCommand = tenantDtoMapper.of(request);
-    var result = tenantFacade.activateTenant(tenantId, tenantCommand);
-    var response = tenantDtoMapper.of(result);
-    return ResponseEntity.ok(response);
-  }
+
 
   @GetMapping("/{tenant-id}")
   @Operation(summary="Tenant details")

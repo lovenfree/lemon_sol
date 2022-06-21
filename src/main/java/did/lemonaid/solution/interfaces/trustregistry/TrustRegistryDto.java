@@ -1,5 +1,6 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.tenant.Tenant;
@@ -54,6 +55,8 @@ public class TrustRegistryDto {
     @Builder
     @ToString
     public static class Credentials {
+
+        @JsonProperty("credentials")
         private final List<CredentialInfo> credentialInfos;
     }
 
@@ -114,6 +117,23 @@ public class TrustRegistryDto {
 
 
   }
+
+  @Getter
+  @Setter
+  @ToString
+  public static class ActivateTenantRequest {
+    private String tenantDID;
+    private String tenantInvitationUrl;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class TenantResponse {
+    private final String tenantId;
+  }
+
+
 
   @Getter
   @Setter

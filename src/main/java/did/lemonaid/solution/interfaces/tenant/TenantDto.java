@@ -37,13 +37,6 @@ public class TenantDto {
   }
 
 
-  @Getter
-  @Setter
-  @ToString
-  public static class ActivateTenantRequest {
-    private String tenantDID;
-    private String tenantInvitationUrl;
-  }
 
 
   @Getter

@@ -25,6 +25,5 @@ public interface TenantDtoMapper {
 
   TenantCommand.UpdateTenant of(TenantDto.UpdateTenantRequest request);
 
-  TenantCommand.ActivateTenant
-  of(TenantDto.ActivateTenantRequest request);
+
 }

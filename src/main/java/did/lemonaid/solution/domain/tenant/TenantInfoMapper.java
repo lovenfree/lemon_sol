@@ -1,6 +1,6 @@
 package did.lemonaid.solution.domain.tenant;
 
-import did.lemonaid.solution.domain.MapStructConfig;
+
 import did.lemonaid.solution.domain.credential.Credential;
 import org.mapstruct.*;
 
