@@ -5,8 +5,10 @@ import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.Credential;
 import lombok.*;
 import org.assertj.core.util.Lists;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Entity
@@ -48,8 +50,10 @@ public class Tenant extends BaseEntity {
   @Column(name="TENANT_ADDR")
   private String tenantAddress;
 
-  @Column(name="TENANT_LOGO_PATH")
-  private String tenantLogoPath;
+  @Lob
+  @Column(name="TENANT_LOGO")
+  @Type(type = "org.hibernate.type.BinaryType")
+  private byte[]  tenantLogo;
 
   @Column(name="TRUST_TENANT")
   private boolean trustTenant;
@@ -82,7 +86,7 @@ public class Tenant extends BaseEntity {
 //  }
 //
   @Builder
-  public Tenant( TenantType tenantType, String tenantName, String tenantHomeUrl, String tenantAddress, String tenantLogoPath, boolean trustTenant) {
+  public Tenant( TenantType tenantType, String tenantName, String tenantHomeUrl, String tenantAddress, String tenantLogo, boolean trustTenant) {
     this.tenantId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.tenantType = tenantType;
     this.tenantName = tenantName;
@@ -90,7 +94,7 @@ public class Tenant extends BaseEntity {
     this.tenantStatus = Tenant.TenantStatus.PAUSE;
     this.tenantHomeUrl = tenantHomeUrl;
     this.tenantAddress = tenantAddress;
-    this.tenantLogoPath = tenantLogoPath;
+    this.tenantLogo = tenantLogo.getBytes(StandardCharsets.UTF_8);
     this.trustTenant = trustTenant;
   }
 
@@ -111,7 +115,7 @@ public class Tenant extends BaseEntity {
     this.tenantStatus = command.getTenantStatus();
     this.tenantHomeUrl = command.getTenantHomeUrl();
     this.tenantAddress = command.getTenantAddress();
-    this.tenantLogoPath = command.getTenantLogoPath();
+    this.tenantLogo = (command.getTenantLogo()).getBytes(StandardCharsets.UTF_8);
   }
 
 

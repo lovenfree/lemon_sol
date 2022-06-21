@@ -19,7 +19,7 @@ public class TenantDto {
     private String tenantName;
     private String tenantHomeUrl;
     private String tenantAddress;
-    private String tenantLogoPath;
+    private String tenantLogo;
   }
 
   @Getter
@@ -33,7 +33,7 @@ public class TenantDto {
     private Tenant.TenantStatus tenantStatus;
     private String tenantHomeUrl;
     private String tenantAddress;
-    private String tenantLogoPath;
+    private String tenantLogo;
   }
 
 
@@ -83,7 +83,7 @@ public class TenantDto {
     private final String tenantAddress;
 
     @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg")
-    private final String tenantLogoPath;
+    private final String tenantLogo;
 
   }
 

@@ -16,7 +16,7 @@ public class TenantInfo {
   private final Tenant.TenantStatus tenantStatus;
   private final String tenantHomeUrl;
   private final String tenantAddress;
-  private final String tenantLogoPath;
+  private final String tenantLogo;
   private final boolean trustTenant;
 
 }

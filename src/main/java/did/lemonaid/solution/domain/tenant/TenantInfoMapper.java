@@ -16,5 +16,27 @@ public interface TenantInfoMapper {
   })
   List<TenantInfo> of(List<Tenant> tenantInfoList);
 
-  TenantInfo of(Tenant tenant);
+//  @Mappings({
+//    @Mapping(source = "Tenant", target = "TenantInfo")
+//  })
+//  TenantInfo of(Tenant tenant);
+
+  default TenantInfo of(Tenant tenant) {
+    return TenantInfo.builder()
+      .tenantAddress(tenant.getTenantAddress())
+      .tenantDID(tenant.getTenantDID())
+      .tenantId(tenant.getTenantId())
+      .tenantHomeUrl(tenant.getTenantHomeUrl())
+      .tenantInvitationUrl(tenant.getTenantInvitationUrl())
+      .tenantLogo(String.valueOf(tenant.getTenantLogo()))
+      .tenantName(tenant.getTenantName())
+      .tenantStatus(tenant.getTenantStatus())
+      .tenantType(tenant.getTenantType())
+      .trustTenant(tenant.isTrustTenant())
+      .build();
+
+  }
+  default String toString(Byte[] bytes) {
+    return bytes != null ? String.valueOf(bytes): null;
+  }
 }
