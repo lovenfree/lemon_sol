@@ -34,16 +34,16 @@ public class TrustRegistryDto {
         @Schema(description = "Tenant Name", example = "LGCNS ISSUER", required = true)
         private final String tenantName;
 
-        @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
+        @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah", required = true)
         private final String tenantDID;
 
-        @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks.")
+        @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks.", required = true)
         private final String tenantInvitationUrl;
 
         @Schema(description = "Tenant Status", example = "Activate", required = true)
         private final Tenant.TenantStatus tenantStatus;
 
-        @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg", required = true)
+        @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg")
         private final String tenantLogoPath;
 
     }
