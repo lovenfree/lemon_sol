@@ -1,6 +1,8 @@
 package did.lemonaid.solution.domain.credential;
 
+import did.lemonaid.solution.common.util.Util;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
+import did.lemonaid.solution.domain.credential.schema.Schemas;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -23,25 +25,28 @@ public class CredentialInfo {
     private final String authLinkUrl;
     private final boolean expiryDateYN;
     private final int validityDays;
-    private final byte[] backgroundImg;
-    private final byte[] logoImg;
+    private final String backgroundImg;
+    private final String logoImg;
     private final String templateItemMapping;
     private final SchemaInfo schema;
 
 
-    public CredentialDetail(String tenantId, String credentialId, String credentialName, Credential.CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String templateItemMapping, SchemaInfo schema) {
-      this.tenantId = tenantId;
-      this.credentialId = credentialId;
-      this.credentialName = credentialName;
-      this.credentialType = credentialType;
-      this.description = description;
-      this.authLinkUrl = authLinkUrl;
-      this.expiryDateYN = expiryDateYN;
-      this.validityDays = validityDays;
+    public CredentialDetail(Credential credential, SchemaInfo schemas) {
+      var backgroundImg = credential.getBackgroundImg() != null ? Util.BASE64_ENCODE(credential.getBackgroundImg()) : null;
+      var logoImg = credential.getBackgroundImg() != null ? Util.BASE64_ENCODE(credential.getLogoImg()) : null;
+
+      this.tenantId = credential.getTenant().getTenantId();
+      this.credentialId = credential.getCredentialId();
+      this.credentialName = credential.getCredentialName();
+      this.credentialType = credential.getCredentialType();
+      this.description = credential.getDescription();
+      this.authLinkUrl = credential.getAuthLinkUrl();
+      this.expiryDateYN = credential.isExpiryDateYN();
+      this.validityDays = credential.getValidityDays();
       this.backgroundImg = backgroundImg;
       this.logoImg = logoImg;
-      this.templateItemMapping = templateItemMapping;
-      this.schema = schema;
+      this.templateItemMapping = credential.getTemplateItemMapping();
+      this.schema = schemas;
     }
   }
 

@@ -1,6 +1,7 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
 import did.lemonaid.solution.domain.credential.Credential;
+import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.tenant.TenantCommand;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
 import did.lemonaid.solution.interfaces.tenant.TenantDto;
@@ -25,6 +26,8 @@ public interface TrustRegistryDtoMapper {
   TenantCommand.ActivateTenant activateOf(TrustRegistryDto.ActivateTenantRequest request);
 
  TrustRegistryDto.TenantResponse of(String tenantId);
+
+  TrustRegistryDto.CredentialDetail of(CredentialInfo.CredentialDetail credential);
 
 //  void of(TrustRegistryDto.RegisterCredentialRequest request);
 }

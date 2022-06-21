@@ -12,9 +12,9 @@ import java.util.List;
   unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface CredentialInfoMapper {
-  @Mappings({
-    @Mapping(source = "tenant.tenantId", target = "tenantId")
-  })
-
-  CredentialInfo.CredentialDetail of(Credential credential);
+//  @Mappings({
+//    @Mapping(source = "credential.schema", target = "CredentialInfo.CredentialDetail")
+//  })
+//
+//  CredentialInfo.CredentialDetail of(Credential credential);
 }
