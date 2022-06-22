@@ -20,7 +20,7 @@ public class CredentialServiceImpl implements CredentialService{
   private final TenantReader tenantReader;
   private final CredentialReader credentialReader;
   private final SchemaReader schemaReader;
-//  private final CredentialStore credentialStore;
+  private final CredentialStore credentialStore;
 
   @Override
   @Transactional
@@ -28,6 +28,11 @@ public class CredentialServiceImpl implements CredentialService{
     var tenant = tenantReader.getTenant(tenantID);
     //schema 조회 없으면 생성
     var schema = schemaReader.getSchema(command.getSchema().getSchemaId());
+//    if(schema == null){
+//      schema = credentialInfoMapper.of(command.getSchema());
+//    }
+//    credentialStore.registerCredential(tenant, schema);
+
 
 
 

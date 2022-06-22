@@ -25,18 +25,19 @@ public class CredentialReaderImpl implements CredentialReader {
       .orElseThrow(EntityNotFoundException::new);
   }
 
-  //todo: stream
+
   @Override
   public CredentialInfo.SchemaInfo getSchema(Credential credential) {
     var schemaDomain = credential.getSchema();
     var schemaAttrs = schemaDomain.getSchemaAttributeList();
 
-    ArrayList<CredentialInfo.SchemaAttributeInfo> schemaList = new ArrayList();
+    //todo: stream
+    ArrayList<CredentialInfo.SchemaAttributeInfo> schemaAttrList = new ArrayList();
     for (SchemaAttribute sa : schemaAttrs){
       var schemaAttrInfo = new CredentialInfo.SchemaAttributeInfo(sa);
-      schemaList.add(schemaAttrInfo);
+      schemaAttrList.add(schemaAttrInfo);
     }
-      var schemaInfo = new CredentialInfo.SchemaInfo(schemaDomain,schemaList);
+      var schemaInfo = new CredentialInfo.SchemaInfo(schemaDomain,schemaAttrList);
 
     return schemaInfo;
 

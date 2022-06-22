@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name="TENANT")
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tenant extends BaseEntity {
   private static final String PREFIX_TENANT = "tnt_";
