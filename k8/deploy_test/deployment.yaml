@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: did-solution-backend
-          image: "docker-registry.bosh/did-solution-backend:latest"
+          image: "asia.gcr.io/pjt-did-dev/solution-backend:latest"
           imagePullPolicy: Always
           ports:
             - name: http
