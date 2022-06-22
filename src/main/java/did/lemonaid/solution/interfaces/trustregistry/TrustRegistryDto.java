@@ -104,7 +104,6 @@ public class TrustRegistryDto {
       private Credential.CredentialType credentialType;
       @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0", required = true)
       private  String credentialDefinitionId;
-
       @Schema(description = "Description", example = "DID id credential")
       private  String description;
       @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
@@ -123,10 +122,7 @@ public class TrustRegistryDto {
       private String logoImgFilename;
       @Schema(description = "???", example = "???", required = true)
       private String tempItemMapping;
-
-      private SchemaInfo schemaInfo;
-
-
+      private SchemaInfo schema;
   }
 
   @Getter

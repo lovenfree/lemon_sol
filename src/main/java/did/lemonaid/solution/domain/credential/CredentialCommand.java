@@ -14,8 +14,8 @@ import java.util.List;
 
 public class CredentialCommand {
   @Getter
-  @Builder
   @ToString
+  @AllArgsConstructor
   public static class RegisterCredential {
     private final String  credentialId;
     private final String credentialName;
@@ -53,8 +53,8 @@ public class CredentialCommand {
   }
 
   @Getter
-  @Builder
   @ToString
+  @AllArgsConstructor
   public static class RegisterSchema {
     private final String schemaId;
     private final String schemaName;
@@ -70,7 +70,7 @@ public class CredentialCommand {
 
 
   @Getter
-  @Builder
+  @AllArgsConstructor
   @ToString
   public static class RequestSchemaAttribute {
     private final String attributeCode;

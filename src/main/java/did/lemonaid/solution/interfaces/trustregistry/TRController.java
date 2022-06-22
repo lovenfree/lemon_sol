@@ -54,10 +54,15 @@ public class TRController {
     @Operation(summary = "register credential")
     @PostMapping ("/credentials")
     public ResponseEntity<TrustRegistryDto.CredentialResponse> registerCredential (@RequestBody @Valid TrustRegistryDto.RegisterCredentialRequest request) {
+      var registerCredential = mapper.of(request);
       var tenantID = request.getTenantId();
-
+      credentialFacade.registerCredential(registerCredential,tenantID);
       return ResponseEntity.ok(null);
     }
+
+
+
+
 
 
     //인증서 상세정보
