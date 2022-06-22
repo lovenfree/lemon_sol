@@ -44,7 +44,7 @@ sourceSets {
         }
         resources.srcDir file('src/test/resources')
     }
-    
+
     moduleTest {
         java {
             compileClasspath += main.output + test.output
@@ -121,7 +121,7 @@ task unitTest(type: Test) {
     testClassesDirs = sourceSets.unitTest.output.classesDirs
     classpath = sourceSets.unitTest.runtimeClasspath
     outputs.upToDateWhen { false}
-} 
+}
 
 task moduleTest(type: Test) {
     testClassesDirs = sourceSets.moduleTest.output.classesDirs
@@ -141,16 +141,38 @@ bootJar {
 	mainClass = 'did.Application'
 }
 
+// jib {
+// 	allowInsecureRegistries = true
+// 	from {
+// 		image = "openjdk:17-jdk-slim-buster"
+// 	}
+// 	to {
+// 		image = "${dockerRegistry}/did-solution-backend:latest"
+// 		auth {
+// 			username = "admin"
+// 			password = "mulgX59q1WhT9tvxP5BJwKKSFUeeQ7"
+// 		}
+// 	}
+// }
+
 jib {
-	allowInsecureRegistries = true
-	from {
-		image = "openjdk:17-jdk-slim-buster"
-	}
-	to {
-		image = "${dockerRegistry}/did-solution-backend:latest"
-		auth {
-			username = "admin"
-			password = "mulgX59q1WhT9tvxP5BJwKKSFUeeQ7"
-		}
-	}
+	from.image="openjdk:17-jdk-slim-buster"
+// 	  container{
+//     creationTime = 'USE_CURRENT_TIMESTAMP'
+//     jvmFlags = [
+//             '-XX:+UseG1GC',
+//             '-XX:MaxGCPauseMillis=50',
+//             '-XX:MetaspaceSize=96m',
+//             '-XX:G1HeapRegionSize=16M',
+//             '-Xlog:gc',
+//             '-Xlog:gc:file=/var/log/gc.log:time',
+//             '-XX:+PrintFlagsFinal',
+//             '-Xmx2g',
+//             '-Xms1g',
+//             '-javaagent:/tuna/tuna.agent.jar',
+//             '-Dscouter.config=/tuna/tuna.conf'
+//     ]
+//   }
+
+
 }
