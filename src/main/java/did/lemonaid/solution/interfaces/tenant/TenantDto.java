@@ -20,6 +20,7 @@ public class TenantDto {
     private String tenantHomeUrl;
     private String tenantAddress;
     private String tenantLogo;
+    private String tenantLogoFilename;
   }
 
   @Getter
@@ -34,6 +35,7 @@ public class TenantDto {
     private String tenantHomeUrl;
     private String tenantAddress;
     private String tenantLogo;
+    private String tenantLogoFilename;
   }
 
 
@@ -75,8 +77,11 @@ public class TenantDto {
     @Schema(description = "Tenant Address", example = "서울시 강서구 마곡")
     private final String tenantAddress;
 
-    @Schema(description = "Tenant logo path", example = "/salksdjf/alskdjfkjlj.jpg")
+    @Schema(description = "Tenant logo img", example = "asdfldd...")
     private final String tenantLogo;
+
+    @Schema(description = "Tenant logo filename", example = "lgcnsLogo.png")
+    private String tenantLogoFilename;
 
   }
 

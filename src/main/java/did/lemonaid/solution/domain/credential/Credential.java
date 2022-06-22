@@ -49,12 +49,16 @@ public class Credential extends BaseEntity {
   private int validityDays;
   @Lob
   @Column(name = "BACKGROUND_IMG")
-  @Type(type = "org.hibernate.type.BinaryType")
-  private byte[] backgroundImg;
+//  @Type(type = "org.hibernate.type.BinaryType")
+  private String backgroundImg;
+  @Column(name = "BACKGROUND_IMG_FILENAME")
+  private String backgroundImgFilename;
   @Lob
   @Column(name = "LOGO_IMG")
-  @Type(type = "org.hibernate.type.BinaryType")
-  private byte[] logoImg;
+//  @Type(type = "org.hibernate.type.BinaryType")
+  private String logoImg;
+  @Column(name = "LOGO_IMG_FILENAME")
+  private String logoImgFilename;
   @Column(name = "TEMPLATE_ITEM_MAPPING", nullable = false)
   private String templateItemMapping;
 
@@ -68,7 +72,8 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String templateItemMapping) {
+  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, String backgroundImg, String backgroundImgFilename,
+                    String logoImg, String logoImgFilename, String templateItemMapping) {
     this.credentialId = credentialId;
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
@@ -79,7 +84,9 @@ public class Credential extends BaseEntity {
     this.expiryDateYN = expiryDateYN;
     this.validityDays = validityDays;
     this.backgroundImg = backgroundImg;
+    this.backgroundImgFilename = backgroundImgFilename;
     this.logoImg = logoImg;
+    this.logoImgFilename = logoImgFilename;
     this.templateItemMapping = templateItemMapping;
     this.schema =schema;
     this.tenant =tenant;

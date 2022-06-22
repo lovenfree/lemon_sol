@@ -46,6 +46,9 @@ public class TrustRegistryDto {
 
         @Schema(description = "Tenant logo path(base64 image)", example = "")
         private final String tenantLogo;
+        @Schema(description = "Tenant logo filename", example = "lgcns.png")
+        private final String tenantLogoFilename;
+
 
     }
 
@@ -76,10 +79,14 @@ public class TrustRegistryDto {
         private final String schemaId;
         @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com")
         private final String authLinkUrl;
-        @Schema(description = "Background Image", example = "background.jpg")
-        private final String backgroundImg;
-        @Schema(description = "Logo Image", example = "logo.img")
-        private final String logoImg;
+      @Schema(description = "Background Image", example = "asldjgkals")
+      private String backgroundImg;
+      @Schema(description = "Background Image file name", example = "background.jpg")
+      private String backgroundImgFilename;
+      @Schema(description = "Logo Image", example = "alskdjgkalsj")
+      private String logoImg;
+      @Schema(description = "Logo Image Filename", example = "logo.img")
+      private String logoImgFilename;
     }
 
     //credential 등록
@@ -106,10 +113,14 @@ public class TrustRegistryDto {
       private boolean expiryDateYN;
       @Schema(description = "validity Days", example = "360")
       private int validityDays;
-      @Schema(description = "Background Image", example = "background.jpg")
+      @Schema(description = "Background Image", example = "asldjgkals")
       private String backgroundImg;
-      @Schema(description = "Logo Image", example = "logo.img")
+      @Schema(description = "Background Image file name", example = "background.jpg")
+      private String backgroundImgFilename;
+      @Schema(description = "Logo Image", example = "alskdjgkalsj")
       private String logoImg;
+      @Schema(description = "Logo Image Filename", example = "logo.img")
+      private String logoImgFilename;
       @Schema(description = "???", example = "???", required = true)
       private String tempItemMapping;
 
@@ -192,10 +203,14 @@ public class TrustRegistryDto {
     private final boolean expiryDateYN;
     @Schema(description = "validity Days", example = "360")
     private final int validityDays;
-    @Schema(description = "Background Image", example = "background.jpg")
-    private final String backgroundImg;
-    @Schema(description = "Logo Image", example = "logo.img")
-    private final String logoImg;
+    @Schema(description = "Background Image", example = "asldjgkals")
+    private String backgroundImg;
+    @Schema(description = "Background Image file name", example = "background.jpg")
+    private String backgroundImgFilename;
+    @Schema(description = "Logo Image", example = "alskdjgkalsj")
+    private String logoImg;
+    @Schema(description = "Logo Image Filename", example = "logo.img")
+    private String logoImgFilename;
     @Schema(description = "credential template Info", example = "???", required = true)
     private final String templateItemMapping;
 

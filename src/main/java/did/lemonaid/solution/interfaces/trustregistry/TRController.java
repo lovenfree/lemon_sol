@@ -56,7 +56,6 @@ public class TRController {
     public ResponseEntity<TrustRegistryDto.CredentialResponse> registerCredential (@RequestBody @Valid TrustRegistryDto.RegisterCredentialRequest request) {
       var tenantID = request.getTenantId();
 
-
       return ResponseEntity.ok(null);
     }
 

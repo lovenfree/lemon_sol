@@ -25,8 +25,10 @@ public class CredentialCommand {
     private final String authLinkUrl;
     private final boolean expiryDateYN;
     private final int validityDays;
-    private final byte[] backgroundImg;
-    private final byte[] logoImg;
+    private final String backgroundImg;
+    private final String backgroundImgFilename;
+    private final String logoImg;
+    private final String logoImgFilename;
     private final String tempItemMapping;
     private RegisterSchema schema;
     public Credential toEntity(Tenant tenant, Schemas schema) {
@@ -42,7 +44,9 @@ public class CredentialCommand {
         .expiryDateYN(expiryDateYN)
         .validityDays(validityDays)
         .backgroundImg(backgroundImg)
+        .backgroundImgFilename(backgroundImgFilename)
         .logoImg(logoImg)
+        .logoImgFilename(logoImgFilename)
         .templateItemMapping(tempItemMapping)
         .build();
     }

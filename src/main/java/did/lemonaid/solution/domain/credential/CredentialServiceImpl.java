@@ -36,10 +36,8 @@ public class CredentialServiceImpl implements CredentialService{
   @Override
   public CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId) {
     var credential = credentialReader.getCredentialBy(credentialDefinitionId);
+    var schema = credentialReader.getSchema(credential);
 
-//    var credential = credentialReader.getCredentialBy(credentialDefinitionId);
-
-    return null;
-//    return     credentialInfoMapper.of(credential);
+    return new CredentialInfo.CredentialDetail(credential,schema);
   }
 }

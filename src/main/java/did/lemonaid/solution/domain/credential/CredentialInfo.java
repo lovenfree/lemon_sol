@@ -26,14 +26,16 @@ public class CredentialInfo {
     private final boolean expiryDateYN;
     private final int validityDays;
     private final String backgroundImg;
+    private final String backgroundImgFilename;
     private final String logoImg;
+    private final String logoImgFilename;
     private final String templateItemMapping;
     private final SchemaInfo schema;
 
 
     public CredentialDetail(Credential credential, SchemaInfo schemas) {
-      var backgroundImg = credential.getBackgroundImg() != null ? Util.BASE64_ENCODE(credential.getBackgroundImg()) : null;
-      var logoImg = credential.getBackgroundImg() != null ? Util.BASE64_ENCODE(credential.getLogoImg()) : null;
+//      var backgroundImg = credential.getBackgroundImg() != null ? Util.BASE64_ENCODE(credential.getBackgroundImg()) : null;
+//      var logoImg = credential.getBackgroundImg() != null ? Util.BASE64_ENCODE(credential.getLogoImg()) : null;
 
       this.tenantId = credential.getTenant().getTenantId();
       this.credentialId = credential.getCredentialId();
@@ -44,8 +46,10 @@ public class CredentialInfo {
       this.authLinkUrl = credential.getAuthLinkUrl();
       this.expiryDateYN = credential.isExpiryDateYN();
       this.validityDays = credential.getValidityDays();
-      this.backgroundImg = backgroundImg;
-      this.logoImg = logoImg;
+      this.backgroundImg = credential.getBackgroundImg();
+      this.backgroundImgFilename = credential.getBackgroundImgFilename();
+      this.logoImg = credential.getLogoImg();
+      this.logoImgFilename = credential.getLogoImgFilename();
       this.templateItemMapping = credential.getTemplateItemMapping();
       this.schema = schemas;
     }
@@ -58,9 +62,9 @@ public class CredentialInfo {
     private final String schemaName;
     private final List<SchemaAttributeInfo> schemaAttributeList;
 
-    public SchemaInfo(String schemaId, String schemaName, List<SchemaAttributeInfo > schemaAttributeList) {
-      this.schemaId = schemaId;
-      this.schemaName = schemaName;
+    public SchemaInfo(Schemas schema, List<SchemaAttributeInfo > schemaAttributeList) {
+      this.schemaId = schema.getSchemaId();
+      this.schemaName = schema.getSchemaName();
       this.schemaAttributeList = schemaAttributeList;
     }
   }
@@ -72,10 +76,10 @@ public class CredentialInfo {
     private final String attributeName;
     private final SchemaAttribute.MimeType mimeType;
 
-    public SchemaAttributeInfo(String attributeCode, String attributeName, SchemaAttribute.MimeType mimeType) {
-      this.attributeCode = attributeCode;
-      this.attributeName = attributeName;
-      this.mimeType = mimeType;
+    public SchemaAttributeInfo(SchemaAttribute schemaAttribute) {
+      this.attributeCode = schemaAttribute.getAttributeCode();
+      this.attributeName = schemaAttribute.getAttributeName();
+      this.mimeType = schemaAttribute.getMimeType();
     }
   }
 
