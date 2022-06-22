@@ -79,14 +79,14 @@ public class TrustRegistryDto {
         private final String schemaId;
         @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com")
         private final String authLinkUrl;
-      @Schema(description = "Background Image", example = "asldjgkals")
-      private String backgroundImg;
-      @Schema(description = "Background Image file name", example = "background.jpg")
-      private String backgroundImgFilename;
-      @Schema(description = "Logo Image", example = "alskdjgkalsj")
-      private String logoImg;
-      @Schema(description = "Logo Image Filename", example = "logo.img")
-      private String logoImgFilename;
+//        @Schema(description = "Background Image", example = "asldjgkals")
+//        private String backgroundImg;
+//        @Schema(description = "Background Image file name", example = "background.jpg")
+//        private String backgroundImgFilename;
+        @Schema(description = "Logo Image", example = "alskdjgkalsj")
+        private String logoImg;
+        @Schema(description = "Logo Image Filename", example = "logo.img")
+        private String logoImgFilename;
     }
 
     //credential 등록
@@ -184,22 +184,22 @@ public class TrustRegistryDto {
   @Builder
   @ToString
   public static class CredentialDetail {
-    @Schema(description = "Tenant ID", example = "slkjdkglajksejrhjgaskj", required = true)
+    @Schema(description = "Tenant ID", example = "slkjdkglajksejrhjgaskj")
     private final String tenantId;
-    @Schema(description = "Credential Id", example = "lgcnsudskjd", required = true)
+    @Schema(description = "Credential Id", example = "lgcnsudskjd")
     private final String credentialId;
-    @Schema(description = "Credential Name", example = "LG EMP ID", required = true)
+    @Schema(description = "Credential Name", example = "LG EMP ID")
     private final String credentialName;
-    @Schema(description = "Credential Type", example = "ID", required = true)
+    @Schema(description = "Credential Type", example = "ID")
     private final Credential.CredentialType credentialType;
-    @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0", required = true)
+    @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0")
     private final String credentialDefinitionId;
 
     @Schema(description = "Description", example = "DID id credential")
     private final String description;
-    @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
+    @Schema(description = "User Auth Page", example = "http://lil.lgcns.com")
     private final String authLinkUrl;
-    @Schema(description = "expiry Date YN", example = "true", required = true)
+    @Schema(description = "expiry Date YN", example = "true")
     private final boolean expiryDateYN;
     @Schema(description = "validity Days", example = "360")
     private final int validityDays;
@@ -211,10 +211,10 @@ public class TrustRegistryDto {
     private String logoImg;
     @Schema(description = "Logo Image Filename", example = "logo.img")
     private String logoImgFilename;
-    @Schema(description = "credential template Info", example = "???", required = true)
+    @Schema(description = "credential template Info", example = "...")
     private final String templateItemMapping;
 
-    @Schema(description = "Schema", required = true)
+    @Schema(description = "Schema")
     private final SchemaDto schema;
 
 //    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
