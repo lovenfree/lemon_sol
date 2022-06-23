@@ -13,4 +13,5 @@ public interface CredentialService {
 //
   List<CredentialInfo> retrieveCredentials();
   CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId);
+
 }

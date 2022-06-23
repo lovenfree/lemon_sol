@@ -17,28 +17,18 @@ import java.util.List;
 @Slf4j
 public class CredentialServiceImpl implements CredentialService{
   private final CredentialInfoMapper credentialInfoMapper;
-  private final TenantReader tenantReader;
+
   private final CredentialReader credentialReader;
-  private final SchemaReader schemaReader;
+
   private final CredentialStore credentialStore;
+  private final SchemaSeriesFactory schemaSeriesFactory;
 
   @Override
   @Transactional
   public String registerCredential(CredentialCommand.RegisterCredential command, String tenantID) {
-    var tenant = tenantReader.getTenant(tenantID);
-    //schema 조회 없으면 생성
-    var schema = schemaReader.getSchema(command.getSchema().getSchemaId());
-//    if(schema == null){
-//      schema = credentialInfoMapper.of(command.getSchema());
-//    }
-//    credentialStore.registerCredential(tenant, schema);
 
-
-
-
-
-    //schema에 대한 업데이트는 별도의 업데이트 api 를 제공 or 있을때 무조건 최신 정보로 업데이트
-    return null;
+    var credential = schemaSeriesFactory.store(command, tenantID);
+    return credential.getCredentialId();
   }
 
   @Override

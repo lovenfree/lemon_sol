@@ -56,8 +56,8 @@ public class TRController {
     public ResponseEntity<TrustRegistryDto.CredentialResponse> registerCredential (@RequestBody @Valid TrustRegistryDto.RegisterCredentialRequest request) {
       var registerCredential = mapper.of(request);
       var tenantID = request.getTenantId();
-      credentialFacade.registerCredential(registerCredential,tenantID);
-      return ResponseEntity.ok(null);
+      var response = TrustRegistryDto.CredentialResponse.builder().credentialId(credentialFacade.registerCredential(registerCredential,tenantID)).build();
+      return ResponseEntity.ok(response);
     }
 
 

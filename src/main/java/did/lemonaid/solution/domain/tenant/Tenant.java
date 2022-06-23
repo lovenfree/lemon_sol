@@ -51,7 +51,6 @@ public class Tenant extends BaseEntity {
 
   @Lob
   @Column(name="TENANT_LOGO")
-  @Type(type = "org.hibernate.type.BinaryType")
   private String  tenantLogo;
 
   @Column(name="TENANT_LOGO_FILENAME")
