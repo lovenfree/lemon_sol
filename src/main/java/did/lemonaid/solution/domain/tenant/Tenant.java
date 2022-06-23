@@ -5,10 +5,8 @@ import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.Credential;
 import lombok.*;
 import org.assertj.core.util.Lists;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Entity
@@ -35,6 +33,9 @@ public class Tenant extends BaseEntity {
 
   @Column(name="TENANT_DID")
   private String tenantDID;
+
+  @Column(name="TENANT_WALLET_ID")
+  private String tenantWalletId;
 
   @Column(name="TENANT_INVITATION_URL")
   private String tenantInvitationUrl;
@@ -76,22 +77,11 @@ public class Tenant extends BaseEntity {
     private final String description;
   }
 
-//  @Builder
-//  public Tenant(String tenantId, TenantType tenantType,String tenantName, TenantStatus tenantStatus) {
-//    //validation
-//
-//    this.tenantId = tenantId;
-//    this.tenantType = tenantType;
-//    this.tenantName = tenantName;
-//    this.tenantStatus = tenantStatus;
-//  }
-//
   @Builder
   public Tenant( TenantType tenantType, String tenantName, String tenantHomeUrl, String tenantAddress, String tenantLogo,String tenantLogoFileName, boolean trustTenant) {
     this.tenantId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.tenantType = tenantType;
     this.tenantName = tenantName;
-
     this.tenantStatus = Tenant.TenantStatus.PAUSE;
     this.tenantHomeUrl = tenantHomeUrl;
     this.tenantAddress = tenantAddress;
@@ -99,8 +89,6 @@ public class Tenant extends BaseEntity {
     this.tenantLogoFileName = tenantLogoFileName;
     this.trustTenant = trustTenant;
   }
-
-
 
   public void activateTenant(TenantCommand.ActivateTenant command){
     this.tenantDID = command.getTenantDID();
@@ -113,11 +101,11 @@ public class Tenant extends BaseEntity {
     this.tenantType = command.getTenantType();
     this.tenantName = command.getTenantName();
     this.tenantDID = command.getTenantDID();
+    this.tenantWalletId = command.getTenantWalletId();
     this.tenantInvitationUrl = command.getTenantInvitationUrl();
     this.tenantStatus = command.getTenantStatus();
     this.tenantHomeUrl = command.getTenantHomeUrl();
     this.tenantAddress = command.getTenantAddress();
-//    this.tenantLogo = (command.getTenantLogo()).getBytes(StandardCharsets.UTF_8);
     this.tenantLogo = command.getTenantLogo();
     this.tenantLogoFileName = command.getTenantLogo();
   }

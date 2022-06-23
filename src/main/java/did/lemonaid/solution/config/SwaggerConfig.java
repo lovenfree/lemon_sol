@@ -31,7 +31,7 @@ public class SwaggerConfig
   @Bean
   public OpenAPI lemonaidOpenAPI() {
     return new OpenAPI()
-      .info(new Info().title("Lemonaid API")
+      .info(new Info().title("Lemonaid Solution API")
         .description("Lemonaid DID Solution")
         .version("v0.0.1"));
   }

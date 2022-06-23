@@ -43,4 +43,13 @@ public class CredentialServiceImpl implements CredentialService{
 
     return new CredentialInfo.CredentialDetail(credential,schema);
   }
+
+  @Override
+  @Transactional
+  public String updateCredential(CredentialCommand.UpdateCredential updateCredential, String credentialId) {
+    var credential = credentialReader.getCredential(credentialId);
+    credential.updateCredential(updateCredential);
+    credentialStore.store(credential);
+    return credential.getCredentialId();
+  }
 }

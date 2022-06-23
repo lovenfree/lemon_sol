@@ -18,12 +18,14 @@ public class CredentialFacade {
 
 
   public String registerCredential(CredentialCommand.RegisterCredential command, String tenantID) {
-    credentialService.registerCredential(command, tenantID);
-
-
-
-    return null;
+    return credentialService.registerCredential(command, tenantID);
   }
+
+  public String updateCredential(String credentialId, CredentialCommand.UpdateCredential registerCredential){
+    return credentialService.updateCredential(registerCredential, credentialId);
+  }
+
+
   public CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId){
     return credentialService.retrieveCredential(credentialDefinitionId);
   }

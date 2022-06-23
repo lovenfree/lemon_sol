@@ -38,6 +38,9 @@ public class TrustRegistryDto {
         @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
         private final String tenantDID;
 
+        @Schema(description = "Tenant Wallet ID", example = "xxidxkdijg")
+        private final String tenantWalletId;
+
         @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks...")
         private final String tenantInvitationUrl;
 
@@ -49,16 +52,12 @@ public class TrustRegistryDto {
         @Schema(description = "Tenant logo filename", example = "lgcns.png")
         private final String tenantLogoFilename;
 
-
     }
-
-
 
     @Getter
     @Builder
     @ToString
     public static class Credentials {
-
         @JsonProperty("credentials")
         private final List<CredentialInfo> credentialInfos;
     }
@@ -79,10 +78,6 @@ public class TrustRegistryDto {
         private final String schemaId;
         @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com")
         private final String authLinkUrl;
-//        @Schema(description = "Background Image", example = "asldjgkals")
-//        private String backgroundImg;
-//        @Schema(description = "Background Image file name", example = "background.jpg")
-//        private String backgroundImgFilename;
         @Schema(description = "Logo Image", example = "alskdjgkalsj")
         private String logoImg;
         @Schema(description = "Logo Image Filename", example = "logo.img")
@@ -128,8 +123,37 @@ public class TrustRegistryDto {
   @Getter
   @Setter
   @ToString
+  public static class UpdateCredentialRequest {
+    @Schema(description = "Credential Name", example = "LG EMP ID", required = true)
+    private  String credentialName;
+    @Schema(description = "Credential Type", example = "ID", required = true)
+    private Credential.CredentialType credentialType;
+    @Schema(description = "Description", example = "DID id credential")
+    private  String description;
+    @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
+    private String authLinkUrl;
+    @Schema(description = "expiry Date YN", example = "true", required = true)
+    private boolean expiryDateYN;
+    @Schema(description = "validity Days", example = "360")
+    private int validityDays;
+    @Schema(description = "Background Image", example = "asldjgkals")
+    private String backgroundImg;
+    @Schema(description = "Background Image file name", example = "background.jpg")
+    private String backgroundImgFilename;
+    @Schema(description = "Logo Image", example = "alskdjgkalsj")
+    private String logoImg;
+    @Schema(description = "Logo Image Filename", example = "logo.img")
+    private String logoImgFilename;
+    @Schema(description = "Template Mapping Info", example = "???", required = true)
+    private String tempItemMapping;
+  }
+
+  @Getter
+  @Setter
+  @ToString
   public static class ActivateTenantRequest {
     private String tenantDID;
+    private String tenantWalletId;
     private String tenantInvitationUrl;
   }
 
@@ -212,13 +236,6 @@ public class TrustRegistryDto {
 
     @Schema(description = "Schema")
     private final SchemaDto schema;
-
-//    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
-//    private  final String schemaId;
-//    @Schema(description = "Schema Name", example = "사원증", required = true)
-//    private final String schemaName;
-//    @Schema(description = "Schema attribute List", required = true)
-//    private final List<SchemaAttributeDto> schemaAttributeList;
 
   }
 

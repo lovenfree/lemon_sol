@@ -2,7 +2,6 @@ package did.lemonaid.solution.interfaces.trustregistry;
 
 import did.lemonaid.solution.application.credential.CredentialFacade;
 import did.lemonaid.solution.application.tenant.TenantFacade;
-import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ import javax.validation.Valid;
 @Tag(name="Trust Registry-Public", description = "Trust Registry API")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/trust-registry")
-public class TRController {
+public class TrustRegistryController {
     private final TenantFacade tenantFacade;
     private final CredentialFacade credentialFacade;
     private final TrustRegistryDtoMapper mapper;
@@ -56,13 +55,19 @@ public class TRController {
     public ResponseEntity<TrustRegistryDto.CredentialResponse> registerCredential (@RequestBody @Valid TrustRegistryDto.RegisterCredentialRequest request) {
       var registerCredential = mapper.of(request);
       var tenantID = request.getTenantId();
-      var response = TrustRegistryDto.CredentialResponse.builder().credentialId(credentialFacade.registerCredential(registerCredential,tenantID)).build();
-      return ResponseEntity.ok(response);
+      var response = credentialFacade.registerCredential(registerCredential,tenantID);
+      return ResponseEntity.ok(TrustRegistryDto.CredentialResponse.builder().credentialId(response).build());
     }
 
 
-
-
+    //인증서 수정
+    @Operation(summary = "update credential")
+    @PatchMapping("/credentials/{credential-id}")
+    public ResponseEntity<TrustRegistryDto.CredentialResponse> updateCredential (@PathVariable("credential-id") String credentialId, @RequestBody @Valid TrustRegistryDto.UpdateCredentialRequest request) {
+      var updateCredential = mapper.of(request);
+      var response = credentialFacade.updateCredential(credentialId,updateCredential);
+      return ResponseEntity.ok(TrustRegistryDto.CredentialResponse.builder().credentialId(response).build());
+    }
 
 
     //인증서 상세정보

@@ -92,6 +92,20 @@ public class Credential extends BaseEntity {
     this.tenant =tenant;
   }
 
+  public void updateCredential(CredentialCommand.UpdateCredential credential) {
+
+    this.credentialName = credential.getCredentialName();
+    this.credentialType = credential.getCredentialType();
+    this.description = credential.getDescription();
+    this.authLinkUrl = credential.getAuthLinkUrl();
+    this.expiryDateYN = credential.isExpiryDateYN();
+    this.validityDays = credential.getValidityDays();
+    this.backgroundImg = credential.getBackgroundImg();
+    this.backgroundImgFilename = credential.getBackgroundImgFilename();
+    this.logoImg = credential.getLogoImg();
+    this.logoImgFilename = credential.getLogoImgFilename();
+    this.templateItemMapping = credential.getTempItemMapping();
+  }
   //연관관계 설정
   public void setSchema(Schemas schema){
     this.schema = schema;

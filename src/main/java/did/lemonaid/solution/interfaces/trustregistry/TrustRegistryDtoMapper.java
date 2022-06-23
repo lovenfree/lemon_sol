@@ -22,15 +22,14 @@ public interface TrustRegistryDtoMapper {
   })
   List<TrustRegistryDto.TenantInfo> of(List<TenantInfo.TenantDetail> tenantInfos);
 
-  List<TrustRegistryDto.CredentialInfo> credentialOf(List<TenantInfo.CredentialDetail> credentials);
-
   TenantCommand.ActivateTenant activateOf(TrustRegistryDto.ActivateTenantRequest request);
 
  TrustRegistryDto.TenantResponse of(String tenantId);
+  List<TrustRegistryDto.CredentialInfo> credentialOf(List<TenantInfo.CredentialDetail> credentials);
 
   TrustRegistryDto.CredentialDetail of(CredentialInfo.CredentialDetail credential);
 
   CredentialCommand.RegisterCredential of(TrustRegistryDto.RegisterCredentialRequest request);
 
-//  void of(TrustRegistryDto.RegisterCredentialRequest request);
+  CredentialCommand.UpdateCredential of (TrustRegistryDto.UpdateCredentialRequest request);
 }

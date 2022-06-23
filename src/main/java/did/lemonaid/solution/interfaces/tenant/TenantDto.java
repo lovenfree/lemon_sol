@@ -30,6 +30,7 @@ public class TenantDto {
     private Tenant.TenantType tenantType;
     private String tenantName;
     private String tenantDID;
+    private String tenantWalletId;
     private String tenantInvitationUrl;
     private Tenant.TenantStatus tenantStatus;
     private String tenantHomeUrl;
@@ -64,6 +65,9 @@ public class TenantDto {
 
     @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
     private final String tenantDID;
+
+    @Schema(description = "Tenant Wallet ID", example = "")
+    private final String tenantWalletId;
 
     @Schema(description = "Tenant invitation URL", example = "did:lem:038dhskjesldkfah")
     private final String tenantInvitationUrl;

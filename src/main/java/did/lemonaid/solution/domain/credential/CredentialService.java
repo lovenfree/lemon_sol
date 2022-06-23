@@ -14,4 +14,5 @@ public interface CredentialService {
   List<CredentialInfo> retrieveCredentials();
   CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId);
 
+  String updateCredential(CredentialCommand.UpdateCredential registerCredential, String credentialId);
 }

@@ -25,6 +25,11 @@ public class CredentialReaderImpl implements CredentialReader {
       .orElseThrow(EntityNotFoundException::new);
   }
 
+  @Override
+  public Credential getCredential(String credentialId) {
+    return credentialRepository.findByCredentialId(credentialId)
+      .orElseThrow(EntityNotFoundException::new);
+  }
 
   @Override
   public CredentialInfo.SchemaInfo getSchema(Credential credential) {
@@ -42,6 +47,8 @@ public class CredentialReaderImpl implements CredentialReader {
     return schemaInfo;
 
   }
+
+
 
 
 //

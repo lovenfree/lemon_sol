@@ -48,6 +48,7 @@ public class TenantCommand {
     private final Tenant.TenantType tenantType;
     private final String  tenantName;
     private final String  tenantDID;
+    private final String  tenantWalletId;
     private final String  tenantInvitationUrl;
     private final Tenant.TenantStatus tenantStatus;
     private final String tenantHomeUrl;

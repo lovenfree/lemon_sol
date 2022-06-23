@@ -55,6 +55,23 @@ public class CredentialCommand {
   @Getter
   @ToString
   @AllArgsConstructor
+  public static class UpdateCredential {
+    private final String credentialName;
+    private final  Credential.CredentialType credentialType;
+    private final String description;
+    private final String authLinkUrl;
+    private final boolean expiryDateYN;
+    private final int validityDays;
+    private final String backgroundImg;
+    private final String backgroundImgFilename;
+    private final String logoImg;
+    private final String logoImgFilename;
+    private final String tempItemMapping;
+  }
+
+  @Getter
+  @ToString
+  @AllArgsConstructor
   public static class RegisterSchema {
     private final String schemaId;
     private final String schemaName;
