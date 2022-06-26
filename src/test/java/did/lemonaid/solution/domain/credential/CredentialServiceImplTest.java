@@ -1,3 +1,5 @@
+package did.lemonaid.solution.domain.credential;
+
 import did.lemonaid.solution.infrastructure.credential.CredentialRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

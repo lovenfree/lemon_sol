@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class TrustRegistryDto {
@@ -87,23 +89,31 @@ public class TrustRegistryDto {
     //credential 등록
   @Getter
   @Setter
+  @Builder
   @ToString
   public static class RegisterCredentialRequest {
       @Schema(description = "Tenant ID", example = "slkjdkglajksejrhjgaskj", required = true)
+      @NotBlank(message = "필수 파라미터 누락")
       private String tenantId;
       @Schema(description = "Credential Id", example = "lgcnsudskjd", required = true)
+      @NotBlank(message = "필수 파라미터 누락")
       private  String credentialId;
       @Schema(description = "Credential Name", example = "LG EMP ID", required = true)
+      @NotBlank(message = "필수 파라미터 누락")
       private  String credentialName;
       @Schema(description = "Credential Type", example = "ID", required = true)
+      @NotNull(message = "필수 파라미터 누락")
       private Credential.CredentialType credentialType;
       @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0", required = true)
+      @NotBlank(message = "필수 파라미터 누락")
       private  String credentialDefinitionId;
       @Schema(description = "Description", example = "DID id credential")
       private  String description;
       @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
+      @NotBlank(message = "필수 파라미터 누락")
       private String authLinkUrl;
       @Schema(description = "expiry Date YN", example = "true", required = true)
+      @NotNull(message = "필수 파라미터 누락")
       private boolean expiryDateYN;
       @Schema(description = "validity Days", example = "360")
       private int validityDays;
@@ -115,9 +125,12 @@ public class TrustRegistryDto {
       private String logoImg;
       @Schema(description = "Logo Image Filename", example = "logo.img")
       private String logoImgFilename;
-      @Schema(description = "???", example = "???", required = true)
-      private String tempItemMapping;
-      private SchemaInfo schema;
+      @Schema(description = "credential template mapping info", example = "???", required = true)
+      @NotBlank(message = "필수 파라미터 누락")
+      private String templateItemMapping;
+      @Schema(description = "Schema Info", required = true)
+      @NotNull(message = "필수 파라미터 누락")
+      private TrustRegistryDto.RegisterSchemaInfo schema;
   }
 
   @Getter
@@ -125,14 +138,18 @@ public class TrustRegistryDto {
   @ToString
   public static class UpdateCredentialRequest {
     @Schema(description = "Credential Name", example = "LG EMP ID", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private  String credentialName;
     @Schema(description = "Credential Type", example = "ID", required = true)
+    @NotNull(message = "필수 파라미터 누락")
     private Credential.CredentialType credentialType;
     @Schema(description = "Description", example = "DID id credential")
     private  String description;
     @Schema(description = "User Auth Page", example = "http://lil.lgcns.com", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private String authLinkUrl;
     @Schema(description = "expiry Date YN", example = "true", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private boolean expiryDateYN;
     @Schema(description = "validity Days", example = "360")
     private int validityDays;
@@ -145,15 +162,23 @@ public class TrustRegistryDto {
     @Schema(description = "Logo Image Filename", example = "logo.img")
     private String logoImgFilename;
     @Schema(description = "Template Mapping Info", example = "???", required = true)
-    private String tempItemMapping;
+    @NotBlank(message = "필수 파라미터 누락")
+    private String templateItemMapping;
   }
 
   @Getter
   @Setter
+  @Builder
   @ToString
   public static class ActivateTenantRequest {
+    @Schema(description = "Tenant DID", example = "RTHAnR3aKM5iSNmHnr4am4", required = true)
+    @NotNull(message = "필수 파라미터 누락")
     private String tenantDID;
+    @Schema(description = "Tenant Wallet ID", example = "ID", required = true)
+    @NotNull(message = "필수 파라미터 누락")
     private String tenantWalletId;
+    @Schema(description = "Tenant Invitation Url", example = "https://devacapyinbound.duckdns.org? ...", required = true)
+    @NotNull(message = "필수 파라미터 누락")
     private String tenantInvitationUrl;
   }
 
@@ -168,27 +193,35 @@ public class TrustRegistryDto {
 
   @Getter
   @Setter
+  @Builder
   @ToString
-  public static class SchemaInfo {
-    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0")
+  public static class RegisterSchemaInfo {
+    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private  String schemaId;
-    @Schema(description = "Schema Name", example = "사원증")
+    @Schema(description = "Schema Name", example = "사원증", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private String schemaName;
-    @Schema(description = "Schema attribute List")
-    private List<RequestSchemaAttribute> schemaAttributeList;
+    @Schema(description = "Schema attribute List", required = true)
+    @NotNull(message = "필수 파라미터 누락")
+    private List<RegisterSchemaAttribute> schemaAttributeList;
   }
 
 
 
   @Getter
   @Setter
+  @Builder
   @ToString
-  public static class RequestSchemaAttribute {
+  public static class RegisterSchemaAttribute {
     @Schema(description = "Schema Attribute Code", example = "name", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private String attributeCode;
     @Schema(description = "Schema attribute Name", example = "name", required = true)
+    @NotBlank(message = "필수 파라미터 누락")
     private String attributeName;
     @Schema(description = "Schema attribute Mime Type", example = "String", required = true)
+    @NotNull(message = "필수 파라미터 누락")
     private SchemaAttribute.MimeType mimeType;
   }
 
@@ -243,11 +276,11 @@ public class TrustRegistryDto {
   @Builder
   @ToString
   public static class SchemaDto {
-    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0", required = true)
+    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0")
     private  final String schemaId;
-    @Schema(description = "Schema Name", example = "사원증", required = true)
+    @Schema(description = "Schema Name", example = "사원증")
     private final String schemaName;
-    @Schema(description = "Schema attribute List", required = true)
+    @Schema(description = "Schema attribute List")
     private final List<SchemaAttributeDto> schemaAttributeList;
   }
 
@@ -256,11 +289,11 @@ public class TrustRegistryDto {
   @Builder
   @ToString
   public static class SchemaAttributeDto {
-    @Schema(description = "Schema Attribute Code", example = "name", required = true)
+    @Schema(description = "Schema Attribute Code", example = "name")
     private final String attributeCode;
-    @Schema(description = "Schema attribute Name", example = "name", required = true)
+    @Schema(description = "Schema attribute Name", example = "name")
     private final String attributeName;
-    @Schema(description = "Schema attribute Mime Type", example = "String", required = true)
+    @Schema(description = "Schema attribute Mime Type", example = "String")
     private final SchemaAttribute.MimeType mimeType;
   }
 
