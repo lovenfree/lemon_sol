@@ -2,11 +2,8 @@ package did.lemonaid.solution.domain.credential;
 
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
-import did.lemonaid.solution.domain.schema.SchemaService;
 import did.lemonaid.solution.domain.tenant.Tenant;
-import did.lemonaid.solution.interfaces.trustregistry.TrustRegistryDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -29,7 +26,7 @@ public class CredentialCommand {
     private final String backgroundImgFilename;
     private final String logoImg;
     private final String logoImgFilename;
-    private final String tempItemMapping;
+    private final String templateItemMapping;
     private RegisterSchema schema;
     public Credential toEntity(Tenant tenant, Schemas schema) {
       return Credential.builder()
@@ -47,7 +44,7 @@ public class CredentialCommand {
         .backgroundImgFilename(backgroundImgFilename)
         .logoImg(logoImg)
         .logoImgFilename(logoImgFilename)
-        .templateItemMapping(tempItemMapping)
+        .templateItemMapping(templateItemMapping)
         .build();
     }
   }
@@ -66,7 +63,7 @@ public class CredentialCommand {
     private final String backgroundImgFilename;
     private final String logoImg;
     private final String logoImgFilename;
-    private final String tempItemMapping;
+    private final String templateItemMapping;
   }
 
   @Getter

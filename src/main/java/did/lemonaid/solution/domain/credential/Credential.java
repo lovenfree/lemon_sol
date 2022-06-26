@@ -4,7 +4,6 @@ import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -104,7 +103,7 @@ public class Credential extends BaseEntity {
     this.backgroundImgFilename = credential.getBackgroundImgFilename();
     this.logoImg = credential.getLogoImg();
     this.logoImgFilename = credential.getLogoImgFilename();
-    this.templateItemMapping = credential.getTempItemMapping();
+    this.templateItemMapping = credential.getTemplateItemMapping();
   }
   //연관관계 설정
   public void setSchema(Schemas schema){
