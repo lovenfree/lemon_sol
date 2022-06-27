@@ -7,7 +7,7 @@ spec:
   gateways:
     - istio-gateway
   hosts:
-    - "admin.dev.lemonaid.singlex.com"
+    - "admin-dev-lemonaid.singlex.com"
   http:
     - match:
         - uri:
