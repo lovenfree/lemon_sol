@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: did-solution-backend
+  name: service-did-solution-backend
   namespace: common-system
 spec:
   type: ClusterIP
@@ -11,4 +11,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: app-did-solution-backend
+    app: did-solution-backend

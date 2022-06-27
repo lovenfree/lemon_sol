@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-did-solution-backend
+      app: did-solution-backend
   template:
     metadata:
       labels:
-        app: app-did-solution-backend
+        app: did-solution-backend
     spec:
       containers:
         - name: did-solution-backend
@@ -23,4 +23,4 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: did-solution-backend-config-dev
+                name: configmap-did-solution-backend

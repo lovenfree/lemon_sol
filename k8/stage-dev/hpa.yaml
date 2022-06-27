@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: did-solution-backend
+  name: hpa-did-solution-backend
   namespace: common-system
 spec:
   scaleTargetRef:
