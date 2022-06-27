@@ -6,7 +6,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels: 
+    matchLabels:
       app: app-did-solution-backend
   template:
     metadata:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: did-solution-backend
-          image: "asia.gcr.io/pjt-did-dev/did-solution-backend:latest"
+          image: "_SERVICEIMG_"
           imagePullPolicy: Always
           ports:
             - name: http
