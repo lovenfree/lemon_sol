@@ -5,10 +5,7 @@ import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -228,9 +225,10 @@ public class TrustRegistryDto {
 
   @Getter
   @Builder
-  @ToString
+  @AllArgsConstructor
   public static class CredentialResponse {
     private final String credentialId;
+
   }
 
   @Getter

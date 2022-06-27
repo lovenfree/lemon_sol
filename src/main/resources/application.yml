@@ -28,6 +28,7 @@ server:
   port: ${DID_SERVER_PORT:9090}
   address: 0.0.0.0
   servlet:
+    context-path: /
     encoding:
       charset: UTF-8
       enabled: true

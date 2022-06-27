@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @Tag(name="Tenant", description = "Admin Tenant API")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/tenants")
+@RequestMapping("/v1/tenants")
 public class TenantController {
   private final TenantFacade tenantFacade;
   private final TenantDtoMapper tenantDtoMapper;

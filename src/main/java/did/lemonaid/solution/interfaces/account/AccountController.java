@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @RestController
 @Tag(name="Account", description = "Account API")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/")
+@RequestMapping("/v1/")
 @Slf4j
 public class AccountController {
 
