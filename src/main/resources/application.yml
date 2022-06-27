@@ -36,6 +36,13 @@ logging:
   level:
     did: ${DID_LOG_LEVEL:info}
 management:
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include:
+          - health
+          - info
   endpoint:
     health:
       show-details: always

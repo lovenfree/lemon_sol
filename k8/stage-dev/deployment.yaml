@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: did-solution-backend
+  namespace: common-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: did-solution-backend
+  template:
+    metadata:
+      labels:
+        app: did-solution-backend
+    spec:
+      containers:
+        - name: did-solution-backend
+          image: "_SERVICEIMG_"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: configmap-did-solution-backend
