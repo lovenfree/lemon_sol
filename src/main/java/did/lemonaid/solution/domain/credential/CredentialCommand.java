@@ -2,11 +2,8 @@ package did.lemonaid.solution.domain.credential;
 
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
-import did.lemonaid.solution.domain.schema.SchemaService;
 import did.lemonaid.solution.domain.tenant.Tenant;
-import did.lemonaid.solution.interfaces.trustregistry.TrustRegistryDto;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -14,8 +11,8 @@ import java.util.List;
 
 public class CredentialCommand {
   @Getter
-  @Builder
   @ToString
+  @AllArgsConstructor
   public static class RegisterCredential {
     private final String  credentialId;
     private final String credentialName;
@@ -25,9 +22,11 @@ public class CredentialCommand {
     private final String authLinkUrl;
     private final boolean expiryDateYN;
     private final int validityDays;
-    private final byte[] backgroundImg;
-    private final byte[] logoImg;
-    private final String tempItemMapping;
+    private final String backgroundImg;
+    private final String backgroundImgFilename;
+    private final String logoImg;
+    private final String logoImgFilename;
+    private final String templateItemMapping;
     private RegisterSchema schema;
     public Credential toEntity(Tenant tenant, Schemas schema) {
       return Credential.builder()
@@ -42,15 +41,34 @@ public class CredentialCommand {
         .expiryDateYN(expiryDateYN)
         .validityDays(validityDays)
         .backgroundImg(backgroundImg)
+        .backgroundImgFilename(backgroundImgFilename)
         .logoImg(logoImg)
-        .templateItemMapping(tempItemMapping)
+        .logoImgFilename(logoImgFilename)
+        .templateItemMapping(templateItemMapping)
         .build();
     }
   }
 
   @Getter
-  @Builder
   @ToString
+  @AllArgsConstructor
+  public static class UpdateCredential {
+    private final String credentialName;
+    private final  Credential.CredentialType credentialType;
+    private final String description;
+    private final String authLinkUrl;
+    private final boolean expiryDateYN;
+    private final int validityDays;
+    private final String backgroundImg;
+    private final String backgroundImgFilename;
+    private final String logoImg;
+    private final String logoImgFilename;
+    private final String templateItemMapping;
+  }
+
+  @Getter
+  @ToString
+  @AllArgsConstructor
   public static class RegisterSchema {
     private final String schemaId;
     private final String schemaName;
@@ -66,7 +84,7 @@ public class CredentialCommand {
 
 
   @Getter
-  @Builder
+  @AllArgsConstructor
   @ToString
   public static class RequestSchemaAttribute {
     private final String attributeCode;

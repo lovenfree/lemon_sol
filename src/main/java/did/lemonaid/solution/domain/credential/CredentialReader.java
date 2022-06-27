@@ -6,4 +6,7 @@ public interface CredentialReader {
   Credential getCredentialBy(String credentialDefinitionID);
 
 
+  CredentialInfo.SchemaInfo getSchema(Credential credential);
+
+  Credential getCredential(String credentialId);
 }

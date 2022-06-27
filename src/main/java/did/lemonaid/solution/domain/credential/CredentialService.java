@@ -5,7 +5,7 @@ package did.lemonaid.solution.domain.credential;
 import java.util.List;
 
 public interface CredentialService {
-  String registerCredential(CredentialCommand.RegisterCredential command);
+  String registerCredential(CredentialCommand.RegisterCredential command, String tenantID);
 //  String updateCredentialInfo(String tenantId, CredentialCommand.UpdateCredential command);
 //  String activateCredential(String tenantId, CredentialCommand.ActivateCredential command);
 //  //  String deleteCredential(String tenantId);
@@ -13,4 +13,6 @@ public interface CredentialService {
 //
   List<CredentialInfo> retrieveCredentials();
   CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId);
+
+  String updateCredential(CredentialCommand.UpdateCredential registerCredential, String credentialId);
 }

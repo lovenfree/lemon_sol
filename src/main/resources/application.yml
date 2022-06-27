@@ -40,7 +40,7 @@ management:
     health:
       show-details: always
 cors:
-  patterns: ${DID_CORS_PATTERNS:"*"}
+  patterns: ${DID_CORS_PATTERNS:*}
 aries:
   admin:
     url: ${DID_ARIES_ADMIN_URL:https://devacapyadmin.duckdns.org}

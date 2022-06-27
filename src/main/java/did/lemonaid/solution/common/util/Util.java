@@ -14,12 +14,12 @@ public class Util {
         return Thread.currentThread().getStackTrace()[3].getMethodName();
     }
 
-  public static String BASE64_ENCODE(byte[] data) {
-      if (data == null || data.length == 0 )
-         throw new InvalidValueException();
-    Base64.Encoder encoder = Base64.getEncoder();
-    byte[] encodedBytes = encoder.encode(data);
-    return String.valueOf(encodedBytes);
-
-  }
+//  public static String BASE64_ENCODE(byte[] data) {
+//      if (data == null || data.length == 0 )
+//         throw new InvalidValueException();
+//    Base64.Encoder encoder = Base64.getEncoder();
+//    byte[] encodedBytes = encoder.encode(data);
+//    return String.valueOf(encodedBytes);
+//
+//  }
 }

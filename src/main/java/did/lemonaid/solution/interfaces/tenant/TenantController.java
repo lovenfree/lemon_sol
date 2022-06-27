@@ -25,7 +25,6 @@ public class TenantController {
   @Operation(summary="Register Tenant")
   public ResponseEntity<TenantDto.TenantResponse> registerTenant(@RequestBody @Valid TenantDto.RegisterTenantRequest request) {
     var tenantCommand = tenantDtoMapper.of(request);
-    log.info(request.getTenantAddress());
     var tenantId = tenantFacade.registerTenant(tenantCommand);
     var response = tenantDtoMapper.of(tenantId);
     return ResponseEntity.ok(response);

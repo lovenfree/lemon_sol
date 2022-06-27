@@ -4,7 +4,6 @@ import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -49,12 +48,16 @@ public class Credential extends BaseEntity {
   private int validityDays;
   @Lob
   @Column(name = "BACKGROUND_IMG")
-  @Type(type = "org.hibernate.type.BinaryType")
-  private byte[] backgroundImg;
+//  @Type(type = "org.hibernate.type.BinaryType")
+  private String backgroundImg;
+  @Column(name = "BACKGROUND_IMG_FILENAME")
+  private String backgroundImgFilename;
   @Lob
   @Column(name = "LOGO_IMG")
-  @Type(type = "org.hibernate.type.BinaryType")
-  private byte[] logoImg;
+//  @Type(type = "org.hibernate.type.BinaryType")
+  private String logoImg;
+  @Column(name = "LOGO_IMG_FILENAME")
+  private String logoImgFilename;
   @Column(name = "TEMPLATE_ITEM_MAPPING", nullable = false)
   private String templateItemMapping;
 
@@ -68,7 +71,8 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, byte[] backgroundImg, byte[] logoImg, String templateItemMapping) {
+  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, String backgroundImg, String backgroundImgFilename,
+                    String logoImg, String logoImgFilename, String templateItemMapping) {
     this.credentialId = credentialId;
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
@@ -79,12 +83,28 @@ public class Credential extends BaseEntity {
     this.expiryDateYN = expiryDateYN;
     this.validityDays = validityDays;
     this.backgroundImg = backgroundImg;
+    this.backgroundImgFilename = backgroundImgFilename;
     this.logoImg = logoImg;
+    this.logoImgFilename = logoImgFilename;
     this.templateItemMapping = templateItemMapping;
     this.schema =schema;
     this.tenant =tenant;
   }
 
+  public void updateCredential(CredentialCommand.UpdateCredential credential) {
+
+    this.credentialName = credential.getCredentialName();
+    this.credentialType = credential.getCredentialType();
+    this.description = credential.getDescription();
+    this.authLinkUrl = credential.getAuthLinkUrl();
+    this.expiryDateYN = credential.isExpiryDateYN();
+    this.validityDays = credential.getValidityDays();
+    this.backgroundImg = credential.getBackgroundImg();
+    this.backgroundImgFilename = credential.getBackgroundImgFilename();
+    this.logoImg = credential.getLogoImg();
+    this.logoImgFilename = credential.getLogoImgFilename();
+    this.templateItemMapping = credential.getTemplateItemMapping();
+  }
   //연관관계 설정
   public void setSchema(Schemas schema){
     this.schema = schema;

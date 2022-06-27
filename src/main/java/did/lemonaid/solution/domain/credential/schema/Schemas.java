@@ -20,8 +20,8 @@ public class Schemas extends BaseEntity {
   @Column(name="SCHEMA_ID", nullable = false)
   private String schemaId;
 
-  @Column(name="CREDENTIAL_DEFINITION_ID", nullable = false)
-  private String credentialDefinitionId;
+//  @Column(name="CREDENTIAL_DEFINITION_ID", nullable = false)
+//  private String credentialDefinitionId;
 
   @Column(name="SCHEMA_NAME", nullable = false)
   private String schemaName;
@@ -46,7 +46,7 @@ public class Schemas extends BaseEntity {
   @Builder
   public Schemas(String schemaId, String credentialDefinitionId, String schemaName){
     this.schemaId = schemaId;
-    this.credentialDefinitionId = credentialDefinitionId;
+//    this.credentialDefinitionId = credentialDefinitionId;
     this.schemaName = schemaName;
   }
 }

@@ -17,6 +17,7 @@ public class TenantCommand {
     private final String tenantHomeUrl;
     private final String tenantAddress;
     private final String tenantLogo;
+    private final String tenantLogoFilename;
 //    private final boolean trustTenant;
 
     public Tenant toEntity() {
@@ -26,6 +27,7 @@ public class TenantCommand {
         .tenantHomeUrl(tenantHomeUrl)
         .tenantAddress(tenantAddress)
         .tenantLogo(tenantLogo)
+        .tenantLogoFileName(tenantLogoFilename)
         .build();
     }
   }
@@ -46,11 +48,13 @@ public class TenantCommand {
     private final Tenant.TenantType tenantType;
     private final String  tenantName;
     private final String  tenantDID;
+    private final String  tenantWalletId;
     private final String  tenantInvitationUrl;
     private final Tenant.TenantStatus tenantStatus;
     private final String tenantHomeUrl;
     private final String tenantAddress;
     private final String tenantLogo;
+    private final String tenantLogoFilename;
 //    private final boolean trustTenant;
   }
 }
