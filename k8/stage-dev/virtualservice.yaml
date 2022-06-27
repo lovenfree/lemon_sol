@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: solution-backend-virtualservice
+  namespace: lgcns-tenant
+spec:
+  gateways:
+    - istio-gateway
+  hosts:
+    - "admin.dev.lemonaid.singlex.com"
+  http:
+    - match:
+        - uri:
+            prefix: /api
+      route:
+        - destination:
+            host: did-solution-backend
+            port:
+              number: 80
