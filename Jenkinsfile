@@ -65,14 +65,48 @@ pipeline {
             steps {
                 script {
                     env.REGION          = "asia-northeast3"
+                    env.service_name = "solution-backend"
                   // env.branch          = sh ( script: 'bash ./cicd/script/get-current-branch.sh', returnStdout: true ).trim()
                   //   env.service_name    = sh ( script: 'grep rootProject.name "./settings.gradle" | cut -d= -f2 | sed -e "s#\'##g"', returnStdout: true ).trim()
                 }
             }
         }
 
-        stage('Feature and Develop Branch') {
-            //when { expression { BRANCH_NAME != 'master'}}
+        stage("Common Sepup") {
+            steps {
+                script {
+                    ///////////////////////// install java //////////////////////////
+                    sh 'apk add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community'
+                    env.JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+                    env.PATH="/usr/lib/jvm/java-17-openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/google-cloud-sdk/bin"
+                    sh 'printenv'
+                    sh 'java -version'
+                    /////////////////////////////////////////////////////////////////
+                    // install gcloud
+
+                    sh '''
+                    echo "install gcloud"
+                    cat /etc/os-rel*
+
+                    export PATH="${PATH}:/home/gcloud/bin:/home/gcloud/google-cloud-sdk/bin"
+                    apk update && apk upgrade
+                    apk add python2
+                    export CLOUDSDK_PYTHON=python2
+                    mkdir /home/gcloud
+
+                    wget -q https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-388.0.0-linux-x86_64.tar.gz \
+                    && tar -xf ./google-cloud-sdk-388.0.0-linux-x86_64.tar.gz -C /home/gcloud \
+                    && rm -rf ./google-cloud-sdk-388.0.0-linux-x86_64.tar. \
+                    && gcloud components install beta --quiet \
+                    && gcloud components install cbt --quiet '''
+                    sh ' echo "gcloud install complete"'
+
+                }
+            }
+        }
+
+        stage('Develop Branch') {
+            when { expression { BRANCH_NAME == 'develop'}}
             stages {
                 stage("[DEV] Environment") {
                     steps {
@@ -102,33 +136,7 @@ pipeline {
                            //  sh ("echo 'DomainURL is :   ' ${DOMAINURL}")
 
                             // make gcp credentials
-                            // install gcloud
-                            ///////////////////////// install java //////////////////////////
-                            sh 'apk add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community'
-                            env.JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
-                            env.PATH="/usr/lib/jvm/java-17-openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/google-cloud-sdk/bin"
-                            sh 'printenv'
-                            sh 'java -version'
-                            /////////////////////////////////////////////////////////////////
-                            sh '''
-                            echo "install gcloud"
-                            cat /etc/os-rel*
 
-                            export PATH="${PATH}:/home/gcloud/bin:/home/gcloud/google-cloud-sdk/bin"
-                            apk update && apk upgrade
-                            apk add python2
-                            export CLOUDSDK_PYTHON=python2
-                            mkdir /home/gcloud
-
-                            wget -q https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-388.0.0-linux-x86_64.tar.gz \
-                            && tar -xf ./google-cloud-sdk-388.0.0-linux-x86_64.tar.gz -C /home/gcloud \
-                            && rm -rf ./google-cloud-sdk-388.0.0-linux-x86_64.tar. \
-                            && gcloud components install beta --quiet \
-                            && gcloud components install cbt --quiet
-
-
-                            '''
-                            sh ' echo "gcloud install complete"'
                             sh 'mkdir -p creds'
                             sh 'echo $SVC_ACCOUNT_DEV_KEY | base64 -d > $GOOGLE_APPLICATION_CREDENTIALS'
                             sh 'echo $GOOGLE_APPLICATION_CREDENTIALS'
@@ -137,13 +145,6 @@ pipeline {
                             sh 'gcloud auth activate-service-account --key-file ${GOOGLE_APPLICATION_CREDENTIALS}'
                             sh 'gcloud auth configure-docker'
                             sh 'gcloud config set project ${project_id}'
-
-
-
-
-
-
-
 
                            //  // store-pass
                            //  def storepass = sh ( script: 'gcloud secrets versions access 1 --secret sso_storepass_secrets', returnStdout: true).trim()
@@ -268,8 +269,9 @@ pipeline {
                            //      }
                            //  }
                             // sh "cat ${userSql}"
+                            env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
-                           sh './gradlew jib --image=asia.gcr.io/${project_id}/solution-backend'
+                           sh './gradlew jib --image='+env.DOCKERIMG
 
                         }
                     }
@@ -285,13 +287,14 @@ pipeline {
                             //     gcloud container clusters get-credentials $CLUSTER_NAME --region $REGION --project $PROJECTID
                             //     gcloud components install kubectl
                             //     '''
+                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
                             sh '''
                             PROJECTID=pjt-did-dev
                             REGION=asia-northeast3
                             CLUSTER_NAME=gke-an3-did-dev
                             gcloud container clusters get-credentials $CLUSTER_NAME --region $REGION --project $PROJECTID
                             gcloud components install kubectl
-                            kubectl apply -f ./k8/deploy_test/
+                            kubectl apply -f ./k8/stage-dev/
                             '''
 
 
