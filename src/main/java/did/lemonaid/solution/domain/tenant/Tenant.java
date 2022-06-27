@@ -55,7 +55,7 @@ public class Tenant extends BaseEntity {
   private String  tenantLogo;
 
   @Column(name="TENANT_LOGO_FILENAME")
-  private String  tenantLogoFileName;
+  private String tenantLogoFilename;
 
   @Column(name="TRUST_TENANT")
   private boolean trustTenant;
@@ -78,7 +78,7 @@ public class Tenant extends BaseEntity {
   }
 
   @Builder
-  public Tenant( TenantType tenantType, String tenantName, String tenantHomeUrl, String tenantAddress, String tenantLogo,String tenantLogoFileName, boolean trustTenant) {
+  public Tenant(TenantType tenantType, String tenantName, String tenantHomeUrl, String tenantAddress, String tenantLogo, String tenantLogoFilename, boolean trustTenant) {
     this.tenantId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.tenantType = tenantType;
     this.tenantName = tenantName;
@@ -86,7 +86,7 @@ public class Tenant extends BaseEntity {
     this.tenantHomeUrl = tenantHomeUrl;
     this.tenantAddress = tenantAddress;
     this.tenantLogo = tenantLogo;
-    this.tenantLogoFileName = tenantLogoFileName;
+    this.tenantLogoFilename = tenantLogoFilename;
     this.trustTenant = trustTenant;
   }
 
@@ -107,7 +107,7 @@ public class Tenant extends BaseEntity {
     this.tenantHomeUrl = command.getTenantHomeUrl();
     this.tenantAddress = command.getTenantAddress();
     this.tenantLogo = command.getTenantLogo();
-    this.tenantLogoFileName = command.getTenantLogo();
+    this.tenantLogoFilename = command.getTenantLogo();
   }
 
 

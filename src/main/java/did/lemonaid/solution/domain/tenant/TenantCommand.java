@@ -27,7 +27,7 @@ public class TenantCommand {
         .tenantHomeUrl(tenantHomeUrl)
         .tenantAddress(tenantAddress)
         .tenantLogo(tenantLogo)
-        .tenantLogoFileName(tenantLogoFilename)
+        .tenantLogoFilename(tenantLogoFilename)
         .build();
     }
   }

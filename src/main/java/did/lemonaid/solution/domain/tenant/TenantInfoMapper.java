@@ -22,23 +22,11 @@ public interface TenantInfoMapper {
 //  })
   TenantInfo.TenantDetail of(Tenant tenant);
 
-  List<TenantInfo.CredentialDetail> credentialOf(List<Credential> credentials);
+//  @Mappings({
+    @Mapping(source = "credentials.schema.schemaId", target = "TenantInfo.CredentialDetail.schemaId")
+//  })
+  List<TenantInfo.CredentialDetail>  credentialOf(List<Credential> credentials);
 
-//  default TenantInfo.TenantDetail of(Tenant tenant) {
-//    return TenantInfo.TenantDetail.builder()
-//      .tenantAddress(tenant.getTenantAddress())
-//      .tenantDID(tenant.getTenantDID())
-//      .tenantId(tenant.getTenantId())
-//      .tenantHomeUrl(tenant.getTenantHomeUrl())
-//      .tenantInvitationUrl(tenant.getTenantInvitationUrl())
-//      .tenantLogo(tenant.getTenantLogo() != null ? String.valueOf(tenant.getTenantLogo()) : null)
-//      .tenantName(tenant.getTenantName())
-//      .tenantStatus(tenant.getTenantStatus())
-//      .tenantType(tenant.getTenantType())
-//      .trustTenant(tenant.isTrustTenant())
-//      .credentialList(tenant.getCredentialList())
-//      .build();
 
-//  }
 
 }

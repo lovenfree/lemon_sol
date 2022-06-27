@@ -1,5 +1,6 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import did.lemonaid.solution.application.credential.CredentialFacade;
 import did.lemonaid.solution.application.tenant.TenantFacade;
@@ -56,24 +57,23 @@ public class TrustRegistryControllerTest {
 
     mockMvc.perform(MockMvcRequestBuilders.get(PATH+"/tenants"))
       .andDo(print())
-      .andExpect(status().isOk());
-//      .andExpect(content());
+      .andExpect(status().isOk())
+      .andExpect(content().string (containsString("tenants")));
   }
 
   private  List<TenantInfo.TenantDetail> createTenantTestData() {
-//    var tenant1 = TenantInfo.TenantDetail.builder().tenantId("tnt_askjeigjksldkfjh")
-//      .tenantType(Tenant.TenantType.ISSUER)
-//      .tenantName("Test tenant #1")
-//      .tenantDID("RTHAnR3aKM5iSNmHnr4am4").tenantStatus(Tenant.TenantStatus.ACTIVATE).build();
-//    var tenant2 =  TenantInfo.TenantDetail.builder().tenantId("tnt_askjeigjksldkfjh")
-//      .tenantType(Tenant.TenantType.ISSUER)
-//      .tenantName("Test tenant #2")
-//      .tenantDID("RTHAnR3aKM5iSNmHnr4am5").tenantStatus(Tenant.TenantStatus.ACTIVATE).build();
-//    List<TenantInfo.TenantDetail> tenants = new ArrayList<>();
-//    tenants.add(tenant1);
-//    tenants.add(tenant2);
-//    return tenants;
-    return null;
+    var tenant1 = TenantInfo.TenantDetail.builder().tenantId("tnt_askjeigjksldkfjh")
+      .tenantType(Tenant.TenantType.ISSUER)
+      .tenantName("Test tenant #1")
+      .tenantDID("RTHAnR3aKM5iSNmHnr4am4").tenantStatus(Tenant.TenantStatus.ACTIVATE).build();
+    var tenant2 =  TenantInfo.TenantDetail.builder().tenantId("tnt_askjeigjksldkfjh")
+      .tenantType(Tenant.TenantType.ISSUER)
+      .tenantName("Test tenant #2")
+      .tenantDID("RTHAnR3aKM5iSNmHnr4am5").tenantStatus(Tenant.TenantStatus.ACTIVATE).build();
+    List<TenantInfo.TenantDetail> tenants = new ArrayList<>();
+    tenants.add(tenant1);
+    tenants.add(tenant2);
+    return tenants;
   }
 
   @Test
@@ -83,25 +83,26 @@ public class TrustRegistryControllerTest {
       .tenantDID("tenant-did").tenantInvitationUrl("http://djkjsnmxn,fmalsk").build();
     var tenantID = "tnt_askjeigjksldkfjh";
 
-    given(tenantFacade.activateTenant(tenantID, mapper.activateOf(request))).willReturn(tenantID);
+    given(tenantFacade.activateTenant(tenantID, mapper.activateOf(request))).willReturn("tnt_askjeigjksldkfjh");
 
-    mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/tenants/{tenant-id}/activate",tenantID))
+    mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/tenants/{tenant-id}/activate",tenantID)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request)))
+      .andDo(print())
       .andExpect(status().isOk())
-      .andExpect(jsonPath(tenantID).exists())
-      .andDo(print());
-
+      .andExpect(content().string(containsString(tenantID)));
   }
 
   @Test
   @DisplayName("테넌트 활성화 fail test - param invalid")
-  void activateTenant_EXCEPTION() {
-
-  }
-
-  @Test
-  @DisplayName("테넌트 활성화 fail test - 존재 하지 않는 테넌트")
-  void activateTenant_EXCEPTION_Tenant() {
-
+  void activateTenant_EXCEPTION() throws Exception {
+    var request = TrustRegistryDto.ActivateTenantRequest.builder().build();
+    var tenantID = "tnt_askjeigjksldkfjh";
+    mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/tenants/{tenant-id}/activate",tenantID)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request)))
+      .andDo(print())
+      .andExpect(status().isBadRequest());
   }
 
   @Test
@@ -130,7 +131,6 @@ public class TrustRegistryControllerTest {
 //    var response = TrustRegistryDto.CredentialResponse.builder().credentialId("credentialID").build();
 
     given(credentialFacade.registerCredential(mapper.of(credential),"tenantID")).willReturn("credentialID");
-//    when(, "tenantID")).thenReturn(response);
 
     mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/credentials")
         .contentType(MediaType.APPLICATION_JSON)

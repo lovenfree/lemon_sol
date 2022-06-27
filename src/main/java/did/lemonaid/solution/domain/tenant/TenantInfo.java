@@ -7,6 +7,7 @@ import lombok.*;
 public class TenantInfo {
 
   @Getter
+  @Builder
   @ToString
   public static class TenantDetail {
     private final String tenantId;
@@ -23,24 +24,25 @@ public class TenantInfo {
     private final boolean trustTenant;
 
 
-    public TenantDetail(Tenant tenant) {
-      this.tenantId = tenant.getTenantId();
-      this.tenantType = tenant.getTenantType();
-      this.tenantName = tenant.getTenantName();
-      this.tenantDID = tenant.getTenantDID();
-      this.tenantWalletId = tenant.getTenantWalletId();
-      this.tenantInvitationUrl = tenant.getTenantInvitationUrl();
-      this.tenantStatus = tenant.getTenantStatus();
-      this.tenantHomeUrl = tenant.getTenantHomeUrl();
-      this.tenantAddress = tenant.getTenantAddress();
-      this.tenantLogo = tenant.getTenantLogo();
-      this.tenantLogoFilename = tenant.getTenantLogoFileName();
-      this.trustTenant = tenant.isTrustTenant();
-    }
+//    public TenantDetail(Tenant tenant) {
+//      this.tenantId = tenant.getTenantId();
+//      this.tenantType = tenant.getTenantType();
+//      this.tenantName = tenant.getTenantName();
+//      this.tenantDID = tenant.getTenantDID();
+//      this.tenantWalletId = tenant.getTenantWalletId();
+//      this.tenantInvitationUrl = tenant.getTenantInvitationUrl();
+//      this.tenantStatus = tenant.getTenantStatus();
+//      this.tenantHomeUrl = tenant.getTenantHomeUrl();
+//      this.tenantAddress = tenant.getTenantAddress();
+//      this.tenantLogo = tenant.getTenantLogo();
+//      this.tenantLogoFilename = tenant.getTenantLogoFileName();
+//      this.trustTenant = tenant.isTrustTenant();
+//    }
 
   }
 
   @Getter
+//  @Builder
   @ToString
   public static class CredentialDetail {
     private final String credentialId;
