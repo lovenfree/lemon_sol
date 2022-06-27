@@ -72,7 +72,7 @@ pipeline {
             }
         }
 
-        stage("Common Sepup") {
+        stage("Common Setup") {
             steps {
                 script {
                     ///////////////////////// install java //////////////////////////
