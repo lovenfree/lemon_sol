@@ -269,6 +269,15 @@ pipeline {
                            //      }
                            //  }
                             // sh "cat ${userSql}"
+                            env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-user solution', returnStdout: true).trim()
+                            env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-passwd', returnStdout: true).trim()
+                            env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=dev-common-did-aries-admin-token', returnStdout: true).trim()
+
+
+                            sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
+                            sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
+                            sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
+
                             env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
                            sh './gradlew jib --image='+env.DOCKERIMG
