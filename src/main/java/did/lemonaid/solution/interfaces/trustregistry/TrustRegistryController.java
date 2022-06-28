@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -16,7 +17,7 @@ import javax.validation.Valid;
 @RestController
 @Tag(name="Trust Registry-Public", description = "Trust Registry API")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/trust-registry")
+@RequestMapping("/v1/trust-registry")
 public class TrustRegistryController {
     private final TenantFacade tenantFacade;
     private final CredentialFacade credentialFacade;
@@ -78,8 +79,5 @@ public class TrustRegistryController {
       var response = mapper.of(credential);
       return ResponseEntity.ok(response);
     }
-
-
-
 
 }
