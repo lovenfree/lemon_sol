@@ -59,7 +59,6 @@ sourceSets {
 
 // If you want to use library , just add on dependencies bracket and refresh gradle
 dependencies {
-
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 
@@ -78,6 +77,10 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'com.querydsl:querydsl-jpa'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.session:spring-session-data-redis'
+
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

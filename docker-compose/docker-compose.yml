@@ -11,3 +11,10 @@ services:
       - TZ=UTC
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+  redis-db:
+    image: redis:alpine
+    command: redis-server --port 6379
+    container_name: redis_boot
+    hostname: redis_boot
+    ports:
+      - 6379:6379
