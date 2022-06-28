@@ -217,7 +217,7 @@ public class TrustRegistryDto {
     @Schema(description = "Schema attribute Name", example = "name", required = true)
     @NotBlank(message = "필수 파라미터 누락")
     private String attributeName;
-    @Schema(description = "Schema attribute Mime Type", example = "String", required = true)
+    @Schema(description = "Schema attribute Mime Type", example = "TEXT_PLAIN", required = true)
     @NotNull(message = "필수 파라미터 누락")
     private SchemaAttribute.MimeType mimeType;
   }
