@@ -15,7 +15,7 @@ public class SwaggerConfig {
    public GroupedOpenApi publicApi() {
        return GroupedOpenApi.builder()
                .group("lemonaid- Trust Registry")
-               .pathsToMatch("/api/v1/trust-registry/**")
+               .pathsToMatch("/v1/trust-registry/**")
                .build();
    }
 
@@ -23,9 +23,9 @@ public class SwaggerConfig {
    public GroupedOpenApi adminApi() {
        return GroupedOpenApi.builder()
                .group("lemonaid-admin")
-               .pathsToMatch("/api/v1/accounts/**")
-               .pathsToMatch("/api/v1/credentials/**")
-               .pathsToMatch("/api/v1/tenants/**")
+               .pathsToMatch("/v1/accounts/**")
+               .pathsToMatch("/v1/credentials/**")
+               .pathsToMatch("/v1/tenants/**")
                .build();
    }
 

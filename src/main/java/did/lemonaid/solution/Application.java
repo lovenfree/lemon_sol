@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @Slf4j
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
