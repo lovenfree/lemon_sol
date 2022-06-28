@@ -5,6 +5,9 @@ public class InvalidValueException extends BusinessException{
     super(ErrorCode.INVALID_INPUT_VALUE);
   }
 
+  public InvalidValueException(ErrorCode errorCode){
+    super(errorCode.getMessage(), errorCode);
+  }
 
   public InvalidValueException(String value) {
         super(value, ErrorCode.INVALID_INPUT_VALUE);

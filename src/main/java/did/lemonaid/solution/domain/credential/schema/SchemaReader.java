@@ -1,5 +1,7 @@
 package did.lemonaid.solution.domain.credential.schema;
 
+import java.util.Optional;
+
 public interface SchemaReader {
-    Schemas getSchema(String schemaId);
+    Optional<Schemas> getSchema(String schemaId);
 }

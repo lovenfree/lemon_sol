@@ -125,7 +125,7 @@ public class TrustRegistryControllerTest {
       .schemaAttributeList(schemaAttributeList).build();
 
     var credential = TrustRegistryDto.RegisterCredentialRequest.builder()
-        .tenantId("tenantID").credentialId("credentialID").credentialName("name").credentialType(Credential.CredentialType.EMPLOYEE_ID)
+        .tenantId("tenantID").credentialName("name").credentialType(Credential.CredentialType.EMPLOYEE_ID)
         .credentialDefinitionId("cred_def_id").authLinkUrl("http://alskdjfklkjalk").expiryDateYN(false).templateItemMapping("test:laskjdf").schema(schema).build();
 
 //    var response = TrustRegistryDto.CredentialResponse.builder().credentialId("credentialID").build();

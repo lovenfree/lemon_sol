@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -56,6 +57,14 @@ public class TenantController {
     var response = tenantDtoMapper.of(tenantInfos);
     return ResponseEntity.ok(response);
   }
+
+  @GetMapping("/test")
+  @ResponseBody
+  public String index(HttpSession session) {
+    session.setAttribute("name", "sup2is");
+    return session.getId() + "\nHello " + session.getAttribute("name");
+  }
+
 
 
 

@@ -1,5 +1,6 @@
 package did.lemonaid.solution.domain.credential;
 
+import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
@@ -14,7 +15,7 @@ public class CredentialCommand {
   @ToString
   @AllArgsConstructor
   public static class RegisterCredential {
-    private final String  credentialId;
+//    private final String  credentialId;
     private final String credentialName;
     private final  Credential.CredentialType credentialType;
     private final String credentialDefinitionId;
@@ -32,7 +33,6 @@ public class CredentialCommand {
       return Credential.builder()
         .tenant(tenant)
         .schema(schema)
-        .credentialId(credentialId)
         .credentialName(credentialName)
         .credentialType(credentialType)
         .credentialDefinitionId(credentialDefinitionId)

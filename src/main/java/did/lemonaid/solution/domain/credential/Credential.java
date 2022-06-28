@@ -1,8 +1,12 @@
 package did.lemonaid.solution.domain.credential;
 
+import did.lemonaid.solution.common.exception.ErrorCode;
+import did.lemonaid.solution.common.exception.InvalidValueException;
+import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
+import io.netty.util.internal.StringUtil;
 import lombok.*;
 
 import javax.persistence.*;
@@ -71,9 +75,12 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(String credentialId, Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, String backgroundImg, String backgroundImgFilename,
+  public Credential(Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, String backgroundImg, String backgroundImgFilename,
                     String logoImg, String logoImgFilename, String templateItemMapping) {
-    this.credentialId = credentialId;
+
+    if (tenant.getTenantStatus().equals(Tenant.TenantStatus.DEACTIVATE)) throw new InvalidValueException(ErrorCode.INVALID_TENANT_STATUS_EXCEPTION);
+
+    this.credentialId = tenant.getTenantDID()+":TR:"+ TokenGenerator.randomCharacter(6);
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
     this.trustCredentialYN = trustCredentialYN;

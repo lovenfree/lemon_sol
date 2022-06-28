@@ -89,12 +89,12 @@ public class TrustRegistryDto {
   @Builder
   @ToString
   public static class RegisterCredentialRequest {
-      @Schema(description = "Tenant ID", example = "slkjdkglajksejrhjgaskj", required = true)
+      @Schema(description = "Tenant ID", example = "tnt_0GmNAEKCVqjQU6g4", required = true)
       @NotBlank(message = "필수 파라미터 누락")
       private String tenantId;
-      @Schema(description = "Credential Id", example = "lgcnsudskjd", required = true)
-      @NotBlank(message = "필수 파라미터 누락")
-      private  String credentialId;
+//      @Schema(description = "Credential Id", example = "lgcnsudskjd", required = true)
+//      @NotBlank(message = "필수 파라미터 누락")
+//      private  String credentialId;
       @Schema(description = "Credential Name", example = "LG EMP ID", required = true)
       @NotBlank(message = "필수 파라미터 누락")
       private  String credentialName;
@@ -291,7 +291,7 @@ public class TrustRegistryDto {
     private final String attributeCode;
     @Schema(description = "Schema attribute Name", example = "name")
     private final String attributeName;
-    @Schema(description = "Schema attribute Mime Type", example = "String")
+    @Schema(description = "Schema attribute Mime Type", example = "TEXT_PLAIN")
     private final SchemaAttribute.MimeType mimeType;
   }
 

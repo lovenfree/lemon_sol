@@ -37,6 +37,7 @@ public class TenantCommand {
   @AllArgsConstructor
   public static class ActivateTenant {
     private final String tenantDID;
+    private final String tenantWalletId;
     private final String tenantInvitationUrl;
   }
 

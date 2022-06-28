@@ -1,5 +1,6 @@
 package did.lemonaid.solution.infrastructure.credential.schema;
 
+import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.credential.*;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttributeStore;
@@ -26,25 +27,28 @@ public class SchemaSeriesFactoryImpl implements SchemaSeriesFactory {
   @Override
   public Credential store(CredentialCommand.RegisterCredential command, String tenantId) {
     var tenant = tenantReader.getTenant(tenantId);
-    var schema = schemaReader.getSchema(command.getSchema().getSchemaId());
+    var schema = schemaReader.getSchema(command.getSchema().getSchemaId()).orElse(null);
 
     var schemaAttrList = command.getSchema().getSchemaAttributeList();
-    if (schemaAttrList.isEmpty()) throw new InvalidValueException();
+    if (schemaAttrList.isEmpty()) throw new InvalidValueException(ErrorCode.INVALID_SCHEMA_ATTR_EXCEPTION);
 
     if (schema == null) {
       //    schema 조회 없으면 생성
+      System.out.println("schema is null");
       schema = command.getSchema().toEntity();
+
+      schemaStore.store(schema);
+
+      Schemas finalSchema = schema;
+      schemaAttrList.stream()
+        .map(requestSchemaAttribute -> {
+          var initSchemaAttr = requestSchemaAttribute.toEntity(finalSchema);
+          schemaAttributeStore.store(initSchemaAttr);
+
+          return null;
+        }).collect(Collectors.toList());
     }
-    schemaStore.store(schema);
-
-    Schemas finalSchema = schema;
-    schemaAttrList.stream()
-      .map(requestSchemaAttribute -> {
-        var initSchemaAttr = requestSchemaAttribute.toEntity(finalSchema);
-        schemaAttributeStore.store(initSchemaAttr);
-
-        return null;
-      }).collect(Collectors.toList());
+    System.out.println("schema is not null");
     var credential = credentialStore.store(command.toEntity(tenant,schema));
 
     return credential;
