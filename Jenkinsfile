@@ -294,6 +294,8 @@ pipeline {
                             CLUSTER_NAME=gke-an3-did-dev
                             gcloud container clusters get-credentials $CLUSTER_NAME --region $REGION --project $PROJECTID
                             gcloud components install kubectl
+                            kubectl apply -f ./k8/redis/master -n common-system
+                            kubectl apply -f ./k8/redis/slave -n common-system
                             kubectl apply -f ./k8/stage-dev/
                             '''
 
