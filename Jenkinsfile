@@ -269,7 +269,7 @@ pipeline {
                            //      }
                            //  }
                             // sh "cat ${userSql}"
-                            env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-user solution', returnStdout: true).trim()
+                            env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-user', returnStdout: true).trim()
                             env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-passwd', returnStdout: true).trim()
                             env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=dev-common-did-aries-admin-token', returnStdout: true).trim()
 
