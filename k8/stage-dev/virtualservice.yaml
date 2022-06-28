@@ -12,8 +12,20 @@ spec:
     - match:
         - uri:
             prefix: /api/
+      route:
+        - destination:
+            host: did-solution-backend
+            port:
+              number: 80
+    - match:
         - uri:
             exact: /swagger-ui.html
+      route:
+        - destination:
+            host: did-solution-backend
+            port:
+              number: 80
+    - match:
         - uri:
             prefix: /swagger-ui/
       route:
