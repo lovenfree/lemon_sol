@@ -55,7 +55,7 @@ public class TenantServiceImpl implements TenantService{
 
   @Override
   public List<TenantInfo.TenantDetail> retrieveTenants(TenantDto.TenantSearchCondition condition) {
-    var tenants = tenantReader.retrieveTenants();
+    var tenants = tenantReader.retrieveTenants(condition);
     return tenantInfoMapper.of(tenants);
   }
 

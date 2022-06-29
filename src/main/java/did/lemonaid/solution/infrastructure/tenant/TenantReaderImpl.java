@@ -3,6 +3,7 @@ package did.lemonaid.solution.infrastructure.tenant;
 import did.lemonaid.solution.common.exception.EntityNotFoundException;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantReader;
+import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class TenantReaderImpl implements TenantReader {
   }
 
   @Override
-  public List<Tenant> retrieveTenants() {
+  public List<Tenant> retrieveTenants(TenantDto.TenantSearchCondition condition) {
     return tenantRepository.findAll();
   }
 }

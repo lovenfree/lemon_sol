@@ -51,7 +51,7 @@ public class TrustRegistryControllerTest {
   void retrieveTenants() throws Exception {
 
     var testL = createTenantTestData();
-    given(tenantFacade.retrieveTenants(condition)).willReturn(testL);
+    given(tenantFacade.retrieveTenants(null)).willReturn(testL);
 
     mockMvc.perform(MockMvcRequestBuilders.get(PATH+"/tenants"))
       .andDo(print())

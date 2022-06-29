@@ -1,6 +1,7 @@
 package did.lemonaid.solution.application.tenant;
 
 import did.lemonaid.solution.domain.notification.NotificationService;
+import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantCommand;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
 import did.lemonaid.solution.domain.tenant.TenantService;
@@ -49,7 +50,7 @@ public class TenantFacade {
     return result;
   }
 
-  public void retrieveActiveTenants() {
-    return tenantService.retrieveTenants(condition);
+  public  List<TenantInfo.TenantDetail> retrieveActiveTenants() {
+    return tenantService.retrieveTenants(TenantDto.TenantSearchCondition.builder().tenantStatus(Tenant.TenantStatus.ACTIVATE).build());
   }
 }
