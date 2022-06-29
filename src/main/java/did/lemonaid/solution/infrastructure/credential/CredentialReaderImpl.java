@@ -5,8 +5,6 @@ import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.CredentialReader;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
-import did.lemonaid.solution.domain.credential.schema.Schemas;
-import did.lemonaid.solution.interfaces.trustregistry.TrustRegistryDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

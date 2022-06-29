@@ -1,15 +1,14 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import did.lemonaid.solution.application.credential.CredentialFacade;
 import did.lemonaid.solution.application.tenant.TenantFacade;
 import did.lemonaid.solution.domain.credential.Credential;
-import did.lemonaid.solution.domain.credential.CredentialCommand;
+import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
+import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
-import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class TrustRegistryControllerTest {
   private CredentialFacade credentialFacade;
 
   @MockBean
-  private TrustRegistryDtoMapper mapper;
+  private TrustRegistryDtoMapperImpl mapper;
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -86,8 +85,8 @@ public class TrustRegistryControllerTest {
     given(tenantFacade.activateTenant(tenantID, mapper.activateOf(request))).willReturn("tnt_askjeigjksldkfjh");
 
     mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/tenants/{tenant-id}/activate",tenantID)
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(request)))
+        .contentType(MediaType.APPLICATION_JSON))
+//        .content(objectMapper.writeValueAsString(request)))
       .andDo(print())
       .andExpect(status().isOk())
       .andExpect(content().string(containsString(tenantID)));
@@ -146,6 +145,58 @@ public class TrustRegistryControllerTest {
   }
 
   @Test
-  void retrieveCertificate() {
+  void retrieveCredential() throws Exception {
+
+//    var testL = credentialDetail();
+    var credentialId = "cred_def_id";
+
+//    given(credentialFacade.retrieveCredential(credentialId)).willReturn(objectMapper.readValue());
+
+    mockMvc.perform(MockMvcRequestBuilders.get(PATH+"/credentials/{credential-definition-id}",credentialId))
+      .andDo(print())
+      .andExpect(status().isOk())
+      .andExpect(content().string (containsString("serviceExtensionInfo")));
+
+  }
+
+
+
+
+//  private Credential credentialDetail(){
+//    List<SchemaAttribute> schemaAttributeList = new ArrayList<>();
+//    SchemaAttribute schemaattr = SchemaAttribute.builder().attributeCode("name")
+//      .attributeName("name")
+//      .mimeType(SchemaAttribute.MimeType.TEXT_PLAIN).build();
+//    schemaAttributeList.add(schemaattr);
+//    var schema = Schemas.builder()
+//      .schemaId("schemaID")
+//      .schemaName("ID")
+//      .schemaAttributeList(schemaAttributeList).build();
+//    var credential = Credential.builder()
+//      .credentialName("name").credentialType(Credential.CredentialType.EMPLOYEE_ID)
+//      .credentialDefinitionId("cred_def_id")
+//      .serviceExtensionInfo("serviceExtensionInfo").authLinkUrl("http://alskdjfklkjalk").expiryDateYN(false).templateItemMapping("test:laskjdf").schema(schema).build();
+//
+//    return credential;
+//  }
+
+  private TrustRegistryDto.RegisterCredentialRequest createCredentialData() {
+    List<TrustRegistryDto.RegisterSchemaAttribute> schemaAttributeList = new ArrayList<>();
+    var schemaattr = TrustRegistryDto.RegisterSchemaAttribute.builder()
+      .attributeCode("name")
+      .attributeName("name")
+      .mimeType(SchemaAttribute.MimeType.TEXT_PLAIN).build();
+    schemaAttributeList.add(schemaattr);
+    var schema = TrustRegistryDto.RegisterSchemaInfo.builder()
+      .schemaId("schemaID")
+      .schemaName("ID")
+      .schemaAttributeList(schemaAttributeList).build();
+
+    var credential = TrustRegistryDto.RegisterCredentialRequest.builder()
+      .tenantId("tenantID").credentialName("name").credentialType(Credential.CredentialType.EMPLOYEE_ID)
+      .credentialDefinitionId("cred_def_id")
+      .serviceExtensionInfo("serviceExtensionInfo").authLinkUrl("http://alskdjfklkjalk").expiryDateYN(false).templateItemMapping("test:laskjdf").schema(schema).build();
+
+    return credential;
   }
 }

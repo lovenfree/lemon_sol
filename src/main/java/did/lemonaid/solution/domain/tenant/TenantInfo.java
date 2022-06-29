@@ -47,6 +47,7 @@ public class TenantInfo {
   public static class CredentialDetail {
     private final String credentialId;
     private final String credentialName;
+    private final String description;
     private final Credential.CredentialType credentialType;
     private final String credentialDefinitionId;
     private final String schemaId;
@@ -59,6 +60,7 @@ public class TenantInfo {
     public CredentialDetail(Credential credential) {
       this.credentialId = credential.getCredentialId();
       this.credentialName = credential.getCredentialName();
+      this.description = credential.getDescription();
       this.credentialType = credential.getCredentialType();
       this.credentialDefinitionId = credential.getCredentialDefinitionId();
       this.schemaId = credential.getSchema().getSchemaId();

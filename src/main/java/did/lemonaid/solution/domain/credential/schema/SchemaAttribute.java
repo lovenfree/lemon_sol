@@ -1,9 +1,13 @@
 package did.lemonaid.solution.domain.credential.schema;
 
+import did.lemonaid.solution.common.exception.ErrorCode;
+import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.BaseEntity;
+import io.netty.util.internal.StringUtil;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity
 @Getter
@@ -26,20 +30,32 @@ public class SchemaAttribute extends BaseEntity {
 
   @Column(name="MIME_TYPE", nullable = false)
   @Enumerated(EnumType.STRING)
+  @Convert(converter = MimeTypeConverter.class)
   private MimeType mimeType;
 
   @Getter
   @AllArgsConstructor
   public enum MimeType {
-    TEXT_PLAIN("text/plain"), IMAGE_PNG("image/png");
+    TEXT_PLAIN("text/plain", "text/plain"),
+    IMAGE_PNG("image/png","image/png");
     private final String description;
+    private final String standardCode;
+
+    public static MimeType ofStandardCode(String standardCode){
+      //todo : param 전달
+      return Arrays.stream(MimeType.values())
+        .filter(v -> v.getStandardCode().equals(standardCode.toLowerCase()))
+        .findAny()
+        .orElseThrow(()-> new InvalidValueException(ErrorCode.INVALID_MIME_TYPE_EXCEPTION));
+    }
+
   }
 
   @Builder
-  public SchemaAttribute(Schemas schema, String attributeCode, String attributeName, MimeType mimeType) {
+  public SchemaAttribute(Schemas schema, String attributeCode, String attributeName, String mimeType) {
     this.schema = schema;
     this.attributeCode = attributeCode;
     this.attributeName = attributeName;
-    this.mimeType = mimeType;
+    this.mimeType = MimeType.ofStandardCode(mimeType);
   }
 }

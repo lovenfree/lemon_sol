@@ -32,6 +32,10 @@ public class Credential extends BaseEntity {
 
   @Column(name = "CREDENTIAL_ID", nullable = false)
   private String credentialId;
+
+  @Column(name = "SERVICE_EXTENSION_INFO")
+  private String serviceExtensionInfo;
+
   @Column(name = "CREDENTIAL_NAME", nullable = false)
   private String credentialName;
   @Column(name = "CREDENTIAL_DEFINITION_ID", nullable = false)
@@ -75,7 +79,7 @@ public class Credential extends BaseEntity {
 
 
   @Builder
-  public Credential(Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays, String backgroundImg, String backgroundImgFilename,
+  public Credential(Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays,String serviceExtensionInfo, String backgroundImg, String backgroundImgFilename,
                     String logoImg, String logoImgFilename, String templateItemMapping) {
 
     if (tenant.getTenantStatus().equals(Tenant.TenantStatus.DEACTIVATE)) throw new InvalidValueException(ErrorCode.INVALID_TENANT_STATUS_EXCEPTION);
@@ -86,6 +90,7 @@ public class Credential extends BaseEntity {
     this.trustCredentialYN = trustCredentialYN;
     this.credentialType = credentialType;
     this.description = description;
+    this.serviceExtensionInfo = serviceExtensionInfo;
     this.authLinkUrl = authLinkUrl;
     this.expiryDateYN = expiryDateYN;
     this.validityDays = validityDays;
@@ -103,6 +108,7 @@ public class Credential extends BaseEntity {
     this.credentialName = credential.getCredentialName();
     this.credentialType = credential.getCredentialType();
     this.description = credential.getDescription();
+    this.serviceExtensionInfo = credential.getServiceExtensionInfo();
     this.authLinkUrl = credential.getAuthLinkUrl();
     this.expiryDateYN = credential.isExpiryDateYN();
     this.validityDays = credential.getValidityDays();

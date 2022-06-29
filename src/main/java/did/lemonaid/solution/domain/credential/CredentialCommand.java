@@ -28,6 +28,7 @@ public class CredentialCommand {
     private final String logoImg;
     private final String logoImgFilename;
     private final String templateItemMapping;
+    private final String serviceExtensionInfo;
     private RegisterSchema schema;
     public Credential toEntity(Tenant tenant, Schemas schema) {
       return Credential.builder()
@@ -45,6 +46,7 @@ public class CredentialCommand {
         .logoImg(logoImg)
         .logoImgFilename(logoImgFilename)
         .templateItemMapping(templateItemMapping)
+        .serviceExtensionInfo(serviceExtensionInfo)
         .build();
     }
   }
@@ -64,6 +66,7 @@ public class CredentialCommand {
     private final String logoImg;
     private final String logoImgFilename;
     private final String templateItemMapping;
+    private final String serviceExtensionInfo;
   }
 
   @Getter
@@ -89,7 +92,7 @@ public class CredentialCommand {
   public static class RequestSchemaAttribute {
     private final String attributeCode;
     private final String attributeName;
-    private final SchemaAttribute.MimeType mimeType;
+    private final String mimeType;
 
     public SchemaAttribute toEntity(Schemas schemas){
       return SchemaAttribute.builder()

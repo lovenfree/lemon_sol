@@ -19,6 +19,7 @@ public enum  ErrorCode {
     TENANT_NOT_FOUND_EXCEPTION(400, "LEMON.TR.003", "등록된 테넌트 정보 없음"),
     INVALID_SCHEMA_ATTR_EXCEPTION(400, "LEMON.TR.004", "하나 이상의 schema attr 존재 해야함"),
     INVALID_TENANT_STATUS_EXCEPTION(400, "LEMON.TR.005", "TENANT 상태가 유효하지 않음"),
+    INVALID_MIME_TYPE_EXCEPTION(400, "LEMON.TR.006", "유효한 Mime-type 이 아닙니다. "),
 
 
     SESSION_NOT_FOUND_EXCEPTION(400, "LEMON.C008", "등록된 세션 정보 없음"),

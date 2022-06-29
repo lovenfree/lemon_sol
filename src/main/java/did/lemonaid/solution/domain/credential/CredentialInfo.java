@@ -30,6 +30,7 @@ public class CredentialInfo {
     private final String logoImg;
     private final String logoImgFilename;
     private final String templateItemMapping;
+    private final String serviceExtensionInfo;
     private final SchemaInfo schema;
 
 
@@ -51,6 +52,7 @@ public class CredentialInfo {
       this.logoImg = credential.getLogoImg();
       this.logoImgFilename = credential.getLogoImgFilename();
       this.templateItemMapping = credential.getTemplateItemMapping();
+      this.serviceExtensionInfo = credential.getServiceExtensionInfo();
       this.schema = schemas;
     }
   }
@@ -74,12 +76,12 @@ public class CredentialInfo {
   public static class SchemaAttributeInfo {
     private final String attributeCode;
     private final String attributeName;
-    private final SchemaAttribute.MimeType mimeType;
+    private final String mimeType;
 
     public SchemaAttributeInfo(SchemaAttribute schemaAttribute) {
       this.attributeCode = schemaAttribute.getAttributeCode();
       this.attributeName = schemaAttribute.getAttributeName();
-      this.mimeType = schemaAttribute.getMimeType();
+      this.mimeType = schemaAttribute.getMimeType().getStandardCode();
     }
   }
 

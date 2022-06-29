@@ -44,10 +44,11 @@ public class Schemas extends BaseEntity {
 //  }
 
   @Builder
-  public Schemas(String schemaId, String credentialDefinitionId, String schemaName){
+  public Schemas(String schemaId, String schemaName, List<SchemaAttribute> schemaAttributeList){
     this.schemaId = schemaId;
-//    this.credentialDefinitionId = credentialDefinitionId;
     this.schemaName = schemaName;
+    this.schemaAttributeList = schemaAttributeList;
+
   }
 }
 

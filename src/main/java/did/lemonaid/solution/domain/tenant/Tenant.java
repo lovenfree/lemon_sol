@@ -108,7 +108,7 @@ public class Tenant extends BaseEntity {
     this.tenantHomeUrl = command.getTenantHomeUrl();
     this.tenantAddress = command.getTenantAddress();
     this.tenantLogo = command.getTenantLogo();
-    this.tenantLogoFilename = command.getTenantLogo();
+    this.tenantLogoFilename = command.getTenantLogoFilename();
   }
 
 
