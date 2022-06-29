@@ -1,6 +1,7 @@
 package did.lemonaid.solution.infrastructure.credential;
 
 import did.lemonaid.solution.common.exception.EntityNotFoundException;
+import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.CredentialReader;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -20,13 +22,18 @@ public class CredentialReaderImpl implements CredentialReader {
   @Override
   public Credential getCredentialBy(String credentialDefinitionID) {
     return credentialRepository.findByCredentialDefinitionId(credentialDefinitionID)
-      .orElseThrow(EntityNotFoundException::new);
+      .orElseThrow(() -> new EntityNotFoundException(ErrorCode.CREDENTIAL_NOT_FOUND_EXCEPTION));
   }
 
   @Override
   public Credential getCredential(String credentialId) {
     return credentialRepository.findByCredentialId(credentialId)
-      .orElseThrow(EntityNotFoundException::new);
+      .orElseThrow(() -> new EntityNotFoundException(ErrorCode.CREDENTIAL_NOT_FOUND_EXCEPTION));
+  }
+
+  @Override
+  public Optional<Credential> validByCredentialID(String credentialDefinitionID) {
+    return credentialRepository.findByCredentialDefinitionId(credentialDefinitionID);
   }
 
   @Override

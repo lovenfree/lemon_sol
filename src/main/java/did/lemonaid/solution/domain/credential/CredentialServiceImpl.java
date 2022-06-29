@@ -1,5 +1,7 @@
 package did.lemonaid.solution.domain.credential;
 
+import did.lemonaid.solution.common.exception.ErrorCode;
+import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.credential.schema.SchemaReader;
 import did.lemonaid.solution.domain.tenant.TenantReader;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,9 @@ public class CredentialServiceImpl implements CredentialService{
   @Override
   @Transactional
   public String registerCredential(CredentialCommand.RegisterCredential command, String tenantID) {
-
+    if(!credentialReader.validByCredentialID(command.getCredentialDefinitionId()).isEmpty()){
+      throw new InvalidValueException(ErrorCode.INVALID_CRE_DEF_ID_EXCEPTION);
+    }
     var credential = schemaSeriesFactory.store(command, tenantID);
     return credential.getCredentialId();
   }

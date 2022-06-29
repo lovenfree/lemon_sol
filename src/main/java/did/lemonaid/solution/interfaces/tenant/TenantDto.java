@@ -118,6 +118,19 @@ public class TenantDto {
     private final String tenantId;
   }
 
+  @Getter
+  @Builder
+  @ToString
+  public static class TenantSearchCondition{
+    @Schema(description = "Tenant Type", example = "ISSUER")
+    private final Tenant.TenantType tenantType;
+    @Schema(description = "Tenant Name", example = "ISSUER")
+    private final String tenantName;
+    @Schema(description = "Tenant Status", example = "Activate")
+    private final Tenant.TenantStatus tenantStatus;
+    @Schema(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
+    private final String tenantDID;
+  }
 
 
 }

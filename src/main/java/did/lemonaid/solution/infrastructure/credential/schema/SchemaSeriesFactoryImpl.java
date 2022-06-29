@@ -30,11 +30,9 @@ public class SchemaSeriesFactoryImpl implements SchemaSeriesFactory {
     var schema = schemaReader.getSchema(command.getSchema().getSchemaId()).orElse(null);
 
     var schemaAttrList = command.getSchema().getSchemaAttributeList();
-    if (schemaAttrList.isEmpty()) throw new InvalidValueException(ErrorCode.INVALID_SCHEMA_ATTR_EXCEPTION);
 
     if (schema == null) {
       //    schema 조회 없으면 생성
-      System.out.println("schema is null");
       schema = command.getSchema().toEntity();
 
       schemaStore.store(schema);
@@ -48,7 +46,6 @@ public class SchemaSeriesFactoryImpl implements SchemaSeriesFactory {
           return null;
         }).collect(Collectors.toList());
     }
-    System.out.println("schema is not null");
     var credential = credentialStore.store(command.toEntity(tenant,schema));
 
     return credential;

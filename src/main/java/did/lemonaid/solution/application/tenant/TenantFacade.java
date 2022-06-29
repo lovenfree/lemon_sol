@@ -4,7 +4,7 @@ import did.lemonaid.solution.domain.notification.NotificationService;
 import did.lemonaid.solution.domain.tenant.TenantCommand;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
 import did.lemonaid.solution.domain.tenant.TenantService;
-import lombok.AllArgsConstructor;
+import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,8 @@ public class TenantFacade {
   private final TenantService tenantService;
   private final NotificationService notificationService;
 
-  public List<TenantInfo.TenantDetail> retrieveTenants(){
-    return tenantService.retrieveTenants();
+  public List<TenantInfo.TenantDetail> retrieveTenants(TenantDto.TenantSearchCondition condition){
+    return tenantService.retrieveTenants(condition);
   }
 
   public TenantInfo.TenantDetail retrieveTenant(String tenantId){
@@ -47,5 +47,9 @@ public class TenantFacade {
     var result = tenantService.activateTenant(tenantId, command);
     notificationService.sendEmail("test","test","test");
     return result;
+  }
+
+  public void retrieveActiveTenants() {
+    return tenantService.retrieveTenants(condition);
   }
 }

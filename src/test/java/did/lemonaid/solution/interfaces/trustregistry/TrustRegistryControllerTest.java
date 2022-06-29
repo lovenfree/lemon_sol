@@ -4,11 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import did.lemonaid.solution.application.credential.CredentialFacade;
 import did.lemonaid.solution.application.tenant.TenantFacade;
 import did.lemonaid.solution.domain.credential.Credential;
-import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
-import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDtoMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class TrustRegistryControllerTest {
   private CredentialFacade credentialFacade;
 
   @MockBean
-  private TrustRegistryDtoMapperImpl mapper;
+  private TRCredentialDtoMapper credentialDtoMapper;
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -52,7 +51,7 @@ public class TrustRegistryControllerTest {
   void retrieveTenants() throws Exception {
 
     var testL = createTenantTestData();
-    given(tenantFacade.retrieveTenants()).willReturn(testL);
+    given(tenantFacade.retrieveTenants(condition)).willReturn(testL);
 
     mockMvc.perform(MockMvcRequestBuilders.get(PATH+"/tenants"))
       .andDo(print())
