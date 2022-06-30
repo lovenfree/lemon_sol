@@ -14,7 +14,7 @@ data:
   DID_DATABASE_PASS: "0sRyPSoK7p7i6Ygk1dewaPkRoy3K5Z/+"
   DID_DATABASE_DDL: "update"
   DID_DATABASE_SHOW_SQL: "true"
-  DID_ARIES_ADMIN_URL: "http://acapyservice"
+  DID_ARIES_ADMIN_URL: "http://acapy-multitenancy-admin"
   DID_ARIES_ADMIN_TOKEN: "not-set-yet"
   DID_REDIS_HOST: "redis-master"
   DID_REDIS_PORT: "6379"
