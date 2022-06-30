@@ -56,13 +56,11 @@ public class Credential extends BaseEntity {
   private int validityDays;
   @Lob
   @Column(name = "BACKGROUND_IMG")
-//  @Type(type = "org.hibernate.type.BinaryType")
   private String backgroundImg;
   @Column(name = "BACKGROUND_IMG_FILENAME")
   private String backgroundImgFilename;
   @Lob
   @Column(name = "LOGO_IMG")
-//  @Type(type = "org.hibernate.type.BinaryType")
   private String logoImg;
   @Column(name = "LOGO_IMG_FILENAME")
   private String logoImgFilename;

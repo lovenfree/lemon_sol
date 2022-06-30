@@ -1,6 +1,6 @@
 package did.lemonaid.solution.domain.credential;
 
-import did.lemonaid.solution.domain.credential.schema.Schemas;
+import java.util.Optional;
 
 public interface CredentialReader {
   Credential getCredentialBy(String credentialDefinitionID);
@@ -9,4 +9,6 @@ public interface CredentialReader {
   CredentialInfo.SchemaInfo getSchema(Credential credential);
 
   Credential getCredential(String credentialId);
+
+  Optional<Credential> validByCredentialID(String credentialDefinitionID);
 }

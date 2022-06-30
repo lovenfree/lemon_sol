@@ -20,9 +20,14 @@ public enum  ErrorCode {
     INVALID_SCHEMA_ATTR_EXCEPTION(400, "LEMON.TR.004", "하나 이상의 schema attr 존재 해야함"),
     INVALID_TENANT_STATUS_EXCEPTION(400, "LEMON.TR.005", "TENANT 상태가 유효하지 않음"),
     INVALID_MIME_TYPE_EXCEPTION(400, "LEMON.TR.006", "유효한 Mime-type 이 아닙니다. "),
+    INVALID_CRE_DEF_ID_EXCEPTION(400, "LEMON.TR.007", "기 등록된 credential definition id 입니다."),
+
+    INVALID_ACTIVE_TENANT_PARAM_EXCEPTION(400, "LEMON.TR.008", "null 이나 공백이 될수 없습니다. "),
+    INVALID_STATUS_PARAM_EXCEPTION(400, "LEMON.TR.009", "현재 상태와 변경 상태가 같습니다. "),
+    INVALID_TRUST_TENANT_PARAM_EXCEPTION(400, "LEMON.TR.010", "Tenant 정보 (TenantDID, WalletID, InvitaionURL) 없음"),
 
 
-    SESSION_NOT_FOUND_EXCEPTION(400, "LEMON.C008", "등록된 세션 정보 없음"),
+  SESSION_NOT_FOUND_EXCEPTION(400, "LEMON.C008", "등록된 세션 정보 없음"),
     ORG_NOT_FOUND_EXCEPTION(400, "LEMON.C009", "기관 정보 없음"),
     DID_FILE_NOT_FOUND(400, "LEMON.C010", "DID 파일이 존재하지 않습니다."),
     RDSA_EXCEPTION(400, "LEMON.C011", "RDSA 연계 오류"),

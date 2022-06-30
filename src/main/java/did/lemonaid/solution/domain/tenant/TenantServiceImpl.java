@@ -1,5 +1,6 @@
 package did.lemonaid.solution.domain.tenant;
 
+import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -53,8 +54,8 @@ public class TenantServiceImpl implements TenantService{
 
 
   @Override
-  public List<TenantInfo.TenantDetail> retrieveTenants() {
-    var tenants = tenantReader.retrieveTenants();
+  public List<TenantInfo.TenantDetail> retrieveTenants(TenantDto.TenantSearchCondition condition) {
+    var tenants = tenantReader.retrieveTenants(condition);
     return tenantInfoMapper.of(tenants);
   }
 

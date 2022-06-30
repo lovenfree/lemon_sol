@@ -1,11 +1,14 @@
 package did.lemonaid.solution.interfaces.tenant;
 
 import did.lemonaid.solution.domain.tenant.Tenant;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -118,6 +121,19 @@ public class TenantDto {
     private final String tenantId;
   }
 
+  @Getter
+  @Builder
+  @ToString
+  public static class TenantSearchCondition{
+    @Parameter(description = "Tenant Type",  example = "ISSUER")
+    private final Tenant.TenantType tenantType;
+    @Parameter(description = "Tenant Name", example = "ISSUER")
+    private final String tenantName;
+    @Parameter(description = "Tenant Status", example = "ACTIVATE")
+    private final Tenant.TenantStatus tenantStatus;
+    @Parameter(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
+    private final String tenantDID;
+  }
 
 
 }

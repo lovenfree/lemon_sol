@@ -31,7 +31,7 @@ public class TrustRegistryController {
     @Operation(summary = "Tenant List")
     @GetMapping("/tenants")
     public ResponseEntity<TRTenantDto.Tenants> retrieveTenants() {
-        var tenants = tenantFacade.retrieveTenants();
+        var tenants = tenantFacade.retrieveActiveTenants();
         var response = TRTenantDto.Tenants.builder().tenants(tenantDtoMapper.of(tenants)).build();
         return ResponseEntity.ok(response);
     }

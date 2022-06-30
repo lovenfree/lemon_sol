@@ -52,8 +52,8 @@ public class TenantController {
 
   @GetMapping
   @Operation(summary="Tenant list")
-  public ResponseEntity<List<TenantDto.TenantInfo>> retrieveTenants() {
-    var tenantInfos = tenantFacade.retrieveTenants();
+  public ResponseEntity<List<TenantDto.TenantInfo>> retrieveTenants(TenantDto.TenantSearchCondition condition) {
+    var tenantInfos = tenantFacade.retrieveTenants(condition);
     var response = tenantDtoMapper.of(tenantInfos);
     return ResponseEntity.ok(response);
   }
