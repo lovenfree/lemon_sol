@@ -37,7 +37,10 @@ public class SchemaAttribute extends BaseEntity {
   @AllArgsConstructor
   public enum MimeType {
     TEXT_PLAIN("text/plain", "text/plain"),
-    IMAGE_PNG("image/png","image/png");
+    IMAGE_PNG("image/png","image/png"),
+    IMAGE_GIF("image/gif","image/gif"),
+    IMAGE_JPEG("image/jpeg","image/jpeg");
+
     private final String description;
     private final String standardCode;
 

@@ -85,7 +85,8 @@ public class Credential extends BaseEntity {
     this.credentialId = tenant.getTenantDID()+":TR:"+ TokenGenerator.randomCharacter(6);
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
-    this.trustCredentialYN = trustCredentialYN;
+    //기본값 으로 true
+    this.trustCredentialYN = true;
     this.credentialType = credentialType;
     this.description = description;
     this.serviceExtensionInfo = serviceExtensionInfo;

@@ -1,16 +1,18 @@
 package did.lemonaid.solution.infrastructure.tenant;
 
-import com.querydsl.core.types.Predicate;
+
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.interfaces.tenant.TenantDto;
 
+import static org.springframework.util.StringUtils.hasLength;
+import static org.springframework.util.StringUtils.isEmpty;
 import javax.persistence.EntityManager;
 import java.util.List;
 
 import static did.lemonaid.solution.domain.tenant.QTenant.tenant;
-import static org.mapstruct.ap.internal.util.Strings.isEmpty;
+
 
 
 public class TenantRepositoryImpl implements TenantRepositoryCustom{
@@ -42,10 +44,10 @@ public class TenantRepositoryImpl implements TenantRepositoryCustom{
   }
 
   private BooleanExpression tenantDIDContains(String tenantDID) {
-    return isEmpty(tenantDID) ? null : tenant.tenantDID.contains(tenantDID);
+    return !hasLength(tenantDID) ? null : tenant.tenantDID.contains(tenantDID);
   }
 
   private BooleanExpression tenantNameContains(String tenantName) {
-    return isEmpty(tenantName) ? null : tenant.tenantName.contains(tenantName);
+    return !hasLength(tenantName) ? null : tenant.tenantName.contains(tenantName);
   }
 }
