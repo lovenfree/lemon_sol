@@ -26,6 +26,6 @@ public class TenantReaderImpl implements TenantReader {
 
   @Override
   public List<Tenant> retrieveTenants(TenantDto.TenantSearchCondition condition) {
-    return tenantRepository.findAll();
+    return tenantRepository.retrieveTenants(condition);
   }
 }

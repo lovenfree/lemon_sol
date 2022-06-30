@@ -1,13 +1,18 @@
 package did.lemonaid.solution.domain.tenant;
 
+import did.lemonaid.solution.common.exception.ErrorCode;
+import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.Credential;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 
 import javax.persistence.*;
 import java.util.List;
+
+import static did.lemonaid.solution.common.exception.ErrorCode.INVALID_ACTIVE_TENANT_PARAM_EXCEPTION;
 
 @Entity
 @Getter
@@ -91,9 +96,14 @@ public class Tenant extends BaseEntity {
   }
 
   public void activateTenant(TenantCommand.ActivateTenant command){
+    if (StringUtils.isBlank(command.getTenantDID())) throw new InvalidValueException("TenantID ",INVALID_ACTIVE_TENANT_PARAM_EXCEPTION);
+    if (StringUtils.isBlank(command.getTenantWalletId())) throw new InvalidValueException("Wallet ID",INVALID_ACTIVE_TENANT_PARAM_EXCEPTION);
+    if (StringUtils.isBlank(command.getTenantInvitationUrl())) throw new InvalidValueException("InvitationURL", INVALID_ACTIVE_TENANT_PARAM_EXCEPTION);
+
     this.tenantDID = command.getTenantDID();
     this.tenantWalletId = command.getTenantWalletId();
     this.tenantInvitationUrl = command.getTenantInvitationUrl();
+
     changeTenantStatus(TenantStatus.ACTIVATE);
     changeTrustTenant();
   }
@@ -114,10 +124,15 @@ public class Tenant extends BaseEntity {
 
 
   public void changeTenantStatus(TenantStatus status){
+    if (status == this.tenantStatus) throw new InvalidValueException("Tenant Status: "+status.getDescription(), ErrorCode.INVALID_STATUS_PARAM_EXCEPTION);
     this.tenantStatus = status;
   }
 
   public void changeTrustTenant(){
+    if (StringUtils.isBlank(this.tenantDID)) throw new InvalidValueException("TenantDID ",ErrorCode.INVALID_TRUST_TENANT_PARAM_EXCEPTION);
+    if (StringUtils.isBlank(this.tenantWalletId)) throw new InvalidValueException("Wallet ID",ErrorCode.INVALID_TRUST_TENANT_PARAM_EXCEPTION);
+    if (StringUtils.isBlank(this.tenantInvitationUrl)) throw new InvalidValueException("InvitationURL", ErrorCode.INVALID_TRUST_TENANT_PARAM_EXCEPTION);
+
     this.trustTenant = true;
   }
 
