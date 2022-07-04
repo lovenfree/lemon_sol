@@ -19,8 +19,8 @@ import javax.validation.Valid;
 @RequestMapping("/v1/credentials")
 public class CredentialController {
   private final CredentialFacade credentialFacade;
-//
-//  private final CredentialDtoMapper credentialDtoMapper;
+
+  private final CredentialDtoMapper credentialDtoMapper;
 //
 //  //인증서 목록
 //  @Operation(summary = "credential List")
