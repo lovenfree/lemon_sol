@@ -33,8 +33,10 @@ ext {
 	set('snippetsDir', file("build/generated-snippets"))
 	set('springBootVersion', '2.6.8')
 	set('springCloudVersion', '2021.0.3')
-	set('dockerRegistry', '34.64.88.46')
 	set('queryDslVersion', '5.0.0')
+}
+if (!ext.has('jibToImage')) {
+	ext.set('jibToImage', "34.64.88.46/did-solution-backend:latest")
 }
 
 sourceSets {
@@ -165,41 +167,30 @@ bootJar {
 	mainClass = 'did.Application'
 }
 
-// jib {
-// 	allowInsecureRegistries = true
-// 	from {
-// 		image = "openjdk:17-jdk-slim-buster"
-// 	}
-// 	to {
-// 		image = "${dockerRegistry}/did-solution-backend:latest"
-// 		auth {
-// 			username = "admin"
-// 			password = "mulgX59q1WhT9tvxP5BJwKKSFUeeQ7"
-// 		}
-// 	}
-// }
-
 jib {
-
-	from.image="openjdk:17-jdk-slim-buster"
-// 	  container{
-//     creationTime = 'USE_CURRENT_TIMESTAMP'
-//     jvmFlags = [
-//             '-XX:+UseG1GC',
-//             '-XX:MaxGCPauseMillis=50',
-//             '-XX:MetaspaceSize=96m',
-//             '-XX:G1HeapRegionSize=16M',
-//             '-Xlog:gc',
-//             '-Xlog:gc:file=/var/log/gc.log:time',
-//             '-XX:+PrintFlagsFinal',
-//             '-Xmx2g',
-//             '-Xms1g',
-//             '-javaagent:/tuna/tuna.agent.jar',
-//             '-Dscouter.config=/tuna/tuna.conf'
-//     ]
-//   }
-
-
+	allowInsecureRegistries = true
+	container {
+		creationTime = 'USE_CURRENT_TIMESTAMP'
+		jvmFlags = [
+				'-XX:+UseG1GC',
+				'-XX:MaxGCPauseMillis=50',
+				'-XX:MetaspaceSize=96m',
+				'-XX:G1HeapRegionSize=16M',
+				'-Xlog:gc',
+				'-Xlog:gc:file=/var/log/gc.log:time',
+				'-XX:+PrintFlagsFinal',
+				'-Xmx2g',
+				'-Xms1g',
+				'-javaagent:/tuna/tuna.agent.jar',
+				'-Dscouter.config=/tuna/tuna.conf'
+		]
+	}
+	from {
+		image = "openjdk:17-jdk-slim-buster"
+	}
+	to {
+		image = "${project.jibToImage}"
+	}
 }
 
 
