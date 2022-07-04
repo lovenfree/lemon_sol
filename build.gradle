@@ -180,9 +180,9 @@ jib {
 				'-Xlog:gc:file=/var/log/gc.log:time',
 				'-XX:+PrintFlagsFinal',
 				'-Xmx2g',
-				'-Xms1g',
-				'-javaagent:/tuna/tuna.agent.jar',
-				'-Dscouter.config=/tuna/tuna.conf'
+				'-Xms1g'//,
+				// '-javaagent:/tuna/tuna.agent.jar',
+				// '-Dscouter.config=/tuna/tuna.conf'
 		]
 	}
 	from {
