@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -22,13 +23,13 @@ public class CredentialController {
   private final CredentialDtoMapper credentialDtoMapper;
 
   //인증서 목록
-//  @Operation(summary = "credential List")
-//  @GetMapping("/tenants/{tenant-id}/credentials")
-//  public ResponseEntity<CredentialDto.Credentials> retrieveCredentials(Operation<CredentialSearchCondition> condition) {
-//    var credentials = credentialFacade.retrieveCredentials(condition);
-//    var response = TRCredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.credentialOf(credentials)).build();
-//    return ResponseEntity.ok(response);
-//  }
+  @Operation(summary = "credential List")
+  @GetMapping("/tenants/{tenant-id}/credentials")
+  public ResponseEntity<CredentialDto.Credentials> retrieveCredentials(Optional<CredentialDto.CredentialSearchCondition> condition) {
+    var credentials = credentialFacade.retrieveCredentials(condition);
+    var response = TRCredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.credentialOf(credentials)).build();
+    return ResponseEntity.ok(response);
+  }
 
 //
 //  //인증서 상태 수정 -> 신뢰 인증서 상태 변경\

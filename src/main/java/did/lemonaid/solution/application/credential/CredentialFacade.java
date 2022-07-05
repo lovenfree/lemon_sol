@@ -3,10 +3,13 @@ package did.lemonaid.solution.application.credential;
 import did.lemonaid.solution.domain.credential.CredentialCommand;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.CredentialService;
+import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -30,7 +33,7 @@ public class CredentialFacade {
     return credentialService.retrieveCredential(credentialDefinitionId);
   }
 
-//    public void retrieveCredentials() {
-//      return credentialService.retrieveCredentials(credentialDefinitionId);
-//    }
+  public List<CredentialInfo.CredentialInfo> retrieveCredentials(Optional<CredentialDto.CredentialSearchCondition> condition) {
+  }
+
 }
