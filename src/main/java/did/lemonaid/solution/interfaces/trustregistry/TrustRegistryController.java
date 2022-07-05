@@ -67,10 +67,10 @@ public class TrustRegistryController {
 
     //인증서 수정
     @Operation(summary = "update credential")
-    @PatchMapping("/credentials/{credential-id}")
-    public ResponseEntity<TRCredentialDto.CredentialResponse> updateCredential (@PathVariable("credential-id") String credentialId, @RequestBody @Valid TRCredentialDto.UpdateCredentialRequest request) {
+    @PatchMapping("/credentials/{credential-definition-id}")
+    public ResponseEntity<TRCredentialDto.CredentialResponse> updateCredential (@PathVariable("credential-definition-id") String credentialDefinitionId, @RequestBody @Valid TRCredentialDto.UpdateCredentialRequest request) {
       var updateCredential = credentialDtoMapper.of(request);
-      var response = credentialFacade.updateCredential(credentialId,updateCredential);
+      var response = credentialFacade.updateCredential(credentialDefinitionId,updateCredential);
       return ResponseEntity.ok(TRCredentialDto.CredentialResponse.builder().credentialId(response).build());
     }
 

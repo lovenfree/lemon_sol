@@ -21,8 +21,8 @@ public class CredentialFacade {
     return credentialService.registerCredential(command, tenantID);
   }
 
-  public String updateCredential(String credentialId, CredentialCommand.UpdateCredential registerCredential){
-    return credentialService.updateCredential(registerCredential, credentialId);
+  public String updateCredential(String credentialDefinitionId, CredentialCommand.UpdateCredential registerCredential){
+    return credentialService.updateCredential(registerCredential, credentialDefinitionId);
   }
 
 
@@ -30,4 +30,7 @@ public class CredentialFacade {
     return credentialService.retrieveCredential(credentialDefinitionId);
   }
 
+//    public void retrieveCredentials() {
+//      return credentialService.retrieveCredentials(credentialDefinitionId);
+//    }
 }

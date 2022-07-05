@@ -50,8 +50,8 @@ public class CredentialServiceImpl implements CredentialService{
 
   @Override
   @Transactional
-  public String updateCredential(CredentialCommand.UpdateCredential updateCredential, String credentialId) {
-    var credential = credentialReader.getCredential(credentialId);
+  public String updateCredential(CredentialCommand.UpdateCredential updateCredential, String credentialDefinitionId) {
+    var credential = credentialReader.getCredentialBy(credentialDefinitionId);
     credential.updateCredential(updateCredential);
     credentialStore.store(credential);
     return credential.getCredentialId();

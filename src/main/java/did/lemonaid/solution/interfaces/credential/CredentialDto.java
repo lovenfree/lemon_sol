@@ -15,6 +15,12 @@ public class CredentialDto {
   @Getter
   @Builder
   @ToString
+  public static class CredentialSearchCondition{
+
+  }
+  @Getter
+  @Builder
+  @ToString
   public static class Credentials {
     @JsonProperty("credentials")
     private final List<CredentialInfo> credentialInfos;

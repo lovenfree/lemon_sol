@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -52,8 +53,8 @@ public class TenantController {
 
   @GetMapping
   @Operation(summary="Tenant list")
-  public ResponseEntity<List<TenantDto.TenantInfo>> retrieveTenants(TenantDto.TenantSearchCondition condition) {
-    var tenantInfos = tenantFacade.retrieveTenants(condition);
+  public ResponseEntity<List<TenantDto.TenantInfo>> retrieveTenants(Optional<TenantDto.TenantSearchCondition> condition) {
+    var tenantInfos = tenantFacade.retrieveTenants(condition.orElse(null));
     var response = tenantDtoMapper.of(tenantInfos);
     return ResponseEntity.ok(response);
   }
