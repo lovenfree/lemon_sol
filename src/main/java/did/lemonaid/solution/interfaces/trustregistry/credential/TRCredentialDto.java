@@ -141,7 +141,7 @@ public class TRCredentialDto {
     @NotBlank(message = "필수 파라미터 누락")
     private String authLinkUrl;
     @Schema(description = "expiry Date YN", example = "true", required = true)
-    @NotBlank(message = "필수 파라미터 누락")
+    @NotNull(message = "필수 파라미터 누락")
     private boolean expiryDateYN;
     @Schema(description = "validity Days", example = "360")
     private int validityDays;
