@@ -1,8 +1,9 @@
 package did.lemonaid.solution.interfaces.credential;
 
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import did.lemonaid.solution.domain.credential.CredentialInfo;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(
   componentModel = "spring",
@@ -10,4 +11,11 @@ import org.mapstruct.ReportingPolicy;
   unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface CredentialDtoMapper {
+//  @Mappings({
+//    @Mapping(source = "TenantInfo", target = "TenantDto.TenantInfo")
+//    @Mapping(source = "TenantInfo", target = "TenantDto.TenantInfo")
+//  })
+  List<CredentialDto.CredentialInfo> of(List<CredentialInfo.CredentialListInfo> credentials);
+
+  CredentialDto.CredentialAdminDetail credentialOf(CredentialInfo.CredentialAdminDetail credential);
 }

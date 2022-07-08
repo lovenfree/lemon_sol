@@ -9,6 +9,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -33,7 +34,11 @@ public class CredentialFacade {
     return credentialService.retrieveCredential(credentialDefinitionId);
   }
 
-  public List<CredentialInfo.CredentialInfo> retrieveCredentials(Optional<CredentialDto.CredentialSearchCondition> condition) {
+  public CredentialInfo.CredentialAdminDetail retrieveAdminCredential(String credentialId){
+    return credentialService.retrieveAdminCredential(credentialId);
+  }
+  public List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition) {
+    return credentialService.retrieveCredentials(condition);
   }
 
 }

@@ -4,6 +4,7 @@ import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.credential.schema.SchemaReader;
 import did.lemonaid.solution.domain.tenant.TenantReader;
+import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class CredentialServiceImpl implements CredentialService{
   }
 
   @Override
-  public List<CredentialInfo> retrieveCredentials() {
+  public List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition) {
     return null;
   }
 
@@ -55,5 +56,10 @@ public class CredentialServiceImpl implements CredentialService{
     credential.updateCredential(updateCredential);
     credentialStore.store(credential);
     return credential.getCredentialId();
+  }
+
+  @Override
+  public CredentialInfo.CredentialAdminDetail retrieveAdminCredential(String credentialId) {
+    return null;
   }
 }

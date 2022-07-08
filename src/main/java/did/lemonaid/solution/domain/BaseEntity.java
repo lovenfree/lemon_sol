@@ -22,38 +22,38 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
     @CreatedBy
     @Column(name = "FRST_RGSR_ID", nullable = false, updatable = false)
-    private String firstRegistorId="test";
+    private String registrationId="test";
 
     @Column(name = "FRST_REG_PROG_ID", nullable = false, updatable = false)
-    private String firstRegisterProgramId = Util.getMethodName();
+    private String registrationProgramId = Util.getMethodName();
 
     @Column(name = "FRST_REG_DTTM", nullable = false, updatable = false)
     @CreationTimestamp
-    private LocalDateTime frstRegDttm;
+    private LocalDateTime registrationDate;
 
 
     @LastModifiedBy
     @Column(name = "LAST_EDTR_ID", nullable = false)
-    private String lastEditorId ="test";
+    private String revisedId ="test";
 
     @Column(name = "LAST_CHNG_PROG_ID", nullable = false)
-    private String lastChangeProgramId = Util.getMethodName();
+    private String revisedProgramId = Util.getMethodName();
 
     @Column(name = "LAST_CHNG_DTTM")
     @UpdateTimestamp
-    private LocalDateTime lastChngDttm;
+    private LocalDateTime revisedDate;
 
     protected void setProgramIdInfo(String programId){
         String name = new Object() {}.getClass().getEnclosingMethod().getName();
         System.out.println("##########1"+ name);
-        this.firstRegisterProgramId = programId;
-        this.lastChangeProgramId = programId;
+        this.registrationProgramId = programId;
+        this.revisedProgramId = programId;
     }
 
     protected void updateProgramIdInfo(String programId){
         String name = new Object() {}.getClass().getEnclosingMethod().getName();
         System.out.println("##########2"+ name);
-        this.lastChangeProgramId = programId;
+        this.revisedProgramId = programId;
     }
 
     private String getMethodId() {
