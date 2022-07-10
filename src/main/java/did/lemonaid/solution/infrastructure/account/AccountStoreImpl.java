@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 public class AccountStoreImpl implements AccountStore {
     private final AccountRepository accountRepository;
 
-    @Override
-    public Account store(Account initAccount) {
+  @Override
+  public Account store(Account account) {
+    return accountRepository.save(account);
+  }
 
-        return null;
-    }
 }

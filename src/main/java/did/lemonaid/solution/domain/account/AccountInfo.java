@@ -1,25 +1,41 @@
 package did.lemonaid.solution.domain.account;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
-@Getter
+import java.time.LocalDateTime;
+
+
 public class AccountInfo {
-    private final Long id;
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class AccountListInfo {
     private final String accountId;
     private final String accountName;
+    private final Account.AccountType accountType;
     private final String mobileNumber;
     private final String email;
     private final Account.AccountStatus accountStatus;
-    private final String authIp;
+    private final LocalDateTime lastLoginDateTime;
+    private final LocalDateTime revisedDate;
+    }
 
 
-    public AccountInfo(Account account) {
-        this.id = account.getId();
-        this.accountId = account.getAccountId();
-        this.accountName = account.getAccountName();
-        this.mobileNumber = account.getMobileNumber();
-        this.email = account.getEmail();
-        this.accountStatus = account.getAccountStatus();
-        this.authIp = account.getAuthIp();
+    @Getter
+    @AllArgsConstructor
+    @ToString
+    public static class AccountDetail {
+      private final String accountId;
+      private final String accountName;
+      private final Account.AccountType accountType;
+      private final String email;
+      private final String mobileNumber;
+      private final String phoneNumber;
+      private final Account.AccountStatus accountStatus;
+      private final String authIp;
+      private final LocalDateTime lastLoginDateTime;
+      private final LocalDateTime revisedDate;
     }
 }

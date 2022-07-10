@@ -1,6 +1,7 @@
 package did.lemonaid.solution.domain.account;
 
 
+import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.common.util.Util;
 import did.lemonaid.solution.domain.BaseEntity;
 import lombok.*;
@@ -33,6 +34,9 @@ public class Account extends BaseEntity {
     @Column(name="CPNO")
     private String mobileNumber;
 
+    @Column(name="TELNO")
+    private String phoneNumber;
+
     @Column(name="EMAIL")
     private String email;
 
@@ -40,10 +44,10 @@ public class Account extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private AccountStatus accountStatus;
 
-  @Column(name="ACCOUNT_TYPE", nullable = false)
-  @Enumerated(EnumType.STRING)
-  private AccountType accountType;
-  @Column(name="AUTH_IP")
+    @Column(name="ACCOUNT_TYPE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
+    @Column(name="AUTH_IP")
     private String authIp;
 
     @Column(name="LAST_LOGIN_DTTM")
@@ -55,30 +59,38 @@ public class Account extends BaseEntity {
     @Column(name="LOGIN_SESN_ID")
     private String loginSessionId;
 
-    @Getter
+  public void deleteAccount() {
+    this.accountStatus = AccountStatus.WITHDRAW;
+
+  }
+
+  @Getter
     @AllArgsConstructor
     public enum AccountStatus{
-        ACTIVATE("활성화"), DEACTIVATE("비활성화");
+        ACTIVATE("활성화"), DEACTIVATE("비활성화"), WITHDRAW("탈퇴");
         private final String description;
     }
 
   @Getter
   @AllArgsConstructor
   public enum AccountType{
-    ADMIN("주관리자"), GENERAL("부관리자");
+    ROLE_ADMIN("주관리자"),
+    ROLE_ASSISTANT("부관리자"),
+    ROLE_GENERAL("일반관리자");
     private final String description;
   }
 
 
     @Builder
-    public Account(String accountId, String accountPw, String accountName, String mobileNumber,
-                   String email, AccountStatus accountStatus, AccountType accountType, String authIp) {
+    public Account(String accountId, String accountPw, String accountName, String mobileNumber, String phoneNumber,
+                   String email,  AccountType accountType, String authIp) {
         this.accountId = accountId;
         this.accountPwHash = accountPw;
         this.accountName = accountName;
         this.mobileNumber = mobileNumber;
+        this.phoneNumber = phoneNumber;
         this.email = email;
-        this.accountStatus = accountStatus;
+        this.accountStatus = AccountStatus.ACTIVATE;
         this.accountType = accountType;
         this.authIp = authIp;
 
@@ -89,19 +101,20 @@ public class Account extends BaseEntity {
 
     }
 
+    public void updateAccountInfo(AccountCommand.UpdateAccount command) {
 
-    public void updateAccountInfo(Account account) {
-
-        this.accountName = account.getAccountName();
-        this.mobileNumber = account.getMobileNumber();
-        this.email = account.getEmail();
-        this.accountStatus = account.getAccountStatus();
-        this.authIp = account.getAuthIp();
-        updateProgramIdInfo(Util.getMethodName());
+      this.accountName = command.getAccountName();
+      this.mobileNumber = command.getMobileNumber();
+      this.phoneNumber = command.getPhoneNumber();
+      this.email = command.getEmail();
+      this.accountType = command.getAccountType();
+      this.accountStatus = command.getAccountStatus();
+      this.authIp = command.getAuthIp();
+      updateProgramIdInfo(Util.getMethodName());
     }
 
-    public void updatePwInfo(String pwHash) {
-        this.accountPwHash = pwHash;
+    public void updatePwInfo(AccountCommand.UpdateAccountPW command) {
+        this.accountPwHash = command.getAccountPw();
         this.lastPwChangeDateTime = LocalDateTime.now();
         updateProgramIdInfo(Util.getMethodName());
     }
