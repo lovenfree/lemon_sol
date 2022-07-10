@@ -41,4 +41,7 @@ public class CredentialFacade {
     return credentialService.retrieveCredentials(condition);
   }
 
+  public String changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus) {
+    return credentialService.changeCredentialStatus(credentialStatus);
+  }
 }

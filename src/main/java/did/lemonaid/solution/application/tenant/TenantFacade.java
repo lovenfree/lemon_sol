@@ -23,6 +23,18 @@ public class TenantFacade {
     return tenantService.retrieveTenants(condition);
   }
 
+  public List<TenantInfo.TenantDetail> retrieveActiveTenants(){
+    return tenantService.retrieveActiveTenants();
+  }
+
+  public List<TenantInfo.TenantDetail> retrieveActiveIssuers(){
+    return tenantService.retrieveActiveIssuers();
+  }
+
+  public List<TenantInfo.TenantDetail> retrieveActiveVerifiers(){
+    return tenantService.retrieveActiveVerifiers();
+  }
+
   public TenantInfo.TenantDetail retrieveTenant(String tenantId){
     return tenantService.retrieveTenant(tenantId);
   }
@@ -50,7 +62,4 @@ public class TenantFacade {
     return result;
   }
 
-  public  List<TenantInfo.TenantDetail> retrieveActiveTenants() {
-    return tenantService.retrieveTenants(TenantDto.TenantSearchCondition.builder().tenantStatus(Tenant.TenantStatus.ACTIVATE).build());
-  }
 }

@@ -1,5 +1,6 @@
 package did.lemonaid.solution.interfaces.credential;
 
+import did.lemonaid.solution.domain.credential.CredentialCommand;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import org.mapstruct.*;
 
@@ -16,6 +17,7 @@ public interface CredentialDtoMapper {
 //    @Mapping(source = "TenantInfo", target = "TenantDto.TenantInfo")
 //  })
   List<CredentialDto.CredentialInfo> of(List<CredentialInfo.CredentialListInfo> credentials);
+  CredentialCommand.UpdateCredentialStatus of(CredentialDto.UpdateCredentialStatus  update);
 
   CredentialDto.CredentialAdminDetail credentialOf(CredentialInfo.CredentialAdminDetail credential);
 }

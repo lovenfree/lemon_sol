@@ -32,6 +32,36 @@ public class TenantRepositoryImpl {
       .fetch();
   }
 
+  public List<Tenant> retrieveActiveTenants() {
+    return queryFactory.select(tenant)
+      .from(tenant)
+      .where(
+        tenantStatusEq(Tenant.TenantStatus.ACTIVATE))
+      .orderBy(tenant.registrationDate.desc())
+      .fetch();
+  }
+
+  public List<Tenant> retrieveActiveIssuers() {
+    return queryFactory.select(tenant)
+      .from(tenant)
+      .where(
+        tenantTypeEq(Tenant.TenantType.ISSUER).or(tenantTypeEq(Tenant.TenantType.BOTH)),
+        tenantStatusEq(Tenant.TenantStatus.ACTIVATE))
+      .orderBy(tenant.registrationDate.desc())
+      .fetch();
+  }
+
+  public List<Tenant> retrieveActiveVerifiers() {
+    return queryFactory.select(tenant)
+      .from(tenant)
+      .where(
+        tenantTypeEq(Tenant.TenantType.VERIFIER).or(tenantTypeEq(Tenant.TenantType.BOTH)),
+        tenantStatusEq(Tenant.TenantStatus.ACTIVATE))
+      .orderBy(tenant.registrationDate.desc())
+      .fetch();
+  }
+
+
   private BooleanExpression tenantTypeEq(Tenant.TenantType tenantType) {
     return tenantType ==null ? null : tenant.tenantType.eq(tenantType);
   }
@@ -47,4 +77,6 @@ public class TenantRepositoryImpl {
   private BooleanExpression tenantNameContains(String tenantName) {
     return !hasLength(tenantName) ? null : tenant.tenantName.contains(tenantName);
   }
+
+
 }

@@ -1,5 +1,6 @@
 package did.lemonaid.solution.interfaces.tenant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -9,9 +10,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TenantDto {
@@ -36,6 +39,7 @@ public class TenantDto {
     private String tenantLogoFilename;
   }
 
+
   @Getter
   @Setter
   @ToString
@@ -46,12 +50,12 @@ public class TenantDto {
     @NotBlank(message = "필수 파라미터 누락")
     @Schema(description = "Tenant Name", example = "LGCNS ISSUER", required = true)
     private String tenantName;
-    @Schema(description = "Tenant DID", example = "RTHAnR3aKM5iSNmHnr4am4")
-    private String tenantDID;
-    @Schema(description = "Tenant Wallet ID", example = "ID")
-    private String tenantWalletId;
-    @Schema(description = "Tenant Invitation Url", example = "https://devacapyinbound.duckdns.org? ...")
-    private String tenantInvitationUrl;
+//    @Schema(description = "Tenant DID", example = "RTHAnR3aKM5iSNmHnr4am4")
+//    private String tenantDID;
+//    @Schema(description = "Tenant Wallet ID", example = "ID")
+//    private String tenantWalletId;
+//    @Schema(description = "Tenant Invitation Url", example = "https://devacapyinbound.duckdns.org? ...")
+//    private String tenantInvitationUrl;
     @NotNull(message = "필수 파라미터 누락")
     @Schema(description = "Tenant Status", example = "ACTIVATE", required = true)
     private Tenant.TenantStatus tenantStatus;
@@ -65,8 +69,10 @@ public class TenantDto {
     private String tenantLogoFilename;
   }
 
-
-
+  public static class changeTenantTrustStatus{
+    @Schema(description = "Trust Tenant Y/N", example = "true", required = true)
+    private Boolean trustTenant;
+  }
 
   @Getter
   @Builder
@@ -110,7 +116,10 @@ public class TenantDto {
     private final String tenantLogo;
 
     @Schema(description = "Tenant logo filename", example = "lgcnsLogo.png")
-    private String tenantLogoFilename;
+    private final String tenantLogoFilename;
+
+    @Schema(description = "Revised Date", example="2021-01-01 00:00:00")
+    private final LocalDateTime revisedDate;
 
   }
 
@@ -118,21 +127,30 @@ public class TenantDto {
   @Builder
   @ToString
   public static class TenantResponse {
+    @Schema(description = "Tenant Id", example = "ISSaskdjnek")
     private final String tenantId;
   }
 
   @Getter
-  @Builder
+  @Setter
   @ToString
   public static class TenantSearchCondition{
     @Parameter(description = "Tenant Type",  example = "ISSUER")
-    private final Tenant.TenantType tenantType;
+    private Tenant.TenantType tenantType;
     @Parameter(description = "Tenant Name", example = "ISSUER")
-    private final String tenantName;
+    private String tenantName;
     @Parameter(description = "Tenant Status", example = "ACTIVATE")
-    private final Tenant.TenantStatus tenantStatus;
+    private Tenant.TenantStatus tenantStatus;
     @Parameter(description = "Tenant DID", example = "did:lem:038dhskjesldkfah")
-    private final String tenantDID;
+    private String tenantDID;
+    @Schema(description="search start date", example="2021-01-01 00:00:00")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    LocalDateTime searchStartDate;
+    @Schema(description="search end date", example="2022-12-31 23:59:59")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    LocalDateTime searchEndDate;
   }
 
 

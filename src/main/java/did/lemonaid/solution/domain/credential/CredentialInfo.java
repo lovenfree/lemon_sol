@@ -3,6 +3,7 @@ package did.lemonaid.solution.domain.credential;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,22 +14,23 @@ import java.util.List;
 
 public class CredentialInfo {
   @Getter
-  @Builder
+  @AllArgsConstructor
   @ToString
   public static class CredentialListInfo{
-    private final String tenantId;
-    private final String tenantDID;
-    private final String tenantName;
-    private final String credentialId;
-    public final String credentialDefinitionId;
-    private final String credentialName;
-    private final Credential.CredentialType credentialType;
-    private boolean trustCredentialYN;
-    public final String schemaId;
-    private final boolean expiryDateYN;
-    private final int validityDays;
-    private final LocalDateTime registrationDate;
-    private final LocalDateTime revisedDate;
+    private  final String tenantId;
+    private  final String tenantDID;
+    private  final String tenantName;
+    private  final String credentialId;
+    private  final String credentialDefinitionId;
+    private final  String credentialName;
+    private final  Credential.CredentialType credentialType;
+    private final  Boolean expiryDateYN;
+    private final Boolean trustCredentialYN;
+    private final  String schemaId;
+    private final  int validityDays;
+    private final  LocalDateTime revisedDate;
+
+
 
   }
 
@@ -44,6 +46,7 @@ public class CredentialInfo {
     public final String credentialDefinitionId;
     private final String description;
     private final String authLinkUrl;
+    private final boolean trustCredentialYN;
     private final boolean expiryDateYN;
     private final int validityDays;
     private final String backgroundImg;
@@ -64,7 +67,8 @@ public class CredentialInfo {
       this.credentialType = credential.getCredentialType();
       this.description = credential.getDescription();
       this.authLinkUrl = credential.getAuthLinkUrl();
-      this.expiryDateYN = credential.isExpiryDateYN();
+      this.trustCredentialYN = credential.getTrustCredentialYN();
+      this.expiryDateYN = credential.getExpiryDateYN();
       this.validityDays = credential.getValidityDays();
       this.backgroundImg = credential.getBackgroundImg();
       this.backgroundImgFilename = credential.getBackgroundImgFilename();
@@ -104,7 +108,7 @@ public class CredentialInfo {
       this.credentialType = credential.getCredentialType();
       this.description = credential.getDescription();
       this.authLinkUrl = credential.getAuthLinkUrl();
-      this.expiryDateYN = credential.isExpiryDateYN();
+      this.expiryDateYN = credential.getExpiryDateYN();
       this.validityDays = credential.getValidityDays();
       this.backgroundImg = credential.getBackgroundImg();
       this.backgroundImgFilename = credential.getBackgroundImgFilename();

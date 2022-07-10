@@ -59,12 +59,6 @@ public class TenantController {
     return ResponseEntity.ok(response);
   }
 
-  @GetMapping("/test")
-  @ResponseBody
-  public String index(HttpSession session) {
-    session.setAttribute("name", "sup2is");
-    return session.getId() + "\nHello " + session.getAttribute("name");
-  }
 
 
 

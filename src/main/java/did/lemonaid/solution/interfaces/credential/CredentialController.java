@@ -28,7 +28,7 @@ public class CredentialController {
   public ResponseEntity<CredentialDto.Credentials> retrieveCredentials(Optional<CredentialDto.CredentialSearchCondition> condition) {
     var credentials = credentialFacade.retrieveCredentials(condition.orElse(null));
     var response = CredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.of(credentials)).build();
-    return ResponseEntity.ok(null);
+    return ResponseEntity.ok(response);
   }
 
   //인증서 상세정보
@@ -40,14 +40,14 @@ public class CredentialController {
     return ResponseEntity.ok(response);
   }
 
-//  //인증서 상태 수정 -> 신뢰 인증서 상태 변경\
-//  @Operation(summary = "update trust credential Status")
-//  @PatchMapping("/{credential-id}")
-//  public ResponseEntity<CredentialDto.CredentialResponse> updateCredential (@PathVariable("credential-id") String credentialId, @RequestBody @Valid CredentialDto.UpdateCredentialStatus request) {
-//    var updateCredential = credentialDtoMapper.of(request);
-//    var response = credentialFacade.updateCredential(credentialId,updateCredential);
-//    return ResponseEntity.ok(CredentialDto.CredentialResponse.builder().credentialId(response).build());
-//  }
+  //인증서 상태 수정 -> 신뢰 인증서 상태 변경\
+  @Operation(summary = "update trust credential Status")
+  @PatchMapping("/credentialStatus")
+  public ResponseEntity<CredentialDto.CredentialResponse> updateCredentialStatus (@RequestBody @Valid CredentialDto.UpdateCredentialStatus request) {
+    var credentialStatus = credentialDtoMapper.of(request);
+    var response = credentialFacade.changeCredentialStatus(credentialStatus);
+    return ResponseEntity.ok(CredentialDto.CredentialResponse.builder().credentialId(response).build());
+  }
 
 
 

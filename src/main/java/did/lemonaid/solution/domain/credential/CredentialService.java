@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface CredentialService {
   String registerCredential(CredentialCommand.RegisterCredential command, String tenantID);
-//  String updateCredentialInfo(String tenantId, CredentialCommand.UpdateCredential command);
 //  String activateCredential(String tenantId, CredentialCommand.ActivateCredential command);
-//  //  String deleteCredential(String tenantId);
 
 
   List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition);
@@ -19,4 +17,6 @@ public interface CredentialService {
   String updateCredential(CredentialCommand.UpdateCredential registerCredential, String credentialId);
 
   CredentialInfo.CredentialAdminDetail retrieveAdminCredential(String credentialId);
+
+  String changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus);
 }

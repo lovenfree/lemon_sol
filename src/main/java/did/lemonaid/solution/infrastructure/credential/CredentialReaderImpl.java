@@ -6,11 +6,13 @@ import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.CredentialReader;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
+import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -26,7 +28,7 @@ public class CredentialReaderImpl implements CredentialReader {
   }
 
   @Override
-  public Credential getCredential(String credentialId) {
+  public Credential retrieveCredential(String credentialId) {
     return credentialRepository.findByCredentialId(credentialId)
       .orElseThrow(() -> new EntityNotFoundException(ErrorCode.CREDENTIAL_NOT_FOUND_EXCEPTION));
   }
@@ -37,7 +39,12 @@ public class CredentialReaderImpl implements CredentialReader {
   }
 
   @Override
-  public CredentialInfo.SchemaInfo getSchema(Credential credential) {
+  public List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition) {
+    return credentialRepository.retrieveCredentials(condition);
+  }
+
+  @Override
+  public CredentialInfo.SchemaInfo retrieveSchema(Credential credential) {
     var schemaDomain = credential.getSchema();
     var schemaAttrs = schemaDomain.getSchemaAttributeList();
 

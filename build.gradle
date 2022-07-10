@@ -205,7 +205,7 @@ jacoco {
 jacocoTestReport {
 	reports {
 		html.enabled true // html 설정
-		csv.enabled true // csv 설정
+		csv.enabled false // csv 설정
 		xml.enabled false // xml 미설정
 	}
 	finalizedBy 'jacocoTestCoverageVerification' // 추가

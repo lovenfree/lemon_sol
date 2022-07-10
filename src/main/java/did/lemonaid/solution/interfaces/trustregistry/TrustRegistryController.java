@@ -30,11 +30,27 @@ public class TrustRegistryController {
 
     @Operation(summary = "Tenant List")
     @GetMapping("/tenants")
-    public ResponseEntity<TRTenantDto.Tenants> retrieveTenants() {
+    public ResponseEntity<TRTenantDto.Tenants> retrieveActiveTenants() {
         var tenants = tenantFacade.retrieveActiveTenants();
         var response = TRTenantDto.Tenants.builder().tenants(tenantDtoMapper.of(tenants)).build();
         return ResponseEntity.ok(response);
     }
+
+  @Operation(summary = "Issuer List")
+  @GetMapping("/issuers")
+  public ResponseEntity<TRTenantDto.Tenants> retrieveActiveIssuers() {
+    var tenants = tenantFacade.retrieveActiveIssuers();
+    var response = TRTenantDto.Tenants.builder().tenants(tenantDtoMapper.of(tenants)).build();
+    return ResponseEntity.ok(response);
+  }
+
+  @Operation(summary = "Verifier List")
+  @GetMapping("/verifiers")
+  public ResponseEntity<TRTenantDto.Tenants> retrieveActiveVerifiers() {
+    var tenants = tenantFacade.retrieveActiveVerifiers();
+    var response = TRTenantDto.Tenants.builder().tenants(tenantDtoMapper.of(tenants)).build();
+    return ResponseEntity.ok(response);
+  }
 
   @PostMapping("/tenants/{tenant-id}/activate")
   @Operation(summary="Activate Tenant")

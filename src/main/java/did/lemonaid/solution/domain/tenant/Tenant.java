@@ -111,9 +111,9 @@ public class Tenant extends BaseEntity {
   public void updateTenantInfo(TenantCommand.UpdateTenant command){
     this.tenantType = command.getTenantType();
     this.tenantName = command.getTenantName();
-    this.tenantDID = command.getTenantDID();
-    this.tenantWalletId = command.getTenantWalletId();
-    this.tenantInvitationUrl = command.getTenantInvitationUrl();
+//    this.tenantDID = command.getTenantDID();
+//    this.tenantWalletId = command.getTenantWalletId();
+//    this.tenantInvitationUrl = command.getTenantInvitationUrl();
     this.tenantStatus = command.getTenantStatus();
     this.tenantHomeUrl = command.getTenantHomeUrl();
     this.tenantAddress = command.getTenantAddress();
