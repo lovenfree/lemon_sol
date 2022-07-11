@@ -197,12 +197,13 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
 
 
 
 
-
-                    stage('Stage Branch') {
+        stage('Stage Branch') {
             when { expression { BRANCH_NAME == 'stage'}}
             stages {
                 stage("[STAGE] Environment") {
@@ -283,6 +284,8 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
 
 
 
@@ -372,9 +375,8 @@ pipeline {
                         }
                     }
                 }
-
-
-
+            }
+        }
 
 
 

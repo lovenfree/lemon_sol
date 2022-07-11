@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
 @Tag(name="Tenant", description = "Admin Tenant API")
 @RequiredArgsConstructor
-@RequestMapping("/v1/tenants")
+@RequestMapping("/v1/admin/tenants")
 public class TenantController {
   private final TenantFacade tenantFacade;
   private final TenantDtoMapper tenantDtoMapper;
@@ -52,18 +53,12 @@ public class TenantController {
 
   @GetMapping
   @Operation(summary="Tenant list")
-  public ResponseEntity<List<TenantDto.TenantInfo>> retrieveTenants(TenantDto.TenantSearchCondition condition) {
-    var tenantInfos = tenantFacade.retrieveTenants(condition);
+  public ResponseEntity<List<TenantDto.TenantInfo>> retrieveTenants(Optional<TenantDto.TenantSearchCondition> condition) {
+    var tenantInfos = tenantFacade.retrieveTenants(condition.orElse(null));
     var response = tenantDtoMapper.of(tenantInfos);
     return ResponseEntity.ok(response);
   }
 
-  @GetMapping("/test")
-  @ResponseBody
-  public String index(HttpSession session) {
-    session.setAttribute("name", "sup2is");
-    return session.getId() + "\nHello " + session.getAttribute("name");
-  }
 
 
 

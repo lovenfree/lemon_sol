@@ -7,7 +7,10 @@ import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDtoMapper;
+import did.lemonaid.solution.interfaces.trustregistry.tenant.TRTenantDto;
+import did.lemonaid.solution.interfaces.trustregistry.tenant.TRTenantDtoMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +30,8 @@ import static org.mockito.BDDMockito.willReturn;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(TrustRegistryController.class)
-public class TrustRegistryControllerTest {
+@WebMvcTest(TRTenantController.class)
+public class TRTenantControllerTest {
   private final String PATH = "/api/v1/trust-registry";
   @MockBean
   private TenantFacade tenantFacade;
@@ -38,6 +41,10 @@ public class TrustRegistryControllerTest {
 
   @MockBean
   private TRCredentialDtoMapper credentialDtoMapper;
+
+  @MockBean
+  private TRTenantDtoMapper tenantDtoMapper;
+
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -77,11 +84,11 @@ public class TrustRegistryControllerTest {
   @Test
   @DisplayName("테넌트 활성화 테스트")
   void activateTenant() throws Exception {
-    var request = TrustRegistryDto.ActivateTenantRequest.builder().tenantWalletId("test-wallet-id")
+    var request = TRTenantDto.ActivateTenantRequest.builder().tenantWalletId("test-wallet-id")
       .tenantDID("tenant-did").tenantInvitationUrl("http://djkjsnmxn,fmalsk").build();
     var tenantID = "tnt_askjeigjksldkfjh";
 
-    given(tenantFacade.activateTenant(tenantID, mapper.activateOf(request))).willReturn("tnt_askjeigjksldkfjh");
+    given(tenantFacade.activateTenant(tenantID, tenantDtoMapper.activateOf(request))).willReturn("tnt_askjeigjksldkfjh");
 
     mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/tenants/{tenant-id}/activate",tenantID)
         .contentType(MediaType.APPLICATION_JSON))
@@ -94,7 +101,7 @@ public class TrustRegistryControllerTest {
   @Test
   @DisplayName("테넌트 활성화 fail test - param invalid")
   void activateTenant_EXCEPTION() throws Exception {
-    var request = TrustRegistryDto.ActivateTenantRequest.builder().build();
+    var request = TRTenantDto.ActivateTenantRequest.builder().build();
     var tenantID = "tnt_askjeigjksldkfjh";
     mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/tenants/{tenant-id}/activate",tenantID)
         .contentType(MediaType.APPLICATION_JSON)
@@ -111,24 +118,24 @@ public class TrustRegistryControllerTest {
   @DisplayName("증명서 등록 api")
   public void registerCredential() throws Exception {
     //test Data
-    List<TrustRegistryDto.RegisterSchemaAttribute> schemaAttributeList = new ArrayList<>();
-    var schemaattr = TrustRegistryDto.RegisterSchemaAttribute.builder()
+    List<TRCredentialDto.RegisterSchemaAttribute> schemaAttributeList = new ArrayList<>();
+    var schemaattr = TRCredentialDto.RegisterSchemaAttribute.builder()
       .attributeCode("name")
       .attributeCode("name")
-      .mimeType(SchemaAttribute.MimeType.TEXT_PLAIN).build();
+      .mimeType("text/plain").build();
      schemaAttributeList.add(schemaattr);
-    var schema = TrustRegistryDto.RegisterSchemaInfo.builder()
+    var schema = TRCredentialDto.RegisterSchemaInfo.builder()
       .schemaId("schemaID")
       .schemaName("ID")
       .schemaAttributeList(schemaAttributeList).build();
 
-    var credential = TrustRegistryDto.RegisterCredentialRequest.builder()
+    var credential = TRCredentialDto.RegisterCredentialRequest.builder()
         .tenantId("tenantID").credentialName("name").credentialType(Credential.CredentialType.EMPLOYEE_ID)
         .credentialDefinitionId("cred_def_id").authLinkUrl("http://alskdjfklkjalk").expiryDateYN(false).templateItemMapping("test:laskjdf").schema(schema).build();
 
 //    var response = TrustRegistryDto.CredentialResponse.builder().credentialId("credentialID").build();
 
-    given(credentialFacade.registerCredential(mapper.of(credential),"tenantID")).willReturn("credentialID");
+    given(credentialFacade.registerCredential(credentialDtoMapper.of(credential),"tenantID")).willReturn("credentialID");
 
     mockMvc.perform(MockMvcRequestBuilders.post(PATH+"/credentials")
         .contentType(MediaType.APPLICATION_JSON)
@@ -179,19 +186,19 @@ public class TrustRegistryControllerTest {
 //    return credential;
 //  }
 
-  private TrustRegistryDto.RegisterCredentialRequest createCredentialData() {
-    List<TrustRegistryDto.RegisterSchemaAttribute> schemaAttributeList = new ArrayList<>();
-    var schemaattr = TrustRegistryDto.RegisterSchemaAttribute.builder()
+  private TRCredentialDto.RegisterCredentialRequest createCredentialData() {
+    List<TRCredentialDto.RegisterSchemaAttribute> schemaAttributeList = new ArrayList<>();
+    var schemaattr = TRCredentialDto.RegisterSchemaAttribute.builder()
       .attributeCode("name")
       .attributeName("name")
-      .mimeType(SchemaAttribute.MimeType.TEXT_PLAIN).build();
+      .mimeType("text/plain").build();
     schemaAttributeList.add(schemaattr);
-    var schema = TrustRegistryDto.RegisterSchemaInfo.builder()
+    var schema = TRCredentialDto.RegisterSchemaInfo.builder()
       .schemaId("schemaID")
       .schemaName("ID")
       .schemaAttributeList(schemaAttributeList).build();
 
-    var credential = TrustRegistryDto.RegisterCredentialRequest.builder()
+    var credential = TRCredentialDto.RegisterCredentialRequest.builder()
       .tenantId("tenantID").credentialName("name").credentialType(Credential.CredentialType.EMPLOYEE_ID)
       .credentialDefinitionId("cred_def_id")
       .serviceExtensionInfo("serviceExtensionInfo").authLinkUrl("http://alskdjfklkjalk").expiryDateYN(false).templateItemMapping("test:laskjdf").schema(schema).build();

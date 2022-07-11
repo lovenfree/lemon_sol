@@ -11,7 +11,6 @@ public class TenantCommand {
   @Builder
   @AllArgsConstructor
   public static class RegisterTenant {
-//    private final String tenantId;
     private final Tenant.TenantType tenantType;
     private final String  tenantName;
     private final String tenantHomeUrl;
@@ -48,14 +47,14 @@ public class TenantCommand {
   public static class UpdateTenant {
     private final Tenant.TenantType tenantType;
     private final String  tenantName;
-    private final String  tenantDID;
-    private final String  tenantWalletId;
-    private final String  tenantInvitationUrl;
+//    private final String  tenantDID;
+//    private final String  tenantWalletId;
+//    private final String  tenantInvitationUrl;
     private final Tenant.TenantStatus tenantStatus;
     private final String tenantHomeUrl;
     private final String tenantAddress;
     private final String tenantLogo;
     private final String tenantLogoFilename;
-//    private final boolean trustTenant;
+//    private final Boolean trustTenant;
   }
 }

@@ -3,6 +3,8 @@ package did.lemonaid.solution.domain.tenant;
 import did.lemonaid.solution.domain.credential.Credential;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 
 public class TenantInfo {
 
@@ -22,22 +24,7 @@ public class TenantInfo {
     private final String tenantLogo;
     private final String tenantLogoFilename;
     private final boolean trustTenant;
-
-
-//    public TenantDetail(Tenant tenant) {
-//      this.tenantId = tenant.getTenantId();
-//      this.tenantType = tenant.getTenantType();
-//      this.tenantName = tenant.getTenantName();
-//      this.tenantDID = tenant.getTenantDID();
-//      this.tenantWalletId = tenant.getTenantWalletId();
-//      this.tenantInvitationUrl = tenant.getTenantInvitationUrl();
-//      this.tenantStatus = tenant.getTenantStatus();
-//      this.tenantHomeUrl = tenant.getTenantHomeUrl();
-//      this.tenantAddress = tenant.getTenantAddress();
-//      this.tenantLogo = tenant.getTenantLogo();
-//      this.tenantLogoFilename = tenant.getTenantLogoFileName();
-//      this.trustTenant = tenant.isTrustTenant();
-//    }
+    private final LocalDateTime revisedDate;
 
   }
 

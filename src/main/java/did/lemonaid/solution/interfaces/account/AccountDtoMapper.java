@@ -6,13 +6,20 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(
         componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface AccountDtoMapper {
-    AccountCommand of(AccountDto.RegisterRequest request);
+    AccountCommand.RegisterAccount of(AccountDto.RegisterAccountRequest request);
 
-    AccountDto.RegisterResponse of(AccountInfo accountInfo);
+    AccountDto.AccountResponse of(String accountId);
+
+    List<AccountDto.AccountInfo> of(List<AccountInfo.AccountDetail> accounts);
+    AccountDto.AccountDetail of(AccountInfo.AccountDetail account);
+  AccountCommand.UpdateAccount of(AccountDto.UpdateAccountRequest account);
+  AccountCommand.UpdateAccountPW of(AccountDto.UpdateAccountPWRequest account);
 }

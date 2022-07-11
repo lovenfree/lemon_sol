@@ -1,6 +1,7 @@
 package did.lemonaid.solution.infrastructure.tenant;
 
 import did.lemonaid.solution.common.exception.EntityNotFoundException;
+import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantReader;
 import did.lemonaid.solution.interfaces.tenant.TenantDto;
@@ -20,12 +21,27 @@ public class TenantReaderImpl implements TenantReader {
   public Tenant getTenant(String tenantId) {
 
       return tenantRepository.findByTenantId(tenantId)
-        .orElseThrow(EntityNotFoundException::new);
+        .orElseThrow(()->new EntityNotFoundException(ErrorCode.TENANT_NOT_FOUND_EXCEPTION));
 
   }
 
   @Override
   public List<Tenant> retrieveTenants(TenantDto.TenantSearchCondition condition) {
     return tenantRepository.retrieveTenants(condition);
+  }
+
+  @Override
+  public List<Tenant> retrieveActiveTenants() {
+    return tenantRepository.retrieveActiveTenants();
+  }
+
+  @Override
+  public List<Tenant> retrieveActiveIssuers() {
+    return tenantRepository.retrieveActiveIssuers();
+  }
+
+  @Override
+  public List<Tenant> retrieveActiveVerifiers() {
+    return tenantRepository.retrieveActiveVerifiers();
   }
 }

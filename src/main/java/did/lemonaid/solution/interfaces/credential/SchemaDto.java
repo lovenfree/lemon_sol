@@ -18,7 +18,7 @@ public class SchemaDto {
     @Schema(description = "Schema Name", example = "사원증")
     private final String schemaName;
     @Schema(description = "Schema attribute List")
-    private final List<TRCredentialDto.SchemaAttributeDto> schemaAttributeList;
+    private final List<SchemaDto.SchemaAttributeDto> schemaAttributeList;
   }
 
 

@@ -70,4 +70,22 @@ public class TenantServiceImpl implements TenantService{
     var credentials = tenantReader.getTenant(tenantId).getCredentialList();
     return tenantInfoMapper.credentialOf(credentials);
   }
+
+  @Override
+  public List<TenantInfo.TenantDetail> retrieveActiveTenants() {
+    var tenants = tenantReader.retrieveActiveTenants();
+    return tenantInfoMapper.of(tenants);
+  }
+
+  @Override
+  public List<TenantInfo.TenantDetail> retrieveActiveIssuers() {
+    var tenants = tenantReader.retrieveActiveIssuers();
+    return tenantInfoMapper.of(tenants);
+  }
+
+  @Override
+  public List<TenantInfo.TenantDetail> retrieveActiveVerifiers() {
+    var tenants = tenantReader.retrieveActiveVerifiers();
+    return tenantInfoMapper.of(tenants);
+  }
 }

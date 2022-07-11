@@ -23,9 +23,9 @@ public class SwaggerConfig {
    public GroupedOpenApi adminApi() {
        return GroupedOpenApi.builder()
                .group("lemonaid-admin")
-               .pathsToMatch("/v1/accounts/**")
-               .pathsToMatch("/v1/credentials/**")
-               .pathsToMatch("/v1/tenants/**")
+               .pathsToMatch("/v1/admin/**")
+//               .pathsToMatch("/v1/credentials/**")
+//               .pathsToMatch("/v1/tenants/**")
                .build();
    }
 

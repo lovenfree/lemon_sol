@@ -2,6 +2,7 @@ package did.lemonaid.solution.domain.tenant;
 
 import did.lemonaid.solution.interfaces.tenant.TenantDto;
 
+import java.security.cert.CertPathBuilder;
 import java.util.List;
 
 
@@ -14,4 +15,8 @@ public interface TenantService {
 
   TenantInfo.TenantDetail retrieveTenant(String tenantId);
   List<TenantInfo.CredentialDetail> retrieveTenantCredentials(String tenantId);
+
+  List<TenantInfo.TenantDetail> retrieveActiveTenants();
+  List<TenantInfo.TenantDetail> retrieveActiveIssuers();
+  List<TenantInfo.TenantDetail> retrieveActiveVerifiers();
 }

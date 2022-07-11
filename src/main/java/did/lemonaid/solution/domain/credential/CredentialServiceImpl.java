@@ -2,8 +2,7 @@ package did.lemonaid.solution.domain.credential;
 
 import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.common.exception.InvalidValueException;
-import did.lemonaid.solution.domain.credential.schema.SchemaReader;
-import did.lemonaid.solution.domain.tenant.TenantReader;
+import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,23 +35,39 @@ public class CredentialServiceImpl implements CredentialService{
   }
 
   @Override
-  public List<CredentialInfo> retrieveCredentials() {
-    return null;
+  public List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition) {
+    return credentialReader.retrieveCredentials(condition);
   }
 
   @Override
   public CredentialInfo.CredentialDetail retrieveCredential(String credentialDefinitionId) {
     var credential = credentialReader.getCredentialBy(credentialDefinitionId);
-    var schema = credentialReader.getSchema(credential);
+    var schema = credentialReader.retrieveSchema(credential);
 
     return new CredentialInfo.CredentialDetail(credential,schema);
   }
 
   @Override
   @Transactional
-  public String updateCredential(CredentialCommand.UpdateCredential updateCredential, String credentialId) {
-    var credential = credentialReader.getCredential(credentialId);
+  public String updateCredential(CredentialCommand.UpdateCredential updateCredential, String credentialDefinitionId) {
+    var credential = credentialReader.getCredentialBy(credentialDefinitionId);
     credential.updateCredential(updateCredential);
+    credentialStore.store(credential);
+    return credential.getCredentialId();
+  }
+
+  @Override
+  public CredentialInfo.CredentialAdminDetail retrieveAdminCredential(String credentialId) {
+    var credential = credentialReader.retrieveCredential(credentialId);
+    var schema = credentialReader.retrieveSchema(credential);
+    return new CredentialInfo.CredentialAdminDetail(credential,schema);
+  }
+
+  @Override
+  @Transactional
+  public String changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus) {
+    var credential = credentialReader.retrieveCredential(credentialStatus.getCredentialId());
+    credential.changeCredentialStatus(credentialStatus);
     credentialStore.store(credential);
     return credential.getCredentialId();
   }

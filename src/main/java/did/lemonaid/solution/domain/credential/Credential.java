@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name="CREDENTIAL")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Credential extends BaseEntity {
-
+  private static final String PREFIX_TENANT = "crd_";
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID")
@@ -41,7 +41,7 @@ public class Credential extends BaseEntity {
   @Column(name = "CREDENTIAL_DEFINITION_ID", nullable = false)
   private String credentialDefinitionId;
   @Column(name = "TRUST_CREDENTIAL_YN", nullable = false)
-  private boolean trustCredentialYN;
+  private Boolean trustCredentialYN;
   @Column(name = "CREDENTIAL_TYPE", nullable = false)
   @Enumerated(EnumType.STRING)
   private CredentialType credentialType;
@@ -51,7 +51,7 @@ public class Credential extends BaseEntity {
   @Column(name = "USER_AUTH_PAGE_URL", nullable = false)
   private String authLinkUrl;
   @Column(name = "EXP_DT_SET_YN", nullable = false)
-  private boolean expiryDateYN;
+  private Boolean expiryDateYN;
   @Column(name = "VALIDITY_DAYS")
   private int validityDays;
   @Lob
@@ -66,6 +66,10 @@ public class Credential extends BaseEntity {
   private String logoImgFilename;
   @Column(name = "TEMPLATE_ITEM_MAPPING", nullable = false)
   private String templateItemMapping;
+
+  public void changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus) {
+    this.trustCredentialYN = credentialStatus.isTrustCredentialYN();
+  }
 
   @Getter
   @AllArgsConstructor
@@ -82,7 +86,7 @@ public class Credential extends BaseEntity {
 
     if (tenant.getTenantStatus().equals(Tenant.TenantStatus.DEACTIVATE)) throw new InvalidValueException(ErrorCode.INVALID_TENANT_STATUS_EXCEPTION);
 
-    this.credentialId = tenant.getTenantDID()+":TR:"+ TokenGenerator.randomCharacter(6);
+    this.credentialId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.credentialName = credentialName;
     this.credentialDefinitionId = credentialDefinitionId;
     //기본값 으로 true

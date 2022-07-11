@@ -103,4 +103,12 @@ public class CredentialCommand {
         .build();
     }
   }
+
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class UpdateCredentialStatus {
+    private final String credentialId;
+    private final boolean trustCredentialYN;
+  }
 }
