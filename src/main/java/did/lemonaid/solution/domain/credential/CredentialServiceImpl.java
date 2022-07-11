@@ -3,6 +3,7 @@ package did.lemonaid.solution.domain.credential;
 import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ public class CredentialServiceImpl implements CredentialService{
   private final CredentialInfoMapper credentialInfoMapper;
 
   private final CredentialReader credentialReader;
-
   private final CredentialStore credentialStore;
   private final SchemaSeriesFactory schemaSeriesFactory;
 
@@ -70,5 +70,10 @@ public class CredentialServiceImpl implements CredentialService{
     credential.changeCredentialStatus(credentialStatus);
     credentialStore.store(credential);
     return credential.getCredentialId();
+  }
+
+  @Override
+  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
+    return credentialReader.retrieveTRCredentials(condition);
   }
 }

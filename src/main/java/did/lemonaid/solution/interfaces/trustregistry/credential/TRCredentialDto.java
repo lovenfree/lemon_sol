@@ -23,24 +23,20 @@ public class TRCredentialDto {
   @Builder
   @ToString
   public static class CredentialInfo {
-    @Schema(description = "Credential Id", example = "TNT_tjalkjaslkddjxc")
-    private final String credentialId;
-    @Schema(description = "Credential Name", example = "LG EMP ID")
-    private final String credentialName;
-    @Schema(description = "Credential Type", example = "ID")
-    private final Credential.CredentialType credentialType;
-    @Schema(description = "Description", example = "DID id credential")
-    private  String description;
+
     @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0")
     private final String credentialDefinitionId;
+    @Schema(description = "Credential Name", example = "LG EMP ID")
+    private final String credentialName;
     @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0")
     private final String schemaId;
-    @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com")
-    private final String authLinkUrl;
-    @Schema(description = "Logo Image", example = "alskdjgkalsj")
-    private String logoImg;
-    @Schema(description = "Logo Image Filename", example = "logo.img")
-    private String logoImgFilename;
+    @Schema(description = "Schema Name", example = "사원증")
+    private final String schemaName;
+    @Schema(description = "Credential Type", example = "ID")
+    private final Credential.CredentialType credentialType;
+    @Schema(description = "Tenant Name", example = "ISSUER")
+    private final String tenantName;
+
   }
 
   //credential 등록
@@ -231,5 +227,21 @@ public class TRCredentialDto {
     private final String attributeName;
     @Schema(description = "Schema attribute Mime Type", example = "TEXT/PLAIN")
     private final String mimeType;
+  }
+
+
+  @Getter
+  @Setter
+  @Builder
+  @ToString
+  public static class CredentialSearchCondition{
+    @Schema(description = "Schema Name", example = "사원증")
+    private final String schemaName;
+    @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0")
+    private final String credentialDefinitionId;
+    @Schema(description = "Credential Type", example = "ID")
+    private final Credential.CredentialType credentialType;
+    @Schema(description = "Tenant Id", example = "tnt_wlkdjfahksdjkglk")
+    private final String tenantId;
   }
 }

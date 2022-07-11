@@ -29,9 +29,18 @@ public class CredentialInfo {
     private final  String schemaId;
     private final  int validityDays;
     private final  LocalDateTime revisedDate;
+  }
 
-
-
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class CredentialTRListInfo{
+    private  final String credentialDefinitionId;
+    private final  String credentialName;
+    private  final String schemaId;
+    private  final String schemaName;
+    private final  Credential.CredentialType credentialType;
+    private final String tenantName;
   }
 
   @Getter

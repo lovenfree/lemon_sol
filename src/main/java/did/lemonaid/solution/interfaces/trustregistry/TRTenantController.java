@@ -24,7 +24,7 @@ import javax.validation.Valid;
 public class TRTenantController {
     private final TenantFacade tenantFacade;
     private final TRTenantDtoMapper tenantDtoMapper;
-    private final TRCredentialDtoMapper credentialDtoMapper;
+//    private final TRCredentialDtoMapper credentialDtoMapper;
 
 
     @Operation(summary = "Tenant List")
@@ -37,9 +37,9 @@ public class TRTenantController {
 
   @Operation(summary = "credential List")
   @GetMapping("/{tenant-id}/credentials")
-  public ResponseEntity<TRCredentialDto.Credentials> retrieveCredentials(@PathVariable("tenant-id") String tenantId) {
+  public ResponseEntity<TRTenantDto.Credentials> retrieveCredentials(@PathVariable("tenant-id") String tenantId) {
     var credentials = tenantFacade.retrieveCredentialList(tenantId);
-    var response = TRCredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.credentialOf(credentials)).build();
+    var response = TRTenantDto.Credentials.builder().credentialInfos(tenantDtoMapper.credentialOf(credentials)).build();
     return ResponseEntity.ok(response);
   }
 

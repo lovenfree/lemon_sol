@@ -4,6 +4,7 @@ import did.lemonaid.solution.domain.credential.CredentialCommand;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.CredentialService;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -43,5 +44,9 @@ public class CredentialFacade {
 
   public String changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus) {
     return credentialService.changeCredentialStatus(credentialStatus);
+  }
+
+  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
+    return credentialService.retrieveTRCredentials(condition);
   }
 }

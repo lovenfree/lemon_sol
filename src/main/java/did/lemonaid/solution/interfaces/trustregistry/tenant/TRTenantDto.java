@@ -1,6 +1,9 @@
 package did.lemonaid.solution.interfaces.trustregistry.tenant;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.tenant.Tenant;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
@@ -75,5 +78,37 @@ public class TRTenantDto {
   @ToString
   public static class TenantResponse {
     private final String tenantId;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class Credentials {
+    @JsonProperty("credentials")
+    private final List<TRTenantDto.CredentialInfo> credentialInfos;
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class CredentialInfo {
+    @Schema(description = "Credential Id", example = "TNT_tjalkjaslkddjxc")
+    private final String credentialId;
+    @Schema(description = "Credential Name", example = "LG EMP ID")
+    private final String credentialName;
+    @Schema(description = "Credential Type", example = "ID")
+    private final Credential.CredentialType credentialType;
+    @Schema(description = "Description", example = "DID id credential")
+    private  String description;
+    @Schema(description = "Credential Definition ID", example = "credentamnxjdhfasf:1.0")
+    private final String credentialDefinitionId;
+    @Schema(description = "Schema Id", example = "schemasjkjfknxkjkd:1.0")
+    private final String schemaId;
+    @Schema(description = "Issue Auth URL", example = "http://lil.lgcns.com")
+    private final String authLinkUrl;
+    @Schema(description = "Logo Image", example = "alskdjgkalsj")
+    private String logoImg;
+    @Schema(description = "Logo Image Filename", example = "logo.img")
+    private String logoImgFilename;
   }
 }

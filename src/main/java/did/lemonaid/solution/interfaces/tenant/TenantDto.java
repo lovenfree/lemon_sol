@@ -3,13 +3,11 @@ package did.lemonaid.solution.interfaces.tenant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;

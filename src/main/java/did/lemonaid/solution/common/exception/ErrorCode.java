@@ -21,17 +21,20 @@ public enum  ErrorCode {
     INVALID_TENANT_STATUS_EXCEPTION(400, "LEMON.TR.005", "TENANT 상태가 유효하지 않음"),
     INVALID_MIME_TYPE_EXCEPTION(400, "LEMON.TR.006", "유효한 Mime-type 이 아닙니다. "),
     INVALID_CRE_DEF_ID_EXCEPTION(400, "LEMON.TR.007", "기 등록된 credential definition id 입니다."),
-     INVALID_ACTIVE_TENANT_PARAM_EXCEPTION(400, "LEMON.TR.008", "null 이나 공백이 될수 없습니다. "),
+   INVALID_ACTIVE_TENANT_PARAM_EXCEPTION(400, "LEMON.TR.008", "null 이나 공백이 될수 없습니다. "),
     INVALID_STATUS_PARAM_EXCEPTION(400, "LEMON.TR.009", "현재 상태와 변경 상태가 같습니다. "),
-    INVALID_TRUST_TENANT_PARAM_EXCEPTION(400, "LEMON.TR.010", "Tenant 정보 (TenantDID, WalletID, InvitaionURL) 없음"),
+    INVALID_TRUST_TENANT_PARAM_EXCEPTION(400, "LEMON.TR.010", "Tenant 정보 (TenantDID, WalletID, InvitationURL) 없음"),
+
+    //ACCOUNT
+    INVALID_ACCOUNT_REGISTER_EXCEPTION(400, "LEMON.ACCOUNT.001", "기 등록된 Account ID 입니다."),
 
 
-  SESSION_NOT_FOUND_EXCEPTION(400, "LEMON.C008", "등록된 세션 정보 없음"),
+    SESSION_NOT_FOUND_EXCEPTION(400, "LEMON.C008", "등록된 세션 정보 없음"),
     ORG_NOT_FOUND_EXCEPTION(400, "LEMON.C009", "기관 정보 없음"),
     DID_FILE_NOT_FOUND(400, "LEMON.C010", "DID 파일이 존재하지 않습니다."),
     RDSA_EXCEPTION(400, "LEMON.C011", "RDSA 연계 오류"),
     SECRET_KEY_NOT_FOUND_EXCEPTION(400, "LEMON.C012", "암호화 키 없음"),
-    PUBKEY_NOT_FOUND_EXCEPTION(400, "LEMON.C013", "구간 암호화 publickey 없음"),
+    PUBKEY_NOT_FOUND_EXCEPTION(400, "LEMON.C013", "구간 암호화 public key 없음"),
     LINK_RESULT_NOT_FOUND_EXCEPTION(400, "LEMON.C014", "연계처리 결과 없음"),
     SYSTEM_NOT_READY_EXCEPTION(400, "LEMON.C015", "시스템 사용 불가 (기관정보 및 라이센스 등록 후 사용)"),
     RDSA_LICENSE_EXPIRED_EXCEPTION(400,"LEMON.C016","RDSA 라이센스 기간이 만료"),
