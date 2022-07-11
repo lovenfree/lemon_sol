@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Tag(name="Account", description = "Account admin API")
@@ -27,8 +28,8 @@ public class AccountController {
 
     @Operation(summary = "관리자 계정 생성")
     @PostMapping
-    public ResponseEntity<AccountDto.AccountResponse> createAccount(@RequestBody @Valid AccountDto.RegisterAccountRequest request) {
-        var command =  accountDtoMapper.of(request);
+    public ResponseEntity<AccountDto.AccountResponse> createAccount(@RequestBody @Valid Optional<AccountDto.RegisterAccountRequest> request) {
+        var command =  accountDtoMapper.of(request.orElse(null));
         var accountId = accountFacade.registerAccount(command);
         var response = accountDtoMapper.of(accountId);
         return ResponseEntity.ok(response);
