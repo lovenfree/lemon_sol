@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solution-backend
+  namespace: common-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: solution-backend
+  template:
+    metadata:
+      labels:
+        app: solution-backend
+    spec:
+      containers:
+        - name: solution-backend
+          image: "_SERVICEIMG_"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: configmap-solution-backend
