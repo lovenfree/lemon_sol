@@ -22,7 +22,7 @@ public class AccountDto {
   @Getter
   @Setter
   @ToString
-  public class RegisterAccountRequest {
+  public static class RegisterAccountRequest {
     @NotBlank(message = "필수 파라미터 누락")
     @Schema(description = "관리자 계정 아이디", example = "admin", required = true)
     private String accountId;
@@ -42,7 +42,7 @@ public class AccountDto {
     @Schema(description = "email", example = "lemonaid@lgcns.com", required = true)
     private String email;
     @NotNull(message = "필수 파라미터 누락")
-    @Schema(description = "Account Type", example = "GENERAL", required = true)
+    @Schema(description = "Account Type", example = "ROLE_GENERAL", required = true)
     private Account.AccountType accountType;
     @Schema(description = "권한IP", example = "0.0.0.0")
     private String authIp;
@@ -52,7 +52,7 @@ public class AccountDto {
     @Getter
     @Setter
     @ToString
-    public class AccountSearchCondition {
+    public static class AccountSearchCondition {
       @Schema(description = "관리자 계정 아이디", example = "admin")
       private String accountId;
       @Schema(description = "관리자 이름", example = "김라엘")
@@ -159,7 +159,7 @@ public class AccountDto {
     @Schema(description = "email", example = "lemonaid@lgcns.com", required = true)
     private String email;
     @NotNull(message = "필수 파라미터 누락")
-    @Schema(description = "Account Type", example = "GENERAL", required = true)
+    @Schema(description = "Account Type", example = "ROLE_GENERAL", required = true)
     private Account.AccountType accountType;
     @NotNull(message = "필수 파라미터 누락")
     @Schema(description = "Account Status", example = "ACTIVATE", required = true)

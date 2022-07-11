@@ -1,5 +1,7 @@
 package did.lemonaid.solution.infrastructure.account;
 
+import did.lemonaid.solution.common.exception.ErrorCode;
+import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.account.Account;
 import did.lemonaid.solution.domain.account.AccountStore;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,12 @@ public class AccountStoreImpl implements AccountStore {
   @Override
   public Account store(Account account) {
     return accountRepository.save(account);
+  }
+
+  @Override
+  public Account initStore(Account initAccount) {
+    if(accountRepository.exist(initAccount.getAccountId())) throw new InvalidValueException(ErrorCode.INVALID_ACCOUNT_REGISTER_EXCEPTION);
+    return accountRepository.save(initAccount);
   }
 
 }
