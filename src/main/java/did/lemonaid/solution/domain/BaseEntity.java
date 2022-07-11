@@ -1,5 +1,5 @@
 package did.lemonaid.solution.domain;
-
+ 
 
 import did.lemonaid.solution.common.util.Util;
 import lombok.Getter;
