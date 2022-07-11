@@ -121,6 +121,7 @@ pipeline {
                         script {
                             env.environment         = 'dev'
                             env.project_id          = 'pjt-did-dev'
+                            env.domain              = "admin-dev-lemonaid.singlex.com"
                            //  env.PORT_NO             = sh(script: "grep -A1 server src/main/resources/application.yml | grep port | grep -v 'server-port' | awk '{print \$2}'", returnStdout: true).trim()
 
 
@@ -178,6 +179,7 @@ pipeline {
                         script {
 
                             sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-dev
                             REGION=asia-northeast3
@@ -209,6 +211,7 @@ pipeline {
                         script {
                             env.environment         = 'stg'
                             env.project_id          = 'pjt-did-stg'
+                            env.domain              = "admin-stg-lemonaid.singlex.com"
                            //  env.PORT_NO             = sh(script: "grep -A1 server src/main/resources/application.yml | grep port | grep -v 'server-port' | awk '{print \$2}'", returnStdout: true).trim()
 
 
@@ -266,6 +269,7 @@ pipeline {
                         script {
 
                             sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-stg
                             REGION=asia-northeast3
@@ -295,6 +299,7 @@ pipeline {
                         script {
                             env.environment         = 'prd'
                             env.project_id          = 'pjt-did-prd'
+                            env.domain              = "admin-lemonaid.singlex.com"
                            //  env.PORT_NO             = sh(script: "grep -A1 server src/main/resources/application.yml | grep port | grep -v 'server-port' | awk '{print \$2}'", returnStdout: true).trim()
 
 
@@ -352,6 +357,7 @@ pipeline {
                         script {
 
                             sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-prd
                             REGION=asia-northeast3
