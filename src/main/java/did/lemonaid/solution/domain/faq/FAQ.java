@@ -1,7 +1,6 @@
 package did.lemonaid.solution.domain.faq;
 
 import did.lemonaid.solution.domain.BaseEntity;
-import did.lemonaid.solution.domain.notice.Notice;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +32,7 @@ public class FAQ extends BaseEntity {
   @Column(name="FAQ_CONTENT", nullable = false)
   private String faqContent;
 
-  @Column(name="NOTICE_STATUS", nullable = false)
+  @Column(name="FAQ_STATUS", nullable = false)
   @Enumerated(EnumType.STRING)
   private FAQStatus faqStatus;
 
