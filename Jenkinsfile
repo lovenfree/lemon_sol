@@ -275,8 +275,8 @@ pipeline {
                     steps {
                         script {
 
-                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
-                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
+                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-stg/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-stg/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-stg
                             REGION=asia-northeast3
@@ -366,8 +366,8 @@ pipeline {
                     steps {
                         script {
 
-                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
-                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
+                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-prd/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-prd/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-prd
                             REGION=asia-northeast3
