@@ -33,7 +33,7 @@ spec:
               cpu: "1"
           readinessProbe:
             httpGet:
-              path: /api/swagger-ui.html
+              path: /api/
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
