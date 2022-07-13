@@ -24,3 +24,16 @@ spec:
           envFrom:
             - configMapRef:
                 name: configmap-solution-backend
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          readinessProbe:
+            httpGet:
+              path: /api/
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5

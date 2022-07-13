@@ -137,6 +137,10 @@ pipeline {
                             sh 'gcloud auth configure-docker'
                             sh 'gcloud config set project ${project_id}'
 
+                            // configmap pull
+                            sh 'gcloud secrets versions access 1 --secret=configmap-solution-backend > ./k8/stage-dev/configmap.yaml'
+
+
                         }
                     }
                 }
@@ -157,14 +161,14 @@ pipeline {
                     steps {
                         script {
 
-                            env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-user', returnStdout: true).trim()
-                            env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-passwd', returnStdout: true).trim()
-                            env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=dev-common-did-aries-admin-token', returnStdout: true).trim()
+                            // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-user', returnStdout: true).trim()
+                            // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-passwd', returnStdout: true).trim()
+                            // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=dev-common-did-aries-admin-token', returnStdout: true).trim()
 
 
-                            sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                            sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                            sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
 
                             env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
@@ -227,6 +231,9 @@ pipeline {
                             sh 'gcloud auth configure-docker'
                             sh 'gcloud config set project ${project_id}'
 
+                            // configmap pull
+                            sh 'gcloud secrets versions access 1 --secret=configmap-solution-backend > ./k8/stage-stg/configmap.yaml'
+
                         }
                     }
                 }
@@ -247,14 +254,14 @@ pipeline {
                     steps {
                         script {
 
-                            env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=stg-postgre-common-did-database-user', returnStdout: true).trim()
-                            env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=stg-postgre-common-did-database-passwd', returnStdout: true).trim()
-                            env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=stg-common-did-aries-admin-token', returnStdout: true).trim()
+                            // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=stg-postgre-common-did-database-user', returnStdout: true).trim()
+                            // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=stg-postgre-common-did-database-passwd', returnStdout: true).trim()
+                            // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=stg-common-did-aries-admin-token', returnStdout: true).trim()
 
 
-                            sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                            sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                            sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
 
                             env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
@@ -268,8 +275,8 @@ pipeline {
                     steps {
                         script {
 
-                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
-                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
+                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-stg/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-stg/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-stg
                             REGION=asia-northeast3
@@ -278,7 +285,7 @@ pipeline {
                             gcloud components install kubectl
                             kubectl apply -f ./k8/redis/master -n common-system
                             kubectl apply -f ./k8/redis/slave -n common-system
-                            kubectl apply -f ./k8/stage-dev/
+                            kubectl apply -f ./k8/stage-stg/
                             '''
 
                         }
@@ -315,6 +322,9 @@ pipeline {
                             sh 'gcloud auth configure-docker'
                             sh 'gcloud config set project ${project_id}'
 
+                            // configmap pull
+                            sh 'gcloud secrets versions access 1 --secret=configmap-solution-backend > ./k8/stage-prd/configmap.yaml'
+
                         }
                     }
                 }
@@ -335,14 +345,14 @@ pipeline {
                     steps {
                         script {
 
-                            env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-user', returnStdout: true).trim()
-                            env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-passwd', returnStdout: true).trim()
-                            env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=prd-common-did-aries-admin-token', returnStdout: true).trim()
+                            // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-user', returnStdout: true).trim()
+                            // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-passwd', returnStdout: true).trim()
+                            // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=prd-common-did-aries-admin-token', returnStdout: true).trim()
 
 
-                            sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                            sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                            sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
+                            // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
 
                             env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
@@ -356,8 +366,8 @@ pipeline {
                     steps {
                         script {
 
-                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
-                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
+                            sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-prd/deployment.yaml")
+                            sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-prd/virtualservice.yaml")
                             sh '''
                             PROJECTID=pjt-did-prd
                             REGION=asia-northeast3
@@ -366,7 +376,7 @@ pipeline {
                             gcloud components install kubectl
                             kubectl apply -f ./k8/redis/master -n common-system
                             kubectl apply -f ./k8/redis/slave -n common-system
-                            kubectl apply -f ./k8/stage-dev/
+                            kubectl apply -f ./k8/stage-prd/
                             '''
 
 
