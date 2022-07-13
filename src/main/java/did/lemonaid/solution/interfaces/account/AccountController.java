@@ -28,8 +28,8 @@ public class AccountController {
 
     @Operation(summary = "관리자 계정 생성")
     @PostMapping
-    public ResponseEntity<AccountDto.AccountResponse> createAccount(@RequestBody @Valid Optional<AccountDto.RegisterAccountRequest> request) {
-        var command =  accountDtoMapper.of(request.orElse(null));
+    public ResponseEntity<AccountDto.AccountResponse> createAccount(@RequestBody @Valid AccountDto.RegisterAccountRequest request) {
+        var command =  accountDtoMapper.of(request);
         var accountId = accountFacade.registerAccount(command);
         var response = accountDtoMapper.of(accountId);
         return ResponseEntity.ok(response);
@@ -38,8 +38,8 @@ public class AccountController {
     @Operation(summary="관리자 목록 조회")
     @GetMapping
 //  @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ASSISTANT','ROLE_GENERAL')")
-    public ResponseEntity<List<AccountDto.AccountInfo>> retrieveAccounts(AccountDto.AccountSearchCondition condition){
-      var accounts = accountFacade.retrieveAccounts(condition);
+    public ResponseEntity<List<AccountDto.AccountInfo>> retrieveAccounts(Optional<AccountDto.AccountSearchCondition> condition){
+      var accounts = accountFacade.retrieveAccounts(condition.orElse(null));
       var response = accountDtoMapper.of(accounts);
       return ResponseEntity.ok(response);
     }

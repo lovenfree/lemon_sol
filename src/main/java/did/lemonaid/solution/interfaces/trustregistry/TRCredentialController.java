@@ -1,6 +1,7 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
 import did.lemonaid.solution.application.credential.CredentialFacade;
+import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDtoMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -50,6 +52,15 @@ public class TRCredentialController {
   public ResponseEntity<TRCredentialDto.CredentialDetail> retrieveCredential (@PathVariable("credential-definition-id") String credentialDefinitionId) {
     var credential = credentialFacade.retrieveCredential(credentialDefinitionId);
     var response = credentialDtoMapper.of(credential);
+    return ResponseEntity.ok(response);
+  }
+
+
+  @Operation(summary = "credential List")
+  @GetMapping("/credentials")
+  public ResponseEntity<TRCredentialDto.Credentials> retrieveCredentials(Optional<TRCredentialDto.CredentialSearchCondition> condition) {
+    var credentials = credentialFacade.retrieveTRCredentials(condition.orElse(null));
+    var response = TRCredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.of(credentials)).build();
     return ResponseEntity.ok(response);
   }
 

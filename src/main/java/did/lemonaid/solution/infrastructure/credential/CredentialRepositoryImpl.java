@@ -1,5 +1,6 @@
 package did.lemonaid.solution.infrastructure.credential;
 
+import com.querydsl.core.SimpleQuery;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -9,6 +10,7 @@ import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.tenant.TenantDto;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +50,30 @@ public class CredentialRepositoryImpl {
         .fetch();
     }
 
+
+
+  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
+    return queryFactory.select(Projections.constructor(CredentialInfo.CredentialTRListInfo.class,
+        credential.credentialDefinitionId, credential.credentialName,
+        credential.schema.schemaId.as("schemaId"),
+        credential.schema.schemaName.as("schemaName"),
+        credential.credentialType, tenant.tenantName.as("tenantName")
+      ))
+      .from(credential)
+      .innerJoin(credential.tenant, tenant)
+      .innerJoin(credential.schema, schemas)
+      .where(credentialTypeEq(condition.getCredentialType()),
+        credDefIdContain(condition.getCredentialDefinitionId()),
+        tenantIdEq(condition.getTenantId()),
+         schemaNameContain(condition.getSchemaName()))
+      .orderBy(credential.revisedDate.desc())
+      .fetch();
+  }
+
+  private BooleanExpression schemaNameContain(String schemaName) {
+    return  !hasLength(schemaName) ? null : credential.schema.schemaName.contains(schemaName);
+  }
+
   private BooleanExpression tenantNameContain(String tenantName) {
     return  !hasLength(tenantName) ? null : credential.tenant.tenantName.contains(tenantName);
   }
@@ -57,9 +83,13 @@ public class CredentialRepositoryImpl {
   }
 
 
-    private BooleanExpression credentialTypeEq(Credential.CredentialType credentialType) {
-      return isEmpty( credentialType)  ? null : credential.credentialType.eq(credentialType);
-    }
+  private BooleanExpression credentialTypeEq(Credential.CredentialType credentialType) {
+    return isEmpty( credentialType)  ? null : credential.credentialType.eq(credentialType);
+  }
+
+  private BooleanExpression tenantIdEq(String tenantId) {
+    return !hasLength( tenantId)  ? null : credential.tenant.tenantId.eq(tenantId);
+  }
 
   private BooleanExpression credDefIdContain(String credDefId) {
     return  !hasLength(credDefId) ? null : credential.credentialDefinitionId.contains(credDefId);

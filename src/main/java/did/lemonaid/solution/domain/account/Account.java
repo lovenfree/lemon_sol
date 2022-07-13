@@ -84,6 +84,7 @@ public class Account extends BaseEntity {
     @Builder
     public Account(String accountId, String accountPw, String accountName, String mobileNumber, String phoneNumber,
                    String email,  AccountType accountType, String authIp) {
+
         this.accountId = accountId;
         this.accountPwHash = accountPw;
         this.accountName = accountName;

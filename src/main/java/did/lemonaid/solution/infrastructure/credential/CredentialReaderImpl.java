@@ -7,6 +7,7 @@ import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.credential.CredentialReader;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,11 @@ public class CredentialReaderImpl implements CredentialReader {
   @Override
   public List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition) {
     return credentialRepository.retrieveCredentials(condition);
+  }
+
+  @Override
+  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
+    return credentialRepository.retrieveTRCredentials(condition);
   }
 
   @Override

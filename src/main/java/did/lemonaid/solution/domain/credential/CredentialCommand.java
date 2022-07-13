@@ -15,7 +15,6 @@ public class CredentialCommand {
   @ToString
   @AllArgsConstructor
   public static class RegisterCredential {
-//    private final String  credentialId;
     private final String credentialName;
     private final  Credential.CredentialType credentialType;
     private final String credentialDefinitionId;

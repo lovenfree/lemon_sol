@@ -22,9 +22,9 @@ public interface TenantInfoMapper {
 //  })
   TenantInfo.TenantDetail of(Tenant tenant);
 
-//  @Mappings({
+  @Mappings({
     @Mapping(source = "credentials.schema.schemaId", target = "TenantInfo.CredentialDetail.schemaId")
-//  })
+  })
   List<TenantInfo.CredentialDetail>  credentialOf(List<Credential> credentials);
 
 

@@ -20,8 +20,9 @@ public class AccountServiceImpl implements AccountService {
   @Override
   @Transactional
   public String registerAccount(AccountCommand.RegisterAccount command){
+      //account 의 경우 중복체크를 위해 initStore 사용
       var iniAccount = command.toEntity();
-      accountStore.store(iniAccount);
+      accountStore.initStore(iniAccount);
       return iniAccount.getAccountId();
   }
 

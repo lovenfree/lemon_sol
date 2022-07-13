@@ -17,11 +17,13 @@ import java.util.List;
 )
 public interface TRCredentialDtoMapper {
 
-  List<TRCredentialDto.CredentialInfo> credentialOf(List<TenantInfo.CredentialDetail> credentials);
-
   TRCredentialDto.CredentialDetail of(CredentialInfo.CredentialDetail credential);
 
   CredentialCommand.RegisterCredential of(TRCredentialDto.RegisterCredentialRequest request);
 
   CredentialCommand.UpdateCredential of (TRCredentialDto.UpdateCredentialRequest request);
+
+  List<TRCredentialDto.CredentialInfo> of(List<CredentialInfo.CredentialTRListInfo> credentials);
+
+
 }

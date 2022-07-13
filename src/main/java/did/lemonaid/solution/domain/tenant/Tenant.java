@@ -71,7 +71,7 @@ public class Tenant extends BaseEntity {
   @Getter
   @AllArgsConstructor
   public enum TenantType{
-    ISSUER("Issuer"), VERIFIER("Verifier"), BOTH("Issuer/Verifier");
+    ISSUER("Issuer"), VERIFIER("Verifier"), BOTH("All");
     private final String description;
   }
 

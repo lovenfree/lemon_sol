@@ -4,6 +4,7 @@ import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface CredentialRepository extends JpaRepository<Credential, Long> {
   Optional<Credential> findByCredentialId(String credentialId);
 
   List<CredentialInfo.CredentialListInfo> retrieveCredentials(CredentialDto.CredentialSearchCondition condition);
+
+  List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition);
 }

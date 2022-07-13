@@ -19,6 +19,14 @@ public class SwaggerConfig {
                .build();
    }
 
+  @Bean
+  public GroupedOpenApi solutionRegistryApi() {
+    return GroupedOpenApi.builder()
+      .group("lemonaid- Solution Registry")
+      .pathsToMatch("/v1/solution-registry/**")
+      .build();
+  }
+
    @Bean
    public GroupedOpenApi adminApi() {
        return GroupedOpenApi.builder()

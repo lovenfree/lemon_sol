@@ -3,6 +3,7 @@ package did.lemonaid.solution.domain.credential;
 
 
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
+import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface CredentialService {
   CredentialInfo.CredentialAdminDetail retrieveAdminCredential(String credentialId);
 
   String changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus);
+
+  List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition);
 }
