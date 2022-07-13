@@ -24,7 +24,7 @@ public class NoticeRepositoryImpl {
   public List<Notice> retrieveHolderNotices(){
     return queryFactory.select(notice)
       .from(notice)
-      .where(noticeRangeEq(Notice.NoticeRange.HOLDER).and(noticeRangeEq(Notice.NoticeRange.ALL)),
+      .where(noticeRangeEq(Notice.NoticeRange.HOLDER).or(noticeRangeEq(Notice.NoticeRange.ALL)),
         noticeStatusEq(Notice.NoticeStatus.PUBLISH))
       .orderBy(notice.revisedDate.desc())
       .fetch();
@@ -33,7 +33,7 @@ public class NoticeRepositoryImpl {
   public List<Notice> retrieveIssuerNotices(SystemManagementDto.NoticeSearchCondition condition){
     return queryFactory.select(notice)
       .from(notice)
-      .where(noticeRangeEq(Notice.NoticeRange.ISSUER).and(noticeRangeEq(Notice.NoticeRange.ALL)),
+      .where(noticeRangeEq(Notice.NoticeRange.ISSUER).or(noticeRangeEq(Notice.NoticeRange.ALL)),
         noticeStatusEq(Notice.NoticeStatus.PUBLISH),
         noticeTitleContains(condition.getNoticeTitle()), dateBetween(condition.getSearchStartDate(), condition.getSearchEndDate()))
       .orderBy(notice.revisedDate.desc())
@@ -43,7 +43,7 @@ public class NoticeRepositoryImpl {
   public List<Notice> retrieveVerifierNotices(SystemManagementDto.NoticeSearchCondition condition){
     return queryFactory.select(notice)
       .from(notice)
-      .where(noticeRangeEq(Notice.NoticeRange.VERIFIER).and(noticeRangeEq(Notice.NoticeRange.ALL)),
+      .where(noticeRangeEq(Notice.NoticeRange.VERIFIER).or(noticeRangeEq(Notice.NoticeRange.ALL)),
         noticeStatusEq(Notice.NoticeStatus.PUBLISH),
         noticeTitleContains(condition.getNoticeTitle()), dateBetween(condition.getSearchStartDate(), condition.getSearchEndDate()))
       .orderBy(notice.revisedDate.desc())
@@ -53,7 +53,7 @@ public class NoticeRepositoryImpl {
   public List<Notice> retrieveTenantNotices(SystemManagementDto.NoticeSearchCondition condition){
     return queryFactory.select(notice)
       .from(notice)
-      .where(noticeRangeEq(Notice.NoticeRange.ISSUER).and(noticeRangeEq(Notice.NoticeRange.VERIFIER)).and(noticeRangeEq(Notice.NoticeRange.ALL)),
+      .where(noticeRangeEq(Notice.NoticeRange.ISSUER).or(noticeRangeEq(Notice.NoticeRange.VERIFIER)).or(noticeRangeEq(Notice.NoticeRange.ALL)),
        noticeStatusEq(Notice.NoticeStatus.PUBLISH),
        noticeTitleContains(condition.getNoticeTitle()), dateBetween(condition.getSearchStartDate(), condition.getSearchEndDate()))
       .orderBy(notice.revisedDate.desc())
