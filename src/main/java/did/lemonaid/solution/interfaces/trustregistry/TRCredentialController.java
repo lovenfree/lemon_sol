@@ -57,7 +57,7 @@ public class TRCredentialController {
 
 
   @Operation(summary = "credential List")
-  @GetMapping
+  @GetMapping("/credentials")
   public ResponseEntity<TRCredentialDto.Credentials> retrieveCredentials(Optional<TRCredentialDto.CredentialSearchCondition> condition) {
     var credentials = credentialFacade.retrieveTRCredentials(condition.orElse(null));
     var response = TRCredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.of(credentials)).build();
