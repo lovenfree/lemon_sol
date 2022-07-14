@@ -1,21 +1,15 @@
 package did.lemonaid.solution.infrastructure.account;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import did.lemonaid.solution.domain.account.Account;
-import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.interfaces.account.AccountDto;
-import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-
 import static did.lemonaid.solution.domain.account.QAccount.account;
-import static did.lemonaid.solution.domain.tenant.QTenant.tenant;
 import static org.springframework.util.StringUtils.hasLength;
 
 @Repository

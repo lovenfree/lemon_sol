@@ -1,7 +1,6 @@
 package did.lemonaid.solution.interfaces.credential;
 
 import did.lemonaid.solution.application.credential.CredentialFacade;
-import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

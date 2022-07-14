@@ -2,8 +2,6 @@ package did.lemonaid.solution.application.notice;
 
 import did.lemonaid.solution.domain.notice.NoticeInfo;
 import did.lemonaid.solution.domain.notice.NoticeService;
-import did.lemonaid.solution.domain.tenant.TenantInfo;
-import did.lemonaid.solution.domain.tenant.TenantService;
 import did.lemonaid.solution.interfaces.trustregistry.lemonaid.SystemManagementDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

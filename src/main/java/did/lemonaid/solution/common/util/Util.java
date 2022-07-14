@@ -1,10 +1,7 @@
 package did.lemonaid.solution.common.util;
 
-import did.lemonaid.solution.common.exception.InvalidValueException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.Base64;
 
 @Component
 @Slf4j

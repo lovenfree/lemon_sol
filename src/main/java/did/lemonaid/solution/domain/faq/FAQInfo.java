@@ -1,6 +1,5 @@
 package did.lemonaid.solution.domain.faq;
 
-import did.lemonaid.solution.domain.notice.Notice;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

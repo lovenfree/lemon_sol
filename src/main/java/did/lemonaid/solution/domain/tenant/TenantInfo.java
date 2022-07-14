@@ -1,7 +1,9 @@
 package did.lemonaid.solution.domain.tenant;
 
 import did.lemonaid.solution.domain.credential.Credential;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 

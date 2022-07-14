@@ -1,7 +1,6 @@
 package did.lemonaid.solution.application.tenant;
 
 import did.lemonaid.solution.domain.notification.NotificationService;
-import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantCommand;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
 import did.lemonaid.solution.domain.tenant.TenantService;

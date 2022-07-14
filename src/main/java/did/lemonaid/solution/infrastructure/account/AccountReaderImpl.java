@@ -4,7 +4,6 @@ import did.lemonaid.solution.common.exception.EntityNotFoundException;
 import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.domain.account.Account;
 import did.lemonaid.solution.domain.account.AccountReader;
-import did.lemonaid.solution.infrastructure.tenant.TenantRepository;
 import did.lemonaid.solution.interfaces.account.AccountDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

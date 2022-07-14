@@ -2,7 +2,6 @@ package did.lemonaid.solution.infrastructure.credential;
 
 import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
-import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import org.springframework.data.jpa.repository.JpaRepository;

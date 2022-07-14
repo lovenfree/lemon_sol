@@ -1,6 +1,5 @@
 package did.lemonaid.solution.interfaces.credential;
 
-import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;

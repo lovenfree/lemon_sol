@@ -1,6 +1,5 @@
 package did.lemonaid.solution.infrastructure.notice;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import did.lemonaid.solution.domain.notice.Notice;
