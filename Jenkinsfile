@@ -76,7 +76,7 @@ pipeline {
             steps {
                 script {
                     ///////////////////////// install java //////////////////////////
-                    sh 'apk add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community'
+                    sh 'apk add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted'
                     env.JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
                     env.PATH="/usr/lib/jvm/java-17-openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/google-cloud-sdk/bin"
                     sh 'printenv'
