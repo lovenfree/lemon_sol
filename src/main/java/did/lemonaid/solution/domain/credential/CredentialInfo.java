@@ -2,9 +2,7 @@ package did.lemonaid.solution.domain.credential;
 
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
-import did.lemonaid.solution.domain.tenant.Tenant;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 

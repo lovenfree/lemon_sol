@@ -1,6 +1,5 @@
 package did.lemonaid.solution.domain.faq;
 
-import did.lemonaid.solution.domain.notice.Notice;
 import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.domain.tenant.TenantReader;
 import did.lemonaid.solution.interfaces.trustregistry.lemonaid.SystemManagementDto;

@@ -3,8 +3,6 @@ package did.lemonaid.solution.interfaces.account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import did.lemonaid.solution.domain.account.Account;
-import did.lemonaid.solution.domain.tenant.Tenant;
-import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;

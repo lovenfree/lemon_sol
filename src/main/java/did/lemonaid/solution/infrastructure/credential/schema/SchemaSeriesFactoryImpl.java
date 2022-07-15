@@ -1,8 +1,9 @@
 package did.lemonaid.solution.infrastructure.credential.schema;
 
-import did.lemonaid.solution.common.exception.ErrorCode;
-import did.lemonaid.solution.common.exception.InvalidValueException;
-import did.lemonaid.solution.domain.credential.*;
+import did.lemonaid.solution.domain.credential.Credential;
+import did.lemonaid.solution.domain.credential.CredentialCommand;
+import did.lemonaid.solution.domain.credential.CredentialStore;
+import did.lemonaid.solution.domain.credential.SchemaSeriesFactory;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttributeStore;
 import did.lemonaid.solution.domain.credential.schema.SchemaReader;
 import did.lemonaid.solution.domain.credential.schema.SchemaStore;

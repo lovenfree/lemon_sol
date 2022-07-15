@@ -1,9 +1,6 @@
 package did.lemonaid.solution.domain.notice;
 
-import did.lemonaid.solution.common.exception.ErrorCode;
-import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.tenant.Tenant;
-import did.lemonaid.solution.domain.tenant.TenantInfoMapper;
 import did.lemonaid.solution.domain.tenant.TenantReader;
 import did.lemonaid.solution.interfaces.trustregistry.lemonaid.SystemManagementDto;
 import lombok.RequiredArgsConstructor;

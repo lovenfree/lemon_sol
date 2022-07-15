@@ -1,7 +1,6 @@
 package did.lemonaid.solution.domain.account;
 
 
-import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.common.util.Util;
 import did.lemonaid.solution.domain.BaseEntity;
 import lombok.*;

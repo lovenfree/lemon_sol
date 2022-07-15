@@ -1,6 +1,9 @@
 package did.lemonaid.solution.domain.account;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 
 public class AccountCommand {

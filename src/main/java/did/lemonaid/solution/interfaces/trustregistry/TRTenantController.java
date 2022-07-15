@@ -1,9 +1,6 @@
 package did.lemonaid.solution.interfaces.trustregistry;
 
-import did.lemonaid.solution.application.credential.CredentialFacade;
 import did.lemonaid.solution.application.tenant.TenantFacade;
-import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
-import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDtoMapper;
 import did.lemonaid.solution.interfaces.trustregistry.tenant.TRTenantDto;
 import did.lemonaid.solution.interfaces.trustregistry.tenant.TRTenantDtoMapper;
 import io.swagger.v3.oas.annotations.Operation;

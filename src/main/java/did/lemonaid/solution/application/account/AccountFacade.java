@@ -4,7 +4,6 @@ import did.lemonaid.solution.domain.account.AccountCommand;
 import did.lemonaid.solution.domain.account.AccountInfo;
 import did.lemonaid.solution.domain.account.AccountService;
 import did.lemonaid.solution.interfaces.account.AccountDto;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

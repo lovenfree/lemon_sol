@@ -3,20 +3,17 @@ package did.lemonaid.solution.interfaces.trustregistry.lemonaid;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.faq.FAQ;
-import did.lemonaid.solution.domain.tenant.Tenant;
-import did.lemonaid.solution.interfaces.trustregistry.tenant.TRTenantDto;
+import did.lemonaid.solution.domain.notice.Notice;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import did.lemonaid.solution.domain.notice.Notice;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class SystemManagementDto {
   @Getter

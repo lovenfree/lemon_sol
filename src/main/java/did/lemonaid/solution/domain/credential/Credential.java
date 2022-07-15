@@ -6,7 +6,6 @@ import did.lemonaid.solution.common.util.TokenGenerator;
 import did.lemonaid.solution.domain.BaseEntity;
 import did.lemonaid.solution.domain.credential.schema.Schemas;
 import did.lemonaid.solution.domain.tenant.Tenant;
-import io.netty.util.internal.StringUtil;
 import lombok.*;
 
 import javax.persistence.*;

@@ -2,7 +2,6 @@ package did.lemonaid.solution.interfaces.trustregistry.tenant;
 
 import did.lemonaid.solution.domain.tenant.TenantCommand;
 import did.lemonaid.solution.domain.tenant.TenantInfo;
-import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import org.mapstruct.*;
 
 import java.util.List;

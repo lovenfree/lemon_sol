@@ -1,15 +1,11 @@
 package did.lemonaid.solution.infrastructure.credential;
 
-import com.querydsl.core.SimpleQuery;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
-import did.lemonaid.solution.domain.tenant.Tenant;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
-import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

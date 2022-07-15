@@ -8,11 +8,10 @@ import did.lemonaid.solution.interfaces.tenant.TenantDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import static org.springframework.util.StringUtils.hasLength;
-
 import java.util.List;
 
 import static did.lemonaid.solution.domain.tenant.QTenant.tenant;
+import static org.springframework.util.StringUtils.hasLength;
 
 
 @Repository

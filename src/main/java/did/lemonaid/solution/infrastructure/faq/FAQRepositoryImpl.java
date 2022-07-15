@@ -7,7 +7,6 @@ import did.lemonaid.solution.interfaces.trustregistry.lemonaid.SystemManagementD
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-
 import java.util.List;
 
 import static did.lemonaid.solution.domain.faq.QFAQ.fAQ;

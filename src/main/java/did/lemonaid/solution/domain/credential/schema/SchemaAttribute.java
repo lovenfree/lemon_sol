@@ -3,7 +3,6 @@ package did.lemonaid.solution.domain.credential.schema;
 import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.common.exception.InvalidValueException;
 import did.lemonaid.solution.domain.BaseEntity;
-import io.netty.util.internal.StringUtil;
 import lombok.*;
 
 import javax.persistence.*;

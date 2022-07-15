@@ -2,7 +2,6 @@ package did.lemonaid.solution.domain.tenant;
 
 import did.lemonaid.solution.interfaces.tenant.TenantDto;
 
-import java.security.cert.CertPathBuilder;
 import java.util.List;
 
 
