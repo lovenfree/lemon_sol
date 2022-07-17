@@ -4,6 +4,7 @@ package did.lemonaid.solution.domain.credential;
 
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface CredentialService {
 
   String changeCredentialStatus(CredentialCommand.UpdateCredentialStatus credentialStatus);
 
-  List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition);
+  CredentialInfo.CredentialList retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition, Pageable pageable);
 }

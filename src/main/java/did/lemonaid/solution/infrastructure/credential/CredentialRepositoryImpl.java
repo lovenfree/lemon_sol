@@ -2,12 +2,17 @@ package did.lemonaid.solution.infrastructure.credential;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -21,6 +26,7 @@ import static org.springframework.util.StringUtils.isEmpty;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class CredentialRepositoryImpl {
   private final JPAQueryFactory queryFactory;
 
@@ -48,7 +54,8 @@ public class CredentialRepositoryImpl {
 
 
 
-  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
+  private  List<CredentialInfo.CredentialTRListInfo> getTRCredentials(TRCredentialDto.CredentialSearchCondition condition, Pageable pageable) {
+    log.info("offset:"+pageable.getOffset()+", limit:"+pageable.getPageSize());
     return queryFactory.select(Projections.constructor(CredentialInfo.CredentialTRListInfo.class,
         credential.credentialDefinitionId, credential.credentialName,
         credential.schema.schemaId.as("schemaId"),
@@ -63,7 +70,24 @@ public class CredentialRepositoryImpl {
         tenantIdEq(condition.getTenantId()),
          schemaNameContain(condition.getSchemaName()))
       .orderBy(credential.revisedDate.desc())
+      .offset(pageable.getOffset())
+      .limit(pageable.getPageSize())
       .fetch();
+  }
+
+  public Page<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition, Pageable pageable) {
+    var credentials = getTRCredentials(condition, pageable);
+    var countQuery = queryFactory.select(Wildcard.count)
+      .from(credential)
+      .innerJoin(credential.tenant, tenant)
+      .innerJoin(credential.schema, schemas)
+      .where(credentialTypeEq(condition.getCredentialType()),
+        credDefIdContain(condition.getCredentialDefinitionId()),
+        tenantIdEq(condition.getTenantId()),
+        schemaNameContain(condition.getSchemaName()));
+
+    return PageableExecutionUtils.getPage(credentials, pageable, countQuery::fetchOne);
+
   }
 
   private BooleanExpression schemaNameContain(String schemaName) {

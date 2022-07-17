@@ -11,6 +11,23 @@ import java.util.List;
 
 
 public class CredentialInfo {
+
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class CredentialList{
+    MetaInfo meta;
+    List<CredentialTRListInfo> credentialInfos;
+  }
+  @Getter
+  @AllArgsConstructor
+  @ToString
+  public static class MetaInfo{
+    boolean last;
+    int totalPages;
+    long totalElements;
+  }
+
   @Getter
   @AllArgsConstructor
   @ToString
