@@ -1,4 +1,4 @@
-package did.lemonaid.solution.interfaces.auth;
+package did.lemonaid.solution.security.filter;
 
 import did.lemonaid.solution.domain.security.AuthCommand;
 import org.mapstruct.InjectionStrategy;

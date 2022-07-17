@@ -10,13 +10,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Component("userDetailsService")
+@Service("UserDetailsService")
 @AllArgsConstructor
 @Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
@@ -46,16 +47,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 //    return new User(account.getAccountId(), account.getAccountPwHash(), grantedAuthorities);
 //
 //  }
-//
-//  public void updateLogInInfo(final String accountId) {
-//    Account account = accountReader.getAccount(accountId);
-//    account.updateLogInInfo();
-//    accountStore.save(account);
-//  }
-//
-//  public void updateLogInFailInfo(final String accountId){
-//    Account account = accountReader.getAccount(accountId);
-//    account.updateFailInfo();
-//    accountStore.save(account);
-//  }
+
+  public void updateLogInInfo(final String accountId) {
+    Account account = accountReader.getAccount(accountId);
+    account.updateLogInInfo();
+    accountStore.store(account);
+  }
+
+  public void updateLogInFailInfo(final String accountId){
+    Account account = accountReader.getAccount(accountId);
+    account.updateFailInfo();
+    accountStore.store(account);
+  }
 }

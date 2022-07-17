@@ -15,6 +15,7 @@ public class AccountCommand {
     private final String accountName;
     private final String mobileNumber;
     private final String phoneNumber;
+    private final Account.AccountType accountType;
     private final String email;
     private final String authIp;
 
@@ -25,6 +26,7 @@ public class AccountCommand {
         .accountName(accountName)
         .mobileNumber(mobileNumber)
         .phoneNumber(phoneNumber)
+        .accountType(accountType)
         .email(email)
         .authIp(authIp)
         .build();

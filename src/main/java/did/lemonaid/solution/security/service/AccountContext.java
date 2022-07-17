@@ -16,10 +16,10 @@ public class AccountContext extends User {
     this.account = account;
   }
   public boolean isAccountNonLocked() {
-    return account.getAccountPwFailCount() == 5 ? false:true;
+    return account.getAccountPwFailCount() > 5 ? false:true;
   }
-//  public boolean isEnabled() {
-//    return account.accountStatus.equals(Account.AccountStatus.DEACTIVATE)?false:true;
-//  }
+  public boolean isEnabled() {
+    return account.getAccountStatus().equals(Account.AccountStatus.ACTIVATE)?true:false;
+  }
 
 }

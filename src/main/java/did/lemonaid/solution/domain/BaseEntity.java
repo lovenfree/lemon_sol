@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
     @CreatedBy
     @Column(name = "FRST_RGSR_ID", nullable = false, updatable = false)
-    private String registrationId="test";
+    private String registrationId;
 
     @Column(name = "FRST_REG_PROG_ID", nullable = false, updatable = false)
     private String registrationProgramId = Util.getMethodName();
@@ -34,7 +34,7 @@ public abstract class BaseEntity {
 
     @LastModifiedBy
     @Column(name = "LAST_EDTR_ID", nullable = false)
-    private String revisedId ="test";
+    private String revisedId;
 
     @Column(name = "LAST_CHNG_PROG_ID", nullable = false)
     private String revisedProgramId = Util.getMethodName();
@@ -45,14 +45,12 @@ public abstract class BaseEntity {
 
     protected void setProgramIdInfo(String programId){
         String name = new Object() {}.getClass().getEnclosingMethod().getName();
-        System.out.println("##########1"+ name);
         this.registrationProgramId = programId;
         this.revisedProgramId = programId;
     }
 
     protected void updateProgramIdInfo(String programId){
         String name = new Object() {}.getClass().getEnclosingMethod().getName();
-        System.out.println("##########2"+ name);
         this.revisedProgramId = programId;
     }
 

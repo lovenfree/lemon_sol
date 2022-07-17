@@ -86,8 +86,7 @@ public class Account extends BaseEntity {
                    String email,  AccountType accountType, String authIp) {
 
         this.accountId = accountId;
-        this.accountPwHash =
-   accountPwHash;
+        this.accountPwHash =accountPwHash;
         this.accountName = accountName;
         this.mobileNumber = mobileNumber;
         this.phoneNumber = phoneNumber;
@@ -128,7 +127,13 @@ public class Account extends BaseEntity {
     }
 
     public void updateFailInfo() {
+
         this.accountPwFailCount = this.accountPwFailCount+=1;
+        if(this.accountPwFailCount == 5) changeAccountDeactive();
+    }
+
+    public void changeAccountDeactive(){
+      this.accountStatus = AccountStatus.DEACTIVATE;
     }
 
 }

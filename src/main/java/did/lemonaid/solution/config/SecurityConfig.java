@@ -1,5 +1,10 @@
 package did.lemonaid.solution.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import did.lemonaid.solution.security.filter.RestLoginProcessingFilter;
+import did.lemonaid.solution.security.handler.CustomAuthenticationFailureHandler;
+import did.lemonaid.solution.security.handler.CustomAuthenticationSuccessHandler;
+import did.lemonaid.solution.security.service.CustomUserDetailsService;
 import did.lemonaid.solution.security.token.JwtAccessDeniedHandler;
 import did.lemonaid.solution.security.token.JwtAuthenticationEntryPoint;
 import did.lemonaid.solution.security.token.JwtSecurityConfig;
@@ -19,20 +24,45 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  private final UserDetailsService userDetailsService;
+  private final CustomUserDetailsService userDetailsService;
   private final JwtTokenProvider tokenProvider;
   private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
   private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+  private final ObjectMapper objectMapper;
 
   @Bean
   public PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public RestLoginProcessingFilter restLoginProcessingFilter() throws Exception{
+    RestLoginProcessingFilter restLoginProcessingFilter = new RestLoginProcessingFilter();
+    restLoginProcessingFilter.setAuthenticationManager(authenticationManagerBean());
+
+    restLoginProcessingFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+    restLoginProcessingFilter.setAuthenticationFailureHandler(authenticationFailureHandler());
+    return restLoginProcessingFilter;
+  }
+
+  @Bean
+  public AuthenticationSuccessHandler authenticationSuccessHandler() {
+    return new CustomAuthenticationSuccessHandler(objectMapper, userDetailsService, tokenProvider);
+  }
+
+  @Bean
+  public AuthenticationFailureHandler authenticationFailureHandler() {
+    return new CustomAuthenticationFailureHandler(objectMapper);
   }
 
   @Override
@@ -55,20 +85,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .cors()
       .and()
       .csrf().disable()
+      .formLogin().disable()
       .exceptionHandling()
       .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-      .accessDeniedHandler(jwtAccessDeniedHandler)
+      .accessDeniedHandler(jwtAccessDeniedHandler);
 
-      .and()
+    http
       .sessionManagement()
-      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-      .and()
+    http
       .authorizeRequests()
       .antMatchers("/**").permitAll()
-      .anyRequest().authenticated()
-        .and()
-          .apply(new JwtSecurityConfig(tokenProvider));
+      .anyRequest().authenticated();
+
+    http
+      .addFilterBefore(restLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
+//      .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class)
+      .apply(new JwtSecurityConfig(tokenProvider));
     http.httpBasic().disable();
   }
 }
