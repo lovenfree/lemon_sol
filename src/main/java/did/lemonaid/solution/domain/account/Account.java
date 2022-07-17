@@ -4,6 +4,7 @@ package did.lemonaid.solution.domain.account;
 import did.lemonaid.solution.common.util.Util;
 import did.lemonaid.solution.domain.BaseEntity;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -81,11 +82,12 @@ public class Account extends BaseEntity {
 
 
     @Builder
-    public Account(String accountId, String accountPw, String accountName, String mobileNumber, String phoneNumber,
+    public Account(String accountId, String accountPwHash, String accountName, String mobileNumber, String phoneNumber,
                    String email,  AccountType accountType, String authIp) {
 
         this.accountId = accountId;
-        this.accountPwHash = accountPw;
+        this.accountPwHash =
+   accountPwHash;
         this.accountName = accountName;
         this.mobileNumber = mobileNumber;
         this.phoneNumber = phoneNumber;

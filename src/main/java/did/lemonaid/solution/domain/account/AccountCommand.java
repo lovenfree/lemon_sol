@@ -1,15 +1,14 @@
 package did.lemonaid.solution.domain.account;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+@RequiredArgsConstructor
 public class AccountCommand {
+
   @Getter
   @Builder
-  @AllArgsConstructor
+  @RequiredArgsConstructor
   public static class RegisterAccount {
     private final String accountId;
     private final String accountPw;
@@ -22,6 +21,7 @@ public class AccountCommand {
     public Account toEntity() {
       return Account.builder()
         .accountId(accountId)
+        .accountPwHash(accountPw)
         .accountName(accountName)
         .mobileNumber(mobileNumber)
         .phoneNumber(phoneNumber)
@@ -29,6 +29,7 @@ public class AccountCommand {
         .authIp(authIp)
         .build();
     }
+
   }
 
   @Getter

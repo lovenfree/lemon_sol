@@ -1,6 +1,7 @@
 package did.lemonaid.solution.domain.account;
 
 import did.lemonaid.solution.interfaces.account.AccountDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
