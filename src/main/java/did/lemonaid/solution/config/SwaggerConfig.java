@@ -1,13 +1,24 @@
 package did.lemonaid.solution.config;
 
 
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Configuration
+@OpenAPIDefinition(servers = {
+  @Server(url = "https://admin-dev-lemonaid.singlex.com/api", description = "DEV"),
+  @Server(url = "http://localhost:9090/api", description = "LOCAL")}
+)
 public class SwaggerConfig {
 
   @Bean
@@ -28,11 +39,10 @@ public class SwaggerConfig {
 
    @Bean
    public GroupedOpenApi adminApi() {
+    String[] adminPaths = {"/v1/admin/**", "/v1/auth/**"};
        return GroupedOpenApi.builder()
                .group("lemonaid-admin")
-               .pathsToMatch("/v1/admin/**")
-//               .pathsToMatch("/v1/credentials/**")
-//               .pathsToMatch("/v1/tenants/**")
+               .pathsToMatch(adminPaths)
                .build();
    }
 

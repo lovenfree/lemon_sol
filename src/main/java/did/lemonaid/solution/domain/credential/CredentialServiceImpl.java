@@ -6,6 +6,7 @@ import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 @Slf4j
 public class CredentialServiceImpl implements CredentialService{
-  private final CredentialInfoMapper credentialInfoMapper;
+//  private final CredentialInfoMapper credentialInfoMapper;
 
   private final CredentialReader credentialReader;
   private final CredentialStore credentialStore;
@@ -71,7 +72,7 @@ public class CredentialServiceImpl implements CredentialService{
   }
 
   @Override
-  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
-    return credentialReader.retrieveTRCredentials(condition);
+  public CredentialInfo.CredentialList retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition, Pageable pageable) {
+    return credentialReader.retrieveTRCredentials(condition,pageable);
   }
 }

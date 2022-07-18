@@ -8,9 +8,11 @@ import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -45,7 +47,7 @@ public class CredentialFacade {
     return credentialService.changeCredentialStatus(credentialStatus);
   }
 
-  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
-    return credentialService.retrieveTRCredentials(condition);
+  public CredentialInfo.CredentialList retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition, Pageable pageable) {
+    return credentialService.retrieveTRCredentials(condition, pageable);
   }
 }

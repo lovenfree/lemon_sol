@@ -21,7 +21,6 @@ INSERT INTO did_solution.faq (id, faq_class, faq_title, faq_display_range, faq_c
 VALUES(8, 'TENANT', 'FAQ 테스트 VERIFIER- EXPIRATION', 'VERIFIER', 'FAQ 테스트 VERIFIER', 'EXPIRATION', 'test', 'tst', '2022-07-13 00:00:00.000', 'test', 'test', '2022-07-13 00:00:00.000');
 INSERT INTO did_solution.faq (id, faq_class, faq_title, faq_display_range, faq_content, faq_status, frst_rgsr_id, frst_reg_prog_id, frst_reg_dttm, last_edtr_id, last_chng_prog_id, last_chng_dttm)
 VALUES(9, 'TENANT', 'FAQ 테스트 VERIFIER- WRITING', 'VERIFIER', 'FAQ 테스트 VERIFIER', 'WRITING', 'test', 'tst', '2022-07-13 00:00:00.000', 'test', 'test', '2022-07-13 00:00:00.000');
-INSERT IN
 
 
 INSERT INTO did_solution.faq (id, faq_class, faq_title, faq_display_range, faq_content, faq_status, frst_rgsr_id, frst_reg_prog_id, frst_reg_dttm, last_edtr_id, last_chng_prog_id, last_chng_dttm)

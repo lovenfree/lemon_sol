@@ -32,6 +32,10 @@ spring:
         max-active: ${DID_REDIS_POOL_MAX_ACTIVE:8}
         max-idle: ${DID_REDIS_POOL_MAX_IDLE:8}
         min-idle: ${DID_REDIS_POOL_MIN_IDLE:0}
+jwt:
+  header: x-code-header
+  secret: aGVsbG8tdGhpcy1pcy1hLW1vbmEtZGlkLXN5c3RlbS13ZWxjb21lLXRvLXRoZS1kZWNlbnRyYWxpemUtSUQtd29ybGQtTWF5LWJlLWZvcmNlLXdpdGgteW91Cg==
+  token-validity-in-seconds: 86400
 server:
   port: ${DID_SERVER_PORT:9090}
   address: 0.0.0.0
@@ -59,8 +63,8 @@ cors:
   patterns: ${DID_CORS_PATTERNS:*}
 aries:
   admin:
-    url: ${DID_ARIES_ADMIN_URL:https://devacapyadmin.duckdns.org}
-    token: ${DID_ARIES_ADMIN_TOKEN:not-set-yet}
+    url: ${DID_ARIES_ADMIN_URL:http://acapy-multitenancy-admin}
+    token: ${DID_ARIES_ADMIN_TOKEN:pbFVy2NKFWcEiMQv29+SEllihK/1TCWyyGx6OlBqiOo4TVjDzKyBAGhraz6NWiVz}
 
 
 
