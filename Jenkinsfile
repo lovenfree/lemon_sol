@@ -76,7 +76,7 @@ pipeline {
             steps {
                 script {
                     ///////////////////////// install java //////////////////////////
-                    sh 'apk add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community'
+                    sh 'apk add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted'
                     env.JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
                     env.PATH="/usr/lib/jvm/java-17-openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/google-cloud-sdk/bin"
                     sh 'printenv'
@@ -144,31 +144,20 @@ pipeline {
                     }
                 }
 
-                stage("[Dev] SonarQube analysis") {
-                    steps {
-                        script {
-                            try {
-                                withSonarQubeEnv('did-sonarqube') {
-                                    sh './gradlew sonarqube'
-                                }
-                            } catch (Exception e) {
-                                error("Gradle Build Failed")
-                            }
-                        }
-                    }
-                }
-                stage("SonarQube Quality Gate"){
-                    steps {
-                        script {
-                            timeout(time: 5, unit: 'MINUTES') {
-                                def qg = waitForQualityGate()
-                                if (qg.status != 'OK') {
-                                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                                }
-                            }
-                        }
-                    }
-                }
+                // stage("[Dev] SonarQube analysis") {
+                //     steps {
+                //         script {
+                //             try {
+                //                 withSonarQubeEnv('did-sonarqube') {
+                //                     sh './gradlew sonarqube'
+                //                 }
+                //             } catch (Exception e) {
+                //                 error("Gradle Build Failed")
+                //             }
+                //         }
+                //     }
+                // }
+
 
                 stage("[DEV] Build Docker Image") {
                     // build docker image and upload to GCR
@@ -343,16 +332,19 @@ pipeline {
                     }
                 }
 
-               //  stage("Static Analysis(SonarQube) & Unit Test") {
-               //      // cf: https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
-               //      // when {branch 'develop'}
-               //      steps {
-               //          withSonarQubeEnv('mip-sonarqube') {
-               //              sh '''./gradlew sonarqube -Dsonar.projectKey=${service_name}
-               //              '''
-               //          }
-               //      }
-               //  }
+                stage("[PRD] SonarQube analysis") {
+                    steps {
+                        script {
+                            try {
+                                withSonarQubeEnv('did-sonarqube') {
+                                    sh './gradlew sonarqube'
+                                }
+                            } catch (Exception e) {
+                                error("Gradle Build Failed")
+                            }
+                        }
+                    }
+                }
 
                 stage("[PRD] Build Docker Image") {
                     // build docker image and upload to GCR
