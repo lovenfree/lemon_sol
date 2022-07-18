@@ -144,31 +144,20 @@ pipeline {
                     }
                 }
 
-                stage("[Dev] SonarQube analysis") {
-                    steps {
-                        script {
-                            try {
-                                withSonarQubeEnv('did-sonarqube') {
-                                    sh './gradlew sonarqube'
-                                }
-                            } catch (Exception e) {
-                                error("Gradle Build Failed")
-                            }
-                        }
-                    }
-                }
-                // stage("SonarQube Quality Gate"){
+                // stage("[Dev] SonarQube analysis") {
                 //     steps {
                 //         script {
-                //             timeout(time: 5, unit: 'MINUTES') {
-                //                 def qg = waitForQualityGate()
-                //                 if (qg.status != 'OK') {
-                //                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                //             try {
+                //                 withSonarQubeEnv('did-sonarqube') {
+                //                     sh './gradlew sonarqube'
                 //                 }
+                //             } catch (Exception e) {
+                //                 error("Gradle Build Failed")
                 //             }
                 //         }
                 //     }
                 // }
+
 
                 stage("[DEV] Build Docker Image") {
                     // build docker image and upload to GCR
@@ -343,16 +332,19 @@ pipeline {
                     }
                 }
 
-               //  stage("Static Analysis(SonarQube) & Unit Test") {
-               //      // cf: https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
-               //      // when {branch 'develop'}
-               //      steps {
-               //          withSonarQubeEnv('mip-sonarqube') {
-               //              sh '''./gradlew sonarqube -Dsonar.projectKey=${service_name}
-               //              '''
-               //          }
-               //      }
-               //  }
+                stage("[PRD] SonarQube analysis") {
+                    steps {
+                        script {
+                            try {
+                                withSonarQubeEnv('did-sonarqube') {
+                                    sh './gradlew sonarqube'
+                                }
+                            } catch (Exception e) {
+                                error("Gradle Build Failed")
+                            }
+                        }
+                    }
+                }
 
                 stage("[PRD] Build Docker Image") {
                     // build docker image and upload to GCR
