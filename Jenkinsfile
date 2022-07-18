@@ -331,39 +331,40 @@ pipeline {
                         }
                     }
                 }
-
-                stage("[PRD] SonarQube analysis") {
-                    steps {
-                        script {
-                            try {
-                                withSonarQubeEnv('did-sonarqube') {
-                                    sh './gradlew sonarqube'
+                parallel {
+                    stage("[PRD] SonarQube analysis") {
+                        steps {
+                            script {
+                                try {
+                                    withSonarQubeEnv('did-sonarqube') {
+                                        sh './gradlew sonarqube'
+                                    }
+                                } catch (Exception e) {
+                                    error("Gradle Build Failed")
                                 }
-                            } catch (Exception e) {
-                                error("Gradle Build Failed")
                             }
                         }
                     }
-                }
 
-                stage("[PRD] Build Docker Image") {
-                    // build docker image and upload to GCR
-                    steps {
-                        script {
+                    stage("[PRD] Build Docker Image") {
+                        // build docker image and upload to GCR
+                        steps {
+                            script {
 
-                            // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-user', returnStdout: true).trim()
-                            // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-passwd', returnStdout: true).trim()
-                            // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=prd-common-did-aries-admin-token', returnStdout: true).trim()
+                                // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-user', returnStdout: true).trim()
+                                // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-passwd', returnStdout: true).trim()
+                                // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=prd-common-did-aries-admin-token', returnStdout: true).trim()
 
 
-                            // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                            // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                            // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
+                                // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
+                                // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
+                                // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
 
-                            env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
+                                env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
-                           sh './gradlew jib --image='+env.DOCKERIMG
+                            sh './gradlew jib --image='+env.DOCKERIMG
 
+                            }
                         }
                     }
                 }
