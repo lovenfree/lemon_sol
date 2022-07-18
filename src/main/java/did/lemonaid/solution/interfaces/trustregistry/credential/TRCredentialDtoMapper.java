@@ -2,9 +2,7 @@ package did.lemonaid.solution.interfaces.trustregistry.credential;
 
 import did.lemonaid.solution.domain.credential.CredentialCommand;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -22,7 +20,14 @@ public interface TRCredentialDtoMapper {
 
   CredentialCommand.UpdateCredential of (TRCredentialDto.UpdateCredentialRequest request);
 
-  List<TRCredentialDto.CredentialInfo> of(List<CredentialInfo.CredentialTRListInfo> credentials);
+
+  @Mappings({
+    @Mapping(source = "credentials.credentialInfos", target = "credentialInfos")
+//    @Mapping(source = "credentials.isLast()", target = "meta.last"),
+//    @Mapping(source = "credentials.getTotalElements()", target = "meta.totalElements"),
+//    @Mapping(source = "credentials.getTotalPages()", target = "meta.totalPages")
+  })
+  TRCredentialDto.Credentials of(CredentialInfo.CredentialList credentials);
 
 
 }

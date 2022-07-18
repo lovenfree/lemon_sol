@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,10 +23,12 @@ public class AccountController {
 
     private final AccountFacade accountFacade;
     private final AccountDtoMapper accountDtoMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Operation(summary = "관리자 계정 생성")
     @PostMapping
     public ResponseEntity<AccountDto.AccountResponse> createAccount(@RequestBody @Valid AccountDto.RegisterAccountRequest request) {
+        request.setAccountPw(passwordEncoder.encode(request.getAccountPw()));
         var command =  accountDtoMapper.of(request);
         var accountId = accountFacade.registerAccount(command);
         var response = accountDtoMapper.of(accountId);

@@ -32,7 +32,7 @@ public class CredentialController {
 
   //인증서 상세정보
   @Operation(summary = "credential details")
-  @GetMapping("/{credential-id}")
+  @GetMapping("/{credential-id:.+}")
   public ResponseEntity<CredentialDto.CredentialAdminDetail> retrieveCredential (@PathVariable("credential-id") String credentialId) {
     var credential = credentialFacade.retrieveAdminCredential(credentialId);
     var response = credentialDtoMapper.credentialOf(credential);

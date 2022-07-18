@@ -4,12 +4,14 @@ import did.lemonaid.solution.common.exception.EntityNotFoundException;
 import did.lemonaid.solution.common.exception.ErrorCode;
 import did.lemonaid.solution.domain.credential.Credential;
 import did.lemonaid.solution.domain.credential.CredentialInfo;
+import did.lemonaid.solution.domain.credential.CredentialInfoMapper;
 import did.lemonaid.solution.domain.credential.CredentialReader;
 import did.lemonaid.solution.domain.credential.schema.SchemaAttribute;
 import did.lemonaid.solution.interfaces.credential.CredentialDto;
 import did.lemonaid.solution.interfaces.trustregistry.credential.TRCredentialDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CredentialReaderImpl implements CredentialReader {
   private final CredentialRepository credentialRepository;
+  private final CredentialInfoMapper mapper;
 
   @Override
   public Credential getCredentialBy(String credentialDefinitionID) {
@@ -45,8 +48,11 @@ public class CredentialReaderImpl implements CredentialReader {
   }
 
   @Override
-  public List<CredentialInfo.CredentialTRListInfo> retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition) {
-    return credentialRepository.retrieveTRCredentials(condition);
+  public CredentialInfo.CredentialList  retrieveTRCredentials(TRCredentialDto.CredentialSearchCondition condition, Pageable pageable) {
+     var credentials = credentialRepository.retrieveTRCredentials(condition, pageable);
+     var meta = new CredentialInfo.MetaInfo(credentials.isLast(), credentials.getTotalPages(), credentials.getTotalElements());
+
+     return new CredentialInfo.CredentialList(meta, credentials.getContent());
   }
 
   @Override
@@ -66,12 +72,4 @@ public class CredentialReaderImpl implements CredentialReader {
 
   }
 
-
-
-
-//
-//  @Override
-//  public Schemas getSchema(Credential credential) {
-//    return null;
-//  }
 }

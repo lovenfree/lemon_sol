@@ -15,9 +15,20 @@ public class TRCredentialDto {
   @Builder
   @ToString
   public static class Credentials {
+    MetaInfo meta;
     @JsonProperty("credentials")
     private final List<CredentialInfo> credentialInfos;
   }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class MetaInfo{
+    boolean last;
+    int totalPages;
+    int totalElements;
+  }
+
 
   @Getter
   @Builder

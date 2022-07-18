@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,9 +59,9 @@ public class TRCredentialController {
 
   @Operation(summary = "credential List")
   @GetMapping("/credentials")
-  public ResponseEntity<TRCredentialDto.Credentials> retrieveCredentials(Optional<TRCredentialDto.CredentialSearchCondition> condition) {
-    var credentials = credentialFacade.retrieveTRCredentials(condition.orElse(null));
-    var response = TRCredentialDto.Credentials.builder().credentialInfos(credentialDtoMapper.of(credentials)).build();
+  public ResponseEntity<TRCredentialDto.Credentials> retrieveCredentials(Optional<TRCredentialDto.CredentialSearchCondition> condition, Pageable pageable) {
+    var credentials = credentialFacade.retrieveTRCredentials(condition.orElse(null), pageable);
+    var response = credentialDtoMapper.of(credentials);
     return ResponseEntity.ok(response);
   }
 
