@@ -41,7 +41,7 @@ public class TRTenantDto {
     @Schema(description = "Tenant Wallet ID", example = "xxidxkdijg")
     private final String tenantWalletId;
 
-    @Schema(description = "Tenant invitation URL", example = "https://ajskdjfkalskejk.claksjdlaksdfjlaks...")
+    @Schema(description = "Tenant invitation URL", example = "https://agency-dev-lemonaid.singlex.com?...")
     private final String tenantInvitationUrl;
 
     @Schema(description = "Tenant Status", example = "Activate")
@@ -67,7 +67,7 @@ public class TRTenantDto {
     @Schema(description = "Tenant Wallet ID", example = "ID", required = true)
     @NotNull(message = "필수 파라미터 누락")
     private String tenantWalletId;
-    @Schema(description = "Tenant Invitation Url", example = "https://devacapyinbound.duckdns.org? ...", required = true)
+    @Schema(description = "Tenant Invitation Url", example = "https://agency-dev-lemonaid.singlex.com?...", required = true)
     @NotNull(message = "필수 파라미터 누락")
     private String tenantInvitationUrl;
   }

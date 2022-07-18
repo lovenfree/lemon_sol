@@ -78,7 +78,7 @@ public class Tenant extends BaseEntity {
   @Getter
   @AllArgsConstructor
   public enum TenantStatus {
-    ACTIVATE("활성화"), DEACTIVATE("비활성화 - Activate 전"), PAUSE("정지") ;
+    ACTIVATE("활성화"), INACTIVATE("비활성화 - Activate 전"), PAUSE("정지") ;
     private final String description;
   }
 
@@ -87,7 +87,7 @@ public class Tenant extends BaseEntity {
     this.tenantId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.tenantType = tenantType;
     this.tenantName = tenantName;
-    this.tenantStatus = Tenant.TenantStatus.DEACTIVATE;
+    this.tenantStatus = Tenant.TenantStatus.INACTIVATE;
     this.tenantHomeUrl = tenantHomeUrl;
     this.tenantAddress = tenantAddress;
     this.tenantLogo = tenantLogo;
