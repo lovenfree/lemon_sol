@@ -63,8 +63,8 @@ cors:
   patterns: ${DID_CORS_PATTERNS:*}
 aries:
   admin:
-    url: ${DID_ARIES_ADMIN_URL:https://devacapyadmin.duckdns.org}
-    token: ${DID_ARIES_ADMIN_TOKEN:not-set-yet}
+    url: ${DID_ARIES_ADMIN_URL:http://acapy-multitenancy-admin}
+    token: ${DID_ARIES_ADMIN_TOKEN:pbFVy2NKFWcEiMQv29+SEllihK/1TCWyyGx6OlBqiOo4TVjDzKyBAGhraz6NWiVz}
 
 
 
