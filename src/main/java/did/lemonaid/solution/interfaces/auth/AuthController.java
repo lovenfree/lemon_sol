@@ -1,6 +1,6 @@
 package did.lemonaid.solution.interfaces.auth;
 
-import did.lemonaid.solution.security.filter.AuthDto;
+import did.lemonaid.solution.security.dto.AuthDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package did.lemonaid.solution.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import did.lemonaid.solution.security.filter.AuthDto;
+import did.lemonaid.solution.security.dto.AuthDto;
 import did.lemonaid.solution.security.service.CustomUserDetailsService;
 import did.lemonaid.solution.security.token.JwtTokenProvider;
 import lombok.extern.slf4j.Slf4j;

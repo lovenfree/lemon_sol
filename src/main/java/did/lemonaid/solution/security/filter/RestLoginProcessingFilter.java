@@ -1,8 +1,8 @@
 package did.lemonaid.solution.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import did.lemonaid.solution.security.dto.AuthDto;
 import did.lemonaid.solution.security.token.RestAuthenticationToken;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

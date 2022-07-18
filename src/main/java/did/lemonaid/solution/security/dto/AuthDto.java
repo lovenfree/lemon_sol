@@ -1,4 +1,4 @@
-package did.lemonaid.solution.security.filter;
+package did.lemonaid.solution.security.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
