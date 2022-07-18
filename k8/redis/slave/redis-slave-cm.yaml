@@ -11,6 +11,6 @@ metadata:
   name: redis-slave-config
 data:
   redis-conf: |
-    replicaof redis-master 6379
+    replicaof redis 6379
     appendonly no
     save ""
