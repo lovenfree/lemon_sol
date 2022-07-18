@@ -1,7 +1,7 @@
 -- tenant
 INSERT INTO public.tenant (id, tenant_id, tenant_type, tenant_name, tenant_did, tenant_status, tenant_home_url, tenant_invitation_url, tenant_logo_path, tenant_addr, trust_tenant, frst_rgsr_id, frst_reg_prog_id, frst_reg_dttm, last_edtr_id, last_chng_prog_id, last_chng_dttm)
 values
-    (1, 'ISStjalskdjxc', 'ISSUER', 'LG CNS', 'RTHAnR3aKM5iSNmHnr4am4', 'ACTIVATE', NULL, 'https://devacapyinbound.duckdns.org?c_i=eyJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9jb25uZWN0aW9ucy8xLjAvaW52aXRhdGlvbiIsICJAaWQiOiAiZDU1ZGFiOTYtNjk4Yi00M2U0LWI3ZmItNTUzMTg1ZjcwOGZmIiwgInNlcnZpY2VFbmRwb2ludCI6ICJodHRwczovL2RldmFjYXB5aW5ib3VuZC5kdWNrZG5zLm9yZyIsICJpbWFnZVVybCI6ICJodHRwczovL3JvYm9oYXNoLm9yZy9MR0NOUyIsICJsYWJlbCI6ICJMR0NOUyIsICJyZWNpcGllbnRLZXlzIjogWyJGc0VEbjRlZmdLTnBlRXFRWXlpZmNLRlM3NkxTWHVXbkhuWjR1ZGRLeVRvdiJdfQ==', NULL, NULL, True, 'test', 'test', '2022-01-01 11:11:11.000', 'test', 'test', '2022-01-01 11:11:11.000');
+    (1, 'ISStjalskdjxc', 'ISSUER', 'LG CNS', 'RTHAnR3aKM5iSNmHnr4am4', 'ACTIVATE', NULL,NULL, NULL, NULL, True, 'test', 'test', '2022-01-01 11:11:11.000', 'test', 'test', '2022-01-01 11:11:11.000');
 
 
 
