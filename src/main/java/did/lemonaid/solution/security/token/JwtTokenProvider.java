@@ -74,7 +74,8 @@ public class JwtTokenProvider implements InitializingBean {
 
         User principal = new User(claims.getSubject(),"",authorities);
 
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+//        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+      return new RestAuthenticationToken(principal, token, authorities);
     }
 
 
