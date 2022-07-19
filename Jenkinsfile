@@ -117,21 +117,21 @@ pipeline {
                     }
                 }
 
-                stage("[DEV-PARALLEL_SONAR&BUILD]"){
-                    parallel {
-                        stage("[DEV] SonarQube analysis") {
-                            steps {
-                                script {
-                                    try {
-                                        withSonarQubeEnv('did-sonarqube') {
-                                            sh './gradlew sonarqube'
-                                        }
-                                    } catch (Exception e) {
-                                        error("Gradle Build Failed")
-                                    }
-                                }
-                            }
-                        }
+                // stage("[DEV-PARALLEL_SONAR&BUILD]"){
+                //     parallel {
+                //         stage("[DEV] SonarQube analysis") {
+                //             steps {
+                //                 script {
+                //                     try {
+                //                         withSonarQubeEnv('did-sonarqube') {
+                //                             sh './gradlew sonarqube'
+                //                         }
+                //                     } catch (Exception e) {
+                //                         error("Gradle Build Failed")
+                //                     }
+                //                 }
+                //             }
+                //         }
 
                         stage("[DEV] Build Docker Image") {
                             // build docker image and upload to GCR
@@ -143,8 +143,8 @@ pipeline {
                                 }
                             }
                         }
-                    }
-                }
+                //     }
+                // }
                 stage("[DEV] Deploy Backend Pod") {
                     // build docker image and upload to GCR
                     steps {
