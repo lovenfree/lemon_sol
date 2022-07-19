@@ -83,7 +83,7 @@ public class Credential extends BaseEntity {
   public Credential(Schemas schema , Tenant tenant, String credentialName, String credentialDefinitionId, boolean trustCredentialYN, CredentialType credentialType, String description, String authLinkUrl, boolean expiryDateYN, int validityDays,String serviceExtensionInfo, String backgroundImg, String backgroundImgFilename,
                     String logoImg, String logoImgFilename, String templateItemMapping) {
 
-    if (tenant.getTenantStatus().equals(Tenant.TenantStatus.DEACTIVATE)) throw new InvalidValueException(ErrorCode.INVALID_TENANT_STATUS_EXCEPTION);
+    if (tenant.getTenantStatus().equals(Tenant.TenantStatus.INACTIVATE)) throw new InvalidValueException(ErrorCode.INVALID_TENANT_STATUS_EXCEPTION);
 
     this.credentialId = TokenGenerator.randomCharacterWithPrefix(PREFIX_TENANT);
     this.credentialName = credentialName;

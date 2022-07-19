@@ -26,15 +26,12 @@ public class AccountAuditorAware implements AuditorAware<String>{
 
     String userId = null;
     if(authentication.getPrincipal() instanceof UserDetails){
-
-      System.out.println("?????");
       UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
       userId = springSecurityUser.getUsername();
     }else if(authentication.getPrincipal() instanceof String){
-      System.out.println("?????");
       userId = (String) authentication.getPrincipal();
     }
-    System.out.println(userId);
+
     return Optional.ofNullable(userId);
   }
 }
