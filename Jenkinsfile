@@ -3,25 +3,10 @@ library ('PipelineUtils@develop') // This requires the snippet to be configured 
 def isFeatureBranch = !(BRANCH_NAME == 'develop' || BRANCH_NAME == 'stage' || BRANCH_NAME == 'master')
 def isDevelopBranch = BRANCH_NAME == 'develop'
 def build_id      = env.build_id
-// env.slack_workspace = 'lgcns-mi'         // Slack workspace address
-// env.slack_token_id  = 'lgcns-mip-slack'
-// def slack_channel = '#jenkinspipeline' // SETUP: This must be a valid slack channel for the configured Slack integration
-// def slack_channel_smoke = '#jenkinspipeline_smoke' // SETUP: This must be a valid slack channel for the configured Slack integration
 
 env.environment    // This will always start as dev and then change as the pipeline progresses
 env.BRANCH_NAME = BRANCH_NAME
 env.submitter = 'hun_k, hsj5009'
-
-def getContainerName(isFeatureBranch, service_name, branch, environment){
-    def name = ""
-
-    if (isFeatureBranch){
-        name = service_name + "-" + branch
-    } else {
-        name = service_name + "-" + environment
-    }
-    return name
-}
 
 pipeline {
     agent {
@@ -36,17 +21,7 @@ pipeline {
         disableConcurrentBuilds()
         skipDefaultCheckout()
     }
-    // post {
-    //     always {
-    //         script {
-    //             notifyBitbucket()
-    //             if (BRANCH_NAME == 'develop' || BRANCH_NAME == 'develop2' || BRANCH_NAME == 'master') {
-    //                 notifySlack(slack_workspace, slack_token_id, slack_channel, currentBuild.result)
-    //             }
-    //             echo "domain url: " + env.DOMAINURL
-    //         }
-    //     }
-    // }
+
     environment {
         SVC_ACCOUNT_DEV_KEY = credentials('did-dev')
         SVC_ACCOUNT_STG_KEY = credentials('did-stg')
@@ -66,8 +41,6 @@ pipeline {
                 script {
                     env.REGION          = "asia-northeast3"
                     env.service_name = "solution-backend"
-                  // env.branch          = sh ( script: 'bash ./cicd/script/get-current-branch.sh', returnStdout: true ).trim()
-                  //   env.service_name    = sh ( script: 'grep rootProject.name "./settings.gradle" | cut -d= -f2 | sed -e "s#\'##g"', returnStdout: true ).trim()
                 }
             }
         }
@@ -144,39 +117,31 @@ pipeline {
                     }
                 }
 
-                // stage("[Dev] SonarQube analysis") {
-                //     steps {
-                //         script {
-                //             try {
-                //                 withSonarQubeEnv('did-sonarqube') {
-                //                     sh './gradlew sonarqube'
-                //                 }
-                //             } catch (Exception e) {
-                //                 error("Gradle Build Failed")
-                //             }
-                //         }
-                //     }
-                // }
+                stage("[DEV-PARALLEL_SONAR&BUILD]"){
+                    parallel {
+                        stage("[DEV] SonarQube analysis") {
+                            steps {
+                                script {
+                                    try {
+                                        withSonarQubeEnv('did-sonarqube') {
+                                            sh './gradlew sonarqube'
+                                        }
+                                    } catch (Exception e) {
+                                        error("Gradle Build Failed")
+                                    }
+                                }
+                            }
+                        }
 
+                        stage("[DEV] Build Docker Image") {
+                            // build docker image and upload to GCR
+                            steps {
+                                script {
+                                    env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
-                stage("[DEV] Build Docker Image") {
-                    // build docker image and upload to GCR
-                    steps {
-                        script {
-
-                            // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-user', returnStdout: true).trim()
-                            // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=dev-postgre-common-did-database-passwd', returnStdout: true).trim()
-                            // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=dev-common-did-aries-admin-token', returnStdout: true).trim()
-
-
-                            // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                            // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                            // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
-
-                            env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
-
-                           sh './gradlew jib --image='+env.DOCKERIMG
-
+                                sh './gradlew jib -PjibToImage='+env.DOCKERIMG
+                                }
+                            }
                         }
                     }
                 }
@@ -184,7 +149,6 @@ pipeline {
                     // build docker image and upload to GCR
                     steps {
                         script {
-
                             sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-dev/deployment.yaml")
                             sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-dev/virtualservice.yaml")
                             sh '''
@@ -197,18 +161,11 @@ pipeline {
                             kubectl apply -f ./k8/redis/slave -n common-system
                             kubectl apply -f ./k8/stage-dev/
                             '''
-
-
-
-
                         }
                     }
                 }
             }
         }
-
-
-
 
         stage('Stage Branch') {
             when { expression { BRANCH_NAME == 'stage'}}
@@ -219,9 +176,6 @@ pipeline {
                             env.environment         = 'stg'
                             env.project_id          = 'pjt-did-stg'
                             env.domain              = "admin-stg-lemonaid.singlex.com"
-                           //  env.PORT_NO             = sh(script: "grep -A1 server src/main/resources/application.yml | grep port | grep -v 'server-port' | awk '{print \$2}'", returnStdout: true).trim()
-
-
 
                             // make gcp credentials
 
@@ -241,31 +195,10 @@ pipeline {
                     }
                 }
 
-               //  stage("Static Analysis(SonarQube) & Unit Test") {
-               //      // cf: https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-jenkins/
-               //      // when {branch 'develop'}
-               //      steps {
-               //          withSonarQubeEnv('mip-sonarqube') {
-               //              sh '''./gradlew sonarqube -Dsonar.projectKey=${service_name}
-               //              '''
-               //          }
-               //      }
-               //  }
-
                 stage("[STAGE] Build Docker Image") {
                     // build docker image and upload to GCR
                     steps {
                         script {
-
-                            // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=stg-postgre-common-did-database-user', returnStdout: true).trim()
-                            // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=stg-postgre-common-did-database-passwd', returnStdout: true).trim()
-                            // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=stg-common-did-aries-admin-token', returnStdout: true).trim()
-
-
-                            // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                            // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                            // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
-
                             env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
 
                            sh './gradlew jib --image='+env.DOCKERIMG
@@ -277,7 +210,6 @@ pipeline {
                     // build docker image and upload to GCR
                     steps {
                         script {
-
                             sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-stg/deployment.yaml")
                             sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-stg/virtualservice.yaml")
                             sh '''
@@ -290,7 +222,6 @@ pipeline {
                             kubectl apply -f ./k8/redis/slave -n common-system
                             kubectl apply -f ./k8/stage-stg/
                             '''
-
                         }
                     }
                 }
@@ -301,10 +232,10 @@ pipeline {
 
 
 
-                 stage('Master Branch') {
+        stage('Master Branch') {
             when { expression { BRANCH_NAME == 'master'}}
             stages {
-                stage("[PRD] Environment") {
+                stage("[PROD] Environment") {
                     steps {
                         script {
                             env.environment         = 'prd'
@@ -331,50 +262,44 @@ pipeline {
                         }
                     }
                 }
-                stage("[PROD-PARALLEL_SONAR&BUILD]"){
-                    parallel {
-                        stage("[PRD] SonarQube analysis") {
-                            steps {
-                                script {
-                                    try {
-                                        withSonarQubeEnv('did-sonarqube') {
-                                            sh './gradlew sonarqube'
-                                        }
-                                    } catch (Exception e) {
-                                        error("Gradle Build Failed")
-                                    }
+                stage("[PROD] SonarQube analysis") {
+                    steps {
+                        script {
+                            try {
+                                withSonarQubeEnv('did-sonarqube') {
+                                    sh './gradlew sonarqube'
                                 }
+                            } catch (Exception e) {
+                                error("Gradle Build Failed")
                             }
                         }
-
-                        stage("[PRD] Build Docker Image") {
-                            // build docker image and upload to GCR
-                            steps {
-                                script {
-
-                                    // env.did_database_user = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-user', returnStdout: true).trim()
-                                    // env.did_database_passwd = sh ( script: 'gcloud secrets versions access 1 --secret=prd-postgre-common-did-database-passwd', returnStdout: true).trim()
-                                    // env.did_aries_admin_token = sh ( script: 'gcloud secrets versions access 1 --secret=prd-common-did-aries-admin-token', returnStdout: true).trim()
-
-
-                                    // sh ("sed -i -e s%_did_database_user_%$did_database_user%g ./k8/stage-dev/configmap.yaml")
-                                    // sh ("sed -i -e s%_did_database_passwd_%$did_database_passwd%g ./k8/stage-dev/configmap.yaml")
-                                    // sh ("sed -i -e s%_did_aries_admin_token_%$did_aries_admin_token%g ./k8/stage-dev/configmap.yaml")
-
-                                    env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
-
-                                sh './gradlew jib --image='+env.DOCKERIMG
-
+                    }
+                }
+                stage("[PROD]SonarQube Quality Gate"){
+                    steps {
+                        script {
+                            timeout(time: 5, unit: 'MINUTES') {
+                                def qg = waitForQualityGate()
+                                if (qg.status != 'OK') {
+                                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
                                 }
                             }
                         }
                     }
                 }
-                stage("[PRD] Deploy Backend Pod") {
+                stage("[PROD] Build Docker Image") {
                     // build docker image and upload to GCR
                     steps {
                         script {
-
+                            env.DOCKERIMG = "asia.gcr.io/" + env.project_id + "/" + env.BRANCH_NAME + "/" + env.service_name + ":" + env.BUILD_NUMBER
+                           sh './gradlew jib --image='+env.DOCKERIMG
+                        }
+                    }
+                }
+                stage("[PROD] Deploy Backend Pod") {
+                    // build docker image and upload to GCR
+                    steps {
+                        script {
                             sh ("sed -i -e s%_SERVICEIMG_%$DOCKERIMG%g ./k8/stage-prd/deployment.yaml")
                             sh ("sed -i -e s%_DOMAIN_%$domain%g ./k8/stage-prd/virtualservice.yaml")
                             sh '''
@@ -387,17 +312,10 @@ pipeline {
                             kubectl apply -f ./k8/redis/slave -n common-system
                             kubectl apply -f ./k8/stage-prd/
                             '''
-
-
-
-
                         }
                     }
                 }
             }
         }
-
-
-
      }
  }
