@@ -50,7 +50,7 @@ public class FAQRepositoryImpl {
   public List<FAQ> retrieveTenantFAQs(SystemManagementDto.FAQSearchCondition condition){
     return queryFactory.select(fAQ)
       .from(fAQ)
-      .where(faqRangeEq(FAQ.DisplayRange.ISSUER).or(faqRangeEq(FAQ.DisplayRange.VERIFIER)).and(faqRangeEq(FAQ.DisplayRange.ALL)),
+      .where(faqRangeEq(FAQ.DisplayRange.ISSUER).or(faqRangeEq(FAQ.DisplayRange.VERIFIER)).or(faqRangeEq(FAQ.DisplayRange.ALL)),
        faqStatusEq(FAQ.FAQStatus.PUBLISH),
        faqTitleContains(condition.getFaqTitle()))
       .orderBy(fAQ.revisedDate.desc())
