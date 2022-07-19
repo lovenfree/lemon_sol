@@ -20,8 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 //@ActiveProfiles("test")
 class TenantRepositoryTest {
-  @MockBean
-  JpaAud accountAuditorAware;
+
   @Autowired
   TestEntityManager testEntityManager;
   @Autowired

@@ -36,8 +36,9 @@ public class RestLoginProcessingFilter extends AbstractAuthenticationProcessingF
       // REST API 기반의 인증 요청이 맞다면 요청 데이터를 모든 인증관련 처리에 사용하려고 만든 AuthDto.LogInRequest 바인딩합니다.
       final AuthDto.LogInRequest login = objectMapper.readValue(request.getReader(), AuthDto.LogInRequest.class);
 
+      System.out.println(request.getRemoteAddr());
       // 인증되지 않은 사용자의 토큰을 생성해야 하므로 RestAuthentication Token의 생성자를 호출합니다.
-      return getAuthenticationManager().authenticate(new RestAuthenticationToken(login.getAccountId(), login.getPassword()));
+      return getAuthenticationManager().authenticate(new RestAuthenticationToken(login.getAccountId(), login.getPassword(), request.getRemoteAddr()));
     }
 
     private boolean isRest(final HttpServletRequest request) {

@@ -22,4 +22,6 @@ public class AccountContext extends User {
     return account.getAccountStatus().equals(Account.AccountStatus.ACTIVATE)?true:false;
   }
 
+
+
 }

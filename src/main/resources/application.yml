@@ -36,6 +36,7 @@ jwt:
   header: x-code-header
   secret: aGVsbG8tdGhpcy1pcy1hLW1vbmEtZGlkLXN5c3RlbS13ZWxjb21lLXRvLXRoZS1kZWNlbnRyYWxpemUtSUQtd29ybGQtTWF5LWJlLWZvcmNlLXdpdGgteW91Cg==
   token-validity-in-seconds: 120000
+
 server:
   port: ${DID_SERVER_PORT:9090}
   address: 0.0.0.0

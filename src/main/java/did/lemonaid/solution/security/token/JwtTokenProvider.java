@@ -74,8 +74,10 @@ public class JwtTokenProvider implements InitializingBean {
 
         User principal = new User(claims.getSubject(),"",authorities);
 
+
 //        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
       return new RestAuthenticationToken(principal, token, authorities);
+
     }
 
 
@@ -89,24 +91,41 @@ public class JwtTokenProvider implements InitializingBean {
             //Invalid JWT signature
             log.error("[SecurityException] "+e);
             request.setAttribute("exception", ErrorCode.JWT_INVALID_TOKEN);
+//          throw new JwtException("Expired");
         } catch (MalformedJwtException e) {
             log.error("[MalformedJwtException] "+e);
             request.setAttribute("exception", ErrorCode.JWT_INVALID_TOKEN);
+//          throw new JwtException("Expired");
         } catch (ExpiredJwtException e) {
             //Expired JWT token
             log.error("[ExpiredJwtException] "+e);
             request.setAttribute("exception", ErrorCode.JWT_EXPIRED_EXCEPTION);
+//          throw new JwtException("Expired");
         } catch (UnsupportedJwtException e) {
             //Unsupported JWT token
             log.error("[UnsupportedJwtException] "+e);
             request.setAttribute("exception", ErrorCode.JWT_INVALID_TOKEN);
+//          throw new JwtException("Expired");
         } catch (IllegalArgumentException e) {
             //JWT token compact of handler are invalid.
             log.error("[IllegalArgumentException] "+e);
             request.setAttribute("exception", ErrorCode.JWT_INVALID_TOKEN);
+//          throw new JwtException("Expired");
+        }catch (Exception e) {
+          //JWT token compact of handler are invalid.
+          log.error("[Exception] "+e);
+          request.setAttribute("exception", ErrorCode.INTERNAL_SERVER_ERROR);
+//          throw new JwtException("Expired");
         }
-        return false;
+      return false;
     }
+
+
+  public boolean validateTokenThrow(String token) throws Exception{
+      Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+
+      return true;
+  }
 
 
 }

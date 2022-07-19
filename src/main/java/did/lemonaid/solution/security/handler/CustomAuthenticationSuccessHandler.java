@@ -1,6 +1,7 @@
 package did.lemonaid.solution.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import did.lemonaid.solution.common.util.Util;
 import did.lemonaid.solution.security.dto.AuthDto;
 import did.lemonaid.solution.security.service.CustomUserDetailsService;
 import did.lemonaid.solution.security.token.JwtTokenProvider;
@@ -34,7 +35,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     response.setStatus(HttpStatus.OK.value());
     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-    log.info("^^^^^^^^ IP :"+request.getRemoteAddr());
 
     //로그인 실패 카운트 초기화
     userService.updateLogInInfo((String)authentication.getPrincipal());

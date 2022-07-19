@@ -23,8 +23,6 @@ import java.util.List;
 public class CustomUserDetailsService implements UserDetailsService {
   private final AccountReader accountReader;
   private final AccountStore accountStore;
-//  private final AccountMapper mapper;
-
 
   @Override
   @Transactional
@@ -37,16 +35,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     return accountContext;
   }
 
-//  private UserDetails createUser(String userId, Account account) {
-//    if(account.getAccountStatus().equals(Account.AccountStatus.DEACTIVATE)){
-//      throw new InvalidAccountException(userId +" 활성화 계정이 아닙니다. ", ErrorCode.INVALID_ACCOUNT_STATUS);
-//    }
-//
-//    List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-//    grantedAuthorities.add(new SimpleGrantedAuthority(String.valueOf(account.getAccountType())));
-//    return new User(account.getAccountId(), account.getAccountPwHash(), grantedAuthorities);
-//
-//  }
 
   public void updateLogInInfo(final String accountId) {
     Account account = accountReader.getAccount(accountId);

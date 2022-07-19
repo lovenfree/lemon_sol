@@ -31,7 +31,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     response.setStatus(HttpStatus.UNAUTHORIZED.value());
     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-    String errMsg = "Email or password is invalid.";
+    String errMsg = null;
 
     if (exception instanceof BadCredentialsException) {
       errMsg = exception.getMessage();

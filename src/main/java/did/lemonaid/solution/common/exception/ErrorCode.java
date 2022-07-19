@@ -27,7 +27,7 @@ public enum  ErrorCode {
 
     //ACCOUNT
     INVALID_ACCOUNT_REGISTER_EXCEPTION(400, "LEMON.ACCOUNT.001", "기 등록된 Account ID 입니다."),
-
+  INVALID_ACCOUNT_IP_EXCEPTION(403,"LEMON.ACCOUNT.002","허용된 IP Address가 아닙니다."),
 
     SESSION_NOT_FOUND_EXCEPTION(400, "LEMON.C008", "등록된 세션 정보 없음"),
     ORG_NOT_FOUND_EXCEPTION(400, "LEMON.C009", "기관 정보 없음"),

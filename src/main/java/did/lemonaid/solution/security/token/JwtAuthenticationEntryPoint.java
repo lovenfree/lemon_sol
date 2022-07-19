@@ -18,10 +18,8 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    private final ObjectMapper om;
 
     @Override
     public void commence(HttpServletRequest request,
@@ -29,6 +27,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException, ServletException {
 
         ErrorCode exception = (ErrorCode)request.getAttribute("exception");
+      System.out.println("JwtAuthenticationEntryPoint: " + exception);
         if(exception == null){
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
@@ -39,7 +38,9 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     }
 
     private void sendErrorResponse(HttpServletResponse response, ErrorCode e) throws IOException {
-        if(e == null){
+      ObjectMapper om = new ObjectMapper();
+
+      if(e == null){
             e = ErrorCode.AUTH_FAIL;
         }
         ErrorResponse errorResponse = ErrorResponse.of(e);

@@ -12,13 +12,15 @@ public class RestAuthenticationToken extends AbstractAuthenticationToken {
 
   private final Object principal;
 
+  private Object details;
   private Object credentials;
 
   // 인증되지 않은 사용자의 토큰을 생성합니다.
-  public RestAuthenticationToken(Object principal, Object credentials) {
+  public RestAuthenticationToken(Object principal, Object credentials, Object details) {
     super(null);
     this.principal = principal;
     this.credentials = credentials;
+    this.details = details;
     setAuthenticated(false);
   }
 
@@ -33,6 +35,11 @@ public class RestAuthenticationToken extends AbstractAuthenticationToken {
   @Override
   public Object getCredentials() {
     return this.credentials;
+  }
+
+  @Override
+  public Object getDetails() {
+    return this.details;
   }
 
   @Override
